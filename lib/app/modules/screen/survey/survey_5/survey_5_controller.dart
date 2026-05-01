@@ -1,9 +1,5 @@
-part of 'survey_5_view.dart';
+import 'package:get/get.dart';
 
 class Survey5ViewController extends GetxController {
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  var selectedIndex = (-1).obs;
 }

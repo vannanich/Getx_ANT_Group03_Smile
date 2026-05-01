@@ -1,5 +1,9 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
-import 'package:flutter_application_1/app/modules/screen/homescreen/home_view.dart';
+import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
+import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding/onboarding/onboarding_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_2/onboarding_2/onboarding_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_3/onboarding_3/onboarding_3_view.dart';
@@ -14,12 +18,6 @@ import 'app_routes.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(
-      name: AppRoutes.home,
-      page: () => HomeView(),
-      binding: HomeViewBinding(),
-      transition: Transition.zoom,
-    ),
     GetPage(
       name: AppRoutes.onboarding,
       page: () => OnboardingView(),
@@ -80,6 +78,27 @@ class AppPages {
       name: AppRoutes.survey_5,
       page: () => Survey5View(),
       binding: Survey5ViewBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: Duration(milliseconds: 900),
+    ),
+    GetPage(
+      name: AppRoutes.moodSelection,
+      page: () => MoodSelectorScreen(),
+      binding: MoodSelectionViewBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: Duration(milliseconds: 900),
+    ),
+    GetPage(
+      name: AppRoutes.moodSelection,
+      page: () => HomeScreenView(),
+      binding: HomeScreenViewBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: Duration(milliseconds: 900),
+    ),
+    GetPage(
+      name: AppRoutes.moodSelection,
+      page: () => BuildstreakView(),
+      binding: BuildstreakViewBinding(),
       transition: Transition.cupertino,
       transitionDuration: Duration(milliseconds: 900),
     ),
