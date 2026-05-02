@@ -38,7 +38,7 @@ class Survey4View extends GetView<Survey4ViewController> {
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
-                Get.toNamed(AppRoutes.survey_1);
+                Get.toNamed(AppRoutes.survey_3);
               },
               child: Icon(Icons.arrow_back, size: 30),
             ),

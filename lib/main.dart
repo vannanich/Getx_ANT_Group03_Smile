@@ -16,6 +16,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: AppRoutes.survey_1,
       initialRoute: AppRoutes.readbook,
+      // initialRoute: AppRoutes.homescreen,
       getPages: AppPages.pages,
     );
   }
