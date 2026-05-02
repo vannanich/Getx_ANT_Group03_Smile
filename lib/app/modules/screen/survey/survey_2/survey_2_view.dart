@@ -45,6 +45,11 @@ class Survey2View extends GetView<Survey2ViewController> {
             SizedBox(height: 20),
             _buildBody(),
             SizedBox(height: 30),
+
+            // Expanded(child: AppGrid(items: myData)),
+            // Expanded(
+            // child: AppGrid(items: myData, controller: controller),
+            // ),
             Expanded(child: AppGrid(items: myData)),
 
             AppButtonOutline(

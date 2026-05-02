@@ -4,6 +4,6 @@ class Survey5ViewBinding extends Bindings {
 
    @override
    void dependencies() {
-       Get.lazyPut(() => Survey5ViewController());
+      //  Get.lazyPut(() => Survey5ViewController());
    }
 }

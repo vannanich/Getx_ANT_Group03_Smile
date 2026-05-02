@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/modules/screen/survey/survey_2/survey_2_view.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:flutter_application_1/app/shared/widgets/app_button_eleveted.dart';
@@ -8,9 +9,8 @@ import 'package:flutter_application_1/app/shared/widgets/app_stepper.dart';
 import 'package:get/get.dart';
 
 part 'survey_5_binding.dart';
-part 'survey_5_controller.dart';
 
-class Survey5View extends GetView<Survey5ViewController> {
+class Survey5View extends GetView<Survey2ViewController> {
   const Survey5View({super.key});
 
   @override
@@ -38,7 +38,7 @@ class Survey5View extends GetView<Survey5ViewController> {
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
-                Get.toNamed(AppRoutes.survey_1);
+                Get.toNamed(AppRoutes.survey_4);
               },
               child: Icon(Icons.arrow_back, size: 30),
             ),
