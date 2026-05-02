@@ -3,6 +3,10 @@ import 'package:flutter_application_1/app/modules/screen/homescreen/home_view.da
 import 'package:flutter_application_1/app/modules/screen/onboarding/onboarding/onboarding_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_2/onboarding_2/onboarding_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_3/onboarding_3/onboarding_3_view.dart';
+import 'package:flutter_application_1/app/modules/screen/readbookscreen/book_download_screen/book_download_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/readbookscreen/detail_book_screen/detail_book_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/readbookscreen/save_book_screen/save_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_1/survey_1_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_2/survey_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_3/survey_3_view.dart';
@@ -82,6 +86,28 @@ class AppPages {
       binding: Survey5ViewBinding(),
       transition: Transition.cupertino,
       transitionDuration: Duration(milliseconds: 900),
+    ),
+
+    //read book screen
+    GetPage(
+      name: AppRoutes.readbook,
+      page: () => ReadBookScreenView(),
+      binding: ReadBookScreenBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.detailbook,
+      page: () => DetailBookScreenView(),
+      binding: DetailBookScreenBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.savebook,
+      page: () => SaveBookScreenView(),
+      binding: SaveBookScreenBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.bookdownload,
+      page: () => BookDownloadScreenView(),
+      binding: BookDownloadScreenViewBinding(),
     ),
   ];
 }

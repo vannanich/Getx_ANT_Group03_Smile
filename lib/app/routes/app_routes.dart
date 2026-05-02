@@ -10,4 +10,10 @@ class AppRoutes {
   static const survey_4 = '/survey_4';
   static const survey_5 = '/survey_5';
   static const survey_6 = '/survey_6';
+
+  //reading book screen
+  static const readbook = '/readbook';
+  static const detailbook = '/detailbook';
+  static const savebook = '/savebook';
+  static const bookdownload = '/bookdownload';
 }
