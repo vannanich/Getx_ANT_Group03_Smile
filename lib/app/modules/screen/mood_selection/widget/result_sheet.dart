@@ -53,7 +53,7 @@ class ResultsSheet extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  Text(mood.emoji, style: const TextStyle(fontSize: 28)),
+                  Text(mood.imagePath, style: const TextStyle(fontSize: 28)),
                   const SizedBox(width: 14),
                   Expanded(
                     child: Column(
