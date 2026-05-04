@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 part 'home_screen_binding.dart';
 part 'home_screen_controller.dart';
@@ -22,6 +24,8 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
                 _buildslidstack(),
                 SizedBox(height: 35),
                 _buildGridMenu(),
+                SizedBox(height: 20),
+                _buildBottomNavigation(),
               ],
             ),
           ),
@@ -276,6 +280,59 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildBottomNavigation() {
+    return Container(
+      height: 70,
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFE5E5),
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10),
+        ],
+      ),
+      child: GNav(
+        textStyle: GoogleFonts.balsamiqSans(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.purple,
+        ),
+
+        rippleColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        haptic: true,
+
+        tabBorderRadius: 20,
+
+        curve: Curves.easeOutExpo,
+        duration: const Duration(milliseconds: 300),
+
+        gap: 8,
+        color: Colors.grey,
+        activeColor: Colors.purple,
+        iconSize: 24,
+
+        tabBackgroundColor: Colors.purple.withOpacity(0.12),
+
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+
+        selectedIndex: 0,
+
+        onTabChange: (index) {
+          print("Selected tab: $index");
+        },
+
+        tabs: const [
+          GButton(icon: LineIcons.home, text: 'Home'),
+          GButton(icon: LineIcons.facebookMessenger, text: 'Likes'),
+          GButton(icon: LineIcons.video, text: 'Search'),
+          GButton(icon: LineIcons.user, text: 'Profile'),
+        ],
+      ),
     );
   }
 }

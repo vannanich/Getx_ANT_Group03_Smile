@@ -119,9 +119,9 @@ class MoodGrid extends GetView<MoodSelectorController> {
       itemCount: MoodSelectorController.tileCount,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 1,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 30,
+        childAspectRatio: 0.9,
       ),
       itemBuilder: (context, index) {
         final mood = question.moods[index];
@@ -164,10 +164,22 @@ class MoodGrid extends GetView<MoodSelectorController> {
 
                       return Opacity(opacity: opacity, child: child);
                     },
-                    child: Text(
-                      mood.emoji,
-                      style: TextStyle(fontSize: isSelected ? 36 : 32),
-                    ),
+                    // child: Text(
+                    //   mood.imagePath,
+                    //   style: TextStyle(fontSize: isSelected ? 36 : 32),
+                    // ),
+                    child: mood.imagePath.startsWith('assets/')
+                        ? Image.asset(
+                            mood.imagePath,
+                            width: isSelected ? 42 : 36,
+                            height: isSelected ? 42 : 36,
+                            errorBuilder: (_, _, _) =>
+                                const Icon(Icons.image_not_supported, size: 32),
+                          )
+                        : Text(
+                            mood.imagePath,
+                            style: TextStyle(fontSize: isSelected ? 36 : 32),
+                          ),
                   ),
                   const SizedBox(height: 5),
                   Text(

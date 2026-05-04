@@ -10,8 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.7.3
-  google_fonts: ^6.0.0
   lottie: ^3.1.0
+  google_fonts: ^8.1.0
+  shared_preferences: ^2.2.3
+  google_nav_bar: ^5.0.7
+  line_icons: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -27,3 +30,5 @@ flutter:
     - assets/goals/
     - assets/What_Smile/
     - assets/building_skill/
+
+

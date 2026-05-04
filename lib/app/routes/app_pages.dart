@@ -1,4 +1,6 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding/onboarding/onboarding_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_2/onboarding_2/onboarding_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_3/onboarding_3/onboarding_3_view.dart';
@@ -101,6 +103,11 @@ class AppPages {
       name: AppRoutes.bookdownload,
       page: () => BookDownloadScreenView(),
       binding: BookDownloadScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.moodSelection,
+      page: () => MoodSelectorScreen(),
+      binding: MoodSelectionViewBinding(),
     ),
   ];
 }

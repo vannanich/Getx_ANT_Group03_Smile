@@ -100,7 +100,7 @@ class MoodSelectorScreen extends StatelessWidget {
                     ],
                   ),
 
-                  const SizedBox(height: 28),
+                  SizedBox(height: 30),
 
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 280),
@@ -118,47 +118,50 @@ class MoodSelectorScreen extends StatelessWidget {
                     ),
                     child: Obx(() {
                       final q = controller.currentQuestion;
-                      return Column(
-                        key: ValueKey(controller.questionIndex.value),
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: q.highlight,
-                                  style: const TextStyle(
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.w800,
-                                    color: Color(0xFF6B3FD4),
+                      return Center(
+                        child: Column(
+                          key: ValueKey(controller.questionIndex.value),
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text.rich(
+                              textAlign: TextAlign.center,
+                              TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: q.highlight,
+                                    style: const TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w800,
+                                      color: Color(0xFF6B3FD4),
+                                    ),
                                   ),
-                                ),
-                                TextSpan(
-                                  text: q.rest,
-                                  style: const TextStyle(
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF2D1B6B),
+                                  TextSpan(
+                                    text: q.rest,
+                                    style: const TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFF2D1B6B),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            q.subtitle,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: AppColors.secondary,
-                              // color: Color(0xFF9B8AB8),
+                            const SizedBox(height: 10),
+                            Text(
+                              q.subtitle,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: AppColors.secondary,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     }),
                   ),
 
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 50),
 
                   Expanded(
                     child: Obx(

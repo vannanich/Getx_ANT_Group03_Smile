@@ -44,27 +44,6 @@ class Onboarding3View extends GetView<Onboarding3ViewController> {
     );
   }
 
-  //   Widget _buildThreeDot() {
-  //     return Obx(
-  //       () => Row(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: List.generate(3, (index) {
-  //           return Container(
-  //             margin: const EdgeInsets.symmetric(horizontal: 5),
-  //             width: 35,
-  //             height: 10,
-  //             decoration: BoxDecoration(
-  //               color: controller.currentIndex.value == index
-  //                   ? AppColors.secondary
-  //                   : Colors.grey,
-  //               borderRadius: BorderRadius.circular(50),
-  //             ),
-  //           );
-  //         }),
-  //       ),
-  //     );
-  //   }
-  // }
 
   Widget _buildSpacer(double space) {
     return Container(
