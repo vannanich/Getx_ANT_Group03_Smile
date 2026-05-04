@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -114,11 +116,78 @@ class ReadBookScreenView extends GetView<ReadBookScreenController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xFF5B33B5),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF5B33B5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                left: 8,
+                                right: 8,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Obx(
+                                      () => GestureDetector(
+                                        onTap: () =>
+                                            controller.toggleDownload(index),
+                                        child: Container(
+                                          width: 32,
+                                          height: 32,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white.withOpacity(
+                                              0.85,
+                                            ),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            controller.isDownloaded(index)
+                                                ? Icons.download_done_rounded
+                                                : Icons.download_rounded,
+                                            size: 18,
+                                            color:
+                                                controller.isDownloaded(index)
+                                                ? Color(0xFF5B33B5)
+                                                : Color(
+                                                    0xFF5B33B5,
+                                                  ).withOpacity(0.9),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Obx(
+                                      () => GestureDetector(
+                                        onTap: () =>
+                                            controller.toggleFavorite(index),
+                                        child: Container(
+                                          width: 32,
+                                          height: 32,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white.withOpacity(
+                                              0.85,
+                                            ),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.favorite_rounded,
+                                            size: 18,
+                                            color: controller.isFavorite(index)
+                                                ? Color(0xFFC0184A)
+                                                : Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(height: 8),
@@ -172,27 +241,29 @@ class ReadBookScreenView extends GetView<ReadBookScreenController> {
   }
 
   Widget _buildSave() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildActionCard(
-          label: 'Book saved',
-          icon: Icons.favorite_rounded,
-          cardColor: Color(0xFFE6DAFE),
-          accentColor: Color(0xFFC0184A),
-          badgeCount: 2,
-          onTap: () => Get.toNamed("/savebook"),
-        ),
-        SizedBox(width: 24),
-        _buildActionCard(
-          label: 'Book downloaded',
-          icon: Icons.download_rounded,
-          cardColor: Color(0xFFE6DAFE),
-          accentColor: Color(0xFF5B33B5),
-          badgeCount: 1,
-          onTap: () => Get.toNamed("/bookdownload"),
-        ),
-      ],
+    return Obx(
+      () => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildActionCard(
+            label: 'Book saved',
+            icon: Icons.favorite_rounded,
+            cardColor: Color(0xFFE6DAFE),
+            accentColor: Color(0xFFC0184A),
+            badgeCount: controller.savedBooks.length,
+            onTap: () => Get.toNamed("/savebook"),
+          ),
+          SizedBox(width: 24),
+          _buildActionCard(
+            label: 'Book downloaded',
+            icon: Icons.download_rounded,
+            cardColor: Color(0xFFE6DAFE),
+            accentColor: Color(0xFF5B33B5),
+            badgeCount: controller.downloadbooks.length,
+            onTap: () => Get.toNamed("/bookdownload"),
+          ),
+        ],
+      ),
     );
   }
 
@@ -206,30 +277,57 @@ class ReadBookScreenView extends GetView<ReadBookScreenController> {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: 175,
-        height: 150,
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: cardColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 56, color: accentColor),
-            SizedBox(height: 10),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: accentColor,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            width: 175,
+            height: 150,
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: cardColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, size: 56, color: accentColor),
+                SizedBox(height: 10),
+                Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: accentColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (badgeCount > 0)
+            Positioned(
+              top: -8,
+              right: -8,
+              child: Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: Color(0xFFCE2045),
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  '$badgeCount',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }
