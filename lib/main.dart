@@ -18,6 +18,8 @@ class MainApp extends StatelessWidget {
       // initialRoute: AppRoutes.moodSelection,
       // initialRoute: AppRoutes.quotescreen,
       getPages: AppPages.pages,
+
+      
     );
   }
 }
