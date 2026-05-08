@@ -17,7 +17,12 @@ class AppRoutes {
   static const detailbook = '/detailbook';
   static const savebook = '/savebook';
   static const bookdownload = '/bookdownload';
+  //mood screen
+  static const moodscreen = '/moodscreen';
   static const moodSelection = '/mood_selection';
   static const homescreen = '/homescreen';
   static const streakScreen = '/streakScreen';
+
+  //quote screen
+  static const quotescreen = '/quotescreen';
 }

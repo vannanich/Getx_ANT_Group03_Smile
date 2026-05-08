@@ -1,9 +1,11 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding/onboarding/onboarding_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_2/onboarding_2/onboarding_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_3/onboarding_3/onboarding_3_view.dart';
+import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/book_download_screen/book_download_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/detail_book_screen/detail_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
@@ -104,10 +106,22 @@ class AppPages {
       page: () => BookDownloadScreenView(),
       binding: BookDownloadScreenViewBinding(),
     ),
+    //Mood screen
     GetPage(
       name: AppRoutes.moodSelection,
       page: () => MoodSelectorScreen(),
       binding: MoodSelectionViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.moodscreen,
+      page: () => MoodScreenView(),
+      binding: MoodScreenBinding(),
+    ),
+    //Quote screen
+    GetPage(
+      name: AppRoutes.quotescreen,
+      page: () => QuoteScreenView(),
+      binding: QuoteScreenBinding(),
     ),
   ];
 }
