@@ -1,4 +1,6 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
@@ -91,6 +93,13 @@ class AppPages {
       binding: Survey5ViewBinding(),
       transition: Transition.cupertino,
       transitionDuration: Duration(milliseconds: 900),
+    ),
+
+    // chat AI
+    GetPage(
+      name: AppRoutes.chatAI,
+      page: () => AiChatView(),
+      binding: AiChatBinding(),
     ),
 
     //read book screen

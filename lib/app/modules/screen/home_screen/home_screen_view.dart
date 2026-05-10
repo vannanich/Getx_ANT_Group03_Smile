@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_controller.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
@@ -242,6 +244,12 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
         "icon": Icons.psychology_alt,
         "title": "Chat AI",
         "color": Colors.purple,
+        "route": () => Get.to(
+          () => AiChatView(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => AiChatController());
+          }),
+        ),
       },
       {
         "icon": Icons.forum_outlined,
