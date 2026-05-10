@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // initialRoute: AppRoutes.moodSelection,
-      // initialRoute: AppRoutes.quotescreen,
+      initialRoute: AppRoutes.homescreen,
       getPages: AppPages.pages,
     );
   }
