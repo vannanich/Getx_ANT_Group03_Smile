@@ -26,4 +26,6 @@ class AppRoutes {
 
   //quote screen
   static const quotescreen = '/quotescreen';
+  //video screen
+  static const videoscreen = '/videoscreen';
 }

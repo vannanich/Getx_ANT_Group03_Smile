@@ -18,6 +18,7 @@ import 'package:flutter_application_1/app/modules/screen/survey/survey_2/survey_
 import 'package:flutter_application_1/app/modules/screen/survey/survey_3/survey_3_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_4/survey_4_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_5/survey_5_view.dart';
+import 'package:flutter_application_1/app/modules/screen/video_screen/video_screen_view.dart';
 import 'package:get/get.dart';
 
 import 'app_routes.dart';
@@ -139,6 +140,12 @@ class AppPages {
       name: AppRoutes.quotescreen,
       page: () => QuoteScreenView(),
       binding: QuoteScreenBinding(),
+    ),
+    //Video screen
+    GetPage(
+      name: AppRoutes.videoscreen,
+      page: () => VideoScreenView(),
+      binding: VideoScreenViewBinding(),
     ),
   ];
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/modules/screen/mood_selection/widget/categoriesWidget.dart';
 import 'package:get/get.dart';
 
 part 'read_book_screen_binding.dart';
@@ -88,7 +89,14 @@ class ReadBookScreenView extends GetView<ReadBookScreenController> {
                 SizedBox(height: 30),
                 _buildSave(),
                 SizedBox(height: 25),
-                _buildCategories(),
+                Categorieswidget(
+                  categories: [
+                    'All',
+                    'Motivation',
+                    'Self improvement',
+                    'Psychology',
+                  ],
+                ),
                 SizedBox(height: 30),
               ]),
             ),
@@ -329,45 +337,6 @@ class ReadBookScreenView extends GetView<ReadBookScreenController> {
             ),
         ],
       ),
-    );
-  }
-
-  Widget _buildCategories() {
-    final List<String> categories = [
-      'All',
-      'Motivation',
-      'Self improve',
-      'Psychology',
-    ];
-    return Row(
-      children: List.generate(categories.length, (index) {
-        final bool isSelected = index == 0;
-        return Expanded(
-          child: Container(
-            margin: EdgeInsets.only(
-              right: index == categories.length - 1 ? 0 : 8,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-              color: isSelected ? Color(0xFF5B33B5) : Color(0xFFE6DAFE),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              categories[index],
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              textScaler: TextScaler.noScaling,
-              maxLines: 1,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-                color: isSelected ? Colors.white : Color(0xFF5B33B5),
-              ),
-            ),
-          ),
-        );
-      }),
     );
   }
 }

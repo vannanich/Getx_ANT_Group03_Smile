@@ -51,7 +51,7 @@ class MoodScreenView extends GetView<MoodScreenController> {
             width: 38,
             height: 38,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.transparent,
               borderRadius: BorderRadius.circular(12),
             ),
           ),
