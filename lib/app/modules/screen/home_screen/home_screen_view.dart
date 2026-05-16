@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_controller.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -105,7 +110,7 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                image: AssetImage("assets/img/background.png"),
+                image: AssetImage("assets/bg_homescreen_card.jpg"),
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
                   const Color.fromARGB(0, 160, 157, 157).withOpacity(0.4),
@@ -213,21 +218,49 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
 
   Widget _buildGridMenu() {
     final List<Map<String, dynamic>> items = [
-      {"icon": Icons.mood, "title": "Track Mood", "color": Colors.orange},
+      {
+        "icon": Icons.mood,
+        "title": "Track Mood",
+        "color": Colors.orange,
+        "route": () => Get.to(
+          () => MoodScreenView(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => MoodScreenController());
+          }),
+        ),
+      },
       {
         "icon": Icons.menu_book_rounded,
         "title": "Read Book",
         "color": Colors.blue,
+        "route": () => Get.to(
+          () => ReadBookScreenView(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => ReadBookScreenController());
+          }),
+        ),
       },
       {
         "icon": Icons.psychology_alt,
         "title": "Chat AI",
         "color": Colors.purple,
+        "route": () => Get.to(
+          () => AiChatView(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => AiChatController());
+          }),
+        ),
       },
       {
         "icon": Icons.forum_outlined,
         "title": "Read Quotes",
         "color": Colors.pink,
+        "route": () => Get.to(
+          () => QuoteScreenView(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => QuoteScreenController());
+          }),
+        ),
       },
       {
         "icon": Icons.movie_creation_outlined,
@@ -254,29 +287,33 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
       itemBuilder: (context, index) {
         final item = items[index];
 
-        return Container(
-          decoration: BoxDecoration(
-            color: item["color"].withOpacity(0.12),
-            borderRadius: BorderRadius.circular(22),
-          ),
+        return GestureDetector(
+          onTap: () => item["route"]?.call(),
 
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(item["icon"], size: 47, color: item["color"]),
+          child: Container(
+            decoration: BoxDecoration(
+              color: item["color"].withOpacity(0.12),
+              borderRadius: BorderRadius.circular(22),
+            ),
 
-              SizedBox(height: 12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(item["icon"], size: 47, color: item["color"]),
 
-              Text(
-                item["title"],
-                textAlign: TextAlign.center,
-                style: GoogleFonts.balsamiqSans(
-                  fontSize: 15,
-                  color: item["color"],
-                  fontWeight: FontWeight.w500,
+                SizedBox(height: 12),
+
+                Text(
+                  item["title"],
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.balsamiqSans(
+                    fontSize: 15,
+                    color: item["color"],
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

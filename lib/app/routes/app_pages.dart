@@ -1,4 +1,7 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_view.dart';
@@ -21,6 +24,13 @@ import 'app_routes.dart';
 
 class AppPages {
   static final pages = [
+    GetPage(
+      name: AppRoutes.homescreen,
+      page: () => HomeScreenView(),
+      binding: HomeScreenViewBinding(),
+      transition: Transition.circularReveal,
+      transitionDuration: Duration(milliseconds: 900),
+    ),
     GetPage(
       name: AppRoutes.onboarding,
       page: () => OnboardingView(),
@@ -83,6 +93,13 @@ class AppPages {
       binding: Survey5ViewBinding(),
       transition: Transition.cupertino,
       transitionDuration: Duration(milliseconds: 900),
+    ),
+
+    // chat AI
+    GetPage(
+      name: AppRoutes.chatAI,
+      page: () => AiChatView(),
+      binding: AiChatBinding(),
     ),
 
     //read book screen

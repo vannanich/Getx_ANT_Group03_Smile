@@ -15,6 +15,7 @@ dependencies:
   shared_preferences: ^2.2.3
   google_nav_bar: ^5.0.7
   line_icons: ^2.0.3
+  google_generative_ai: ^0.4.6
 
 dev_dependencies:
   flutter_test:
@@ -26,9 +27,3 @@ flutter:
   assets:
     - assets/
     - assets/Feeling/
-    - assets/need_most/
-    - assets/goals/
-    - assets/What_Smile/
-    - assets/building_skill/
-
-

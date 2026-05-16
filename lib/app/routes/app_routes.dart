@@ -11,6 +11,7 @@ class AppRoutes {
   static const survey_5 = '/survey_5';
   static const survey_6 = '/survey_6';
   static const surveyScreen = '/surveyscreen';
+  static const chatAI = '/chatAI';
 
   //reading book screen
   static const readbook = '/readbook';
