@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_controller.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 class DoctorAppointmentView extends GetView<DoctorAppointmentController> {
@@ -320,12 +321,17 @@ class DoctorAppointmentView extends GetView<DoctorAppointmentController> {
           elevation: 4,
           shadowColor: const Color(0xFF5B2DC4).withOpacity(0.35),
         ),
-        child: const Text(
-          'Book an appointment',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-            fontSize: 16,
+        child:  GestureDetector(
+          onTap:() {
+            Get.toNamed(AppRoutes.schedule);
+          },
+          child: Text(
+            'Book an appointment',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
+            ),
           ),
         ),
       ),

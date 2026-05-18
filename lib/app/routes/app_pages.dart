@@ -5,6 +5,8 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_app
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
@@ -160,6 +162,11 @@ class AppPages {
       name: AppRoutes.bookAppointment,
       page: () =>DoctorAppointmentView (),
       binding: DoctorAppointmentBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.schedule,
+      page: () =>ScheduleView (),
+      binding: ScheduleBinding (),
     ),
   ];
 }
