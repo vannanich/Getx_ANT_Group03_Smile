@@ -5,6 +5,9 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_wit
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_controller.dart';
+import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_view.dart';
+import 'package:flutter_application_1/app/modules/screen/video_screen/video_screen_view.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -271,11 +274,23 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
         "icon": Icons.movie_creation_outlined,
         "title": "Watch Videos",
         "color": Colors.red,
+        "route": () => Get.to(
+          () => VideoScreenView(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => VideoScreenViewController());
+          }),
+        ),
       },
       {
         "icon": Icons.nightlight_round,
         "title": "Sleeping Mode",
         "color": Colors.deepPurple,
+        "route": () => Get.to(
+          () => SleepModeView(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => SleepModeController());
+          }),
+        ),
       },
     ];
 

@@ -12,6 +12,7 @@ class AppRoutes {
   static const survey_6 = '/survey_6';
   static const surveyScreen = '/surveyscreen';
   static const chatAI = '/chatAI';
+  static const sleepingMood = '/sleeping_mood';
 
   // doctor feature 
   static const chatWithDoctor = '/chat_with_doctor';

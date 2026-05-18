@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/model/mood_model.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_controller.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
@@ -53,8 +54,12 @@ class ResultsSheet extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  Text(mood.imagePath, style: const TextStyle(fontSize: 28)),
-                  const SizedBox(width: 14),
+Image.asset(
+  mood.imagePath,
+  width: 30,
+  height: 30,
+  fit: BoxFit.contain,
+),                  const SizedBox(width: 14),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,12 +96,15 @@ class ResultsSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
-            child: const Text(
-              'Done',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
+            child:  GestureDetector(
+              onTap: () => Get.toNamed(AppRoutes.homescreen),
+              child: Text(
+                'Done',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
