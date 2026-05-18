@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'login_screen_controller.dart';
 
@@ -287,13 +288,18 @@ class LoginScreenView extends GetView<LoginScreenController> {
     return ElevatedButton.icon(
       onPressed: controller.onFacebook,
       icon:  Icon(Icons.facebook, color: Colors.white, size: 20),
-      label:  Text(
-        'CONTINUE WITH FACEBOOK',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: 13,
-          letterSpacing: 0.5,
+      label:  GestureDetector(
+        onTap: () {
+          Get.toNamed(AppRoutes.moodSelection);
+        },
+        child: Text(
+          'CONTINUE WITH FACEBOOK',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 13,
+            letterSpacing: 0.5,
+          ),
         ),
       ),
       style: ElevatedButton.styleFrom(

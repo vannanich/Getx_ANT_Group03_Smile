@@ -129,7 +129,9 @@ class Onboarding3View extends GetView<Onboarding3ViewController> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AppRoutes.moodSelection);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

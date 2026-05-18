@@ -37,7 +37,7 @@ const List<MoodQuestion> questions = [
   ),
   MoodQuestion(
     highlight: 'What',
-    rest: ' do you need the most today ?',
+    rest: ' do you need the most ?',
     subtitle: 'Choose what matter the most to you right now',
     moods: [
       Mood('assets/Feeling/motivation.png', 'Motivation'),
