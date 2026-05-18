@@ -13,6 +13,10 @@ class AppRoutes {
   static const surveyScreen = '/surveyscreen';
   static const chatAI = '/chatAI';
 
+  // doctor feature 
+  static const chatWithDoctor = '/chat_with_doctor';
+  static const bookAppointment = '/book_appointment';
+
   //reading book screen
   static const readbook = '/readbook';
   static const detailbook = '/detailbook';

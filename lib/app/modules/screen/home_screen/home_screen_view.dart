@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -184,12 +186,15 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Chat with Doctor",
-                        style: GoogleFonts.balsamiqSans(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.brown.shade700,
+                      GestureDetector(
+                        onTap: () => Get.toNamed(AppRoutes.chatWithDoctor),
+                        child: Text(
+                          "Chat with Doctor",
+                          style: GoogleFonts.balsamiqSans(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.brown.shade700,
+                          ),
                         ),
                       ),
                       SizedBox(height: 5),

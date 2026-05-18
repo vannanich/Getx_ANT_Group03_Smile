@@ -1,6 +1,10 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
@@ -146,6 +150,16 @@ class AppPages {
       name: AppRoutes.videoscreen,
       page: () => VideoScreenView(),
       binding: VideoScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.chatWithDoctor,
+      page: () => ChatWithDoctorView(),
+      binding: ChatWithDoctorBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.bookAppointment,
+      page: () =>DoctorAppointmentView (),
+      binding: DoctorAppointmentBinding (),
     ),
   ];
 }
