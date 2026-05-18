@@ -1,9 +1,9 @@
-part of 'login_screen_view.dart';
+import 'package:get/get.dart';
+import 'login_screen_controller.dart';
 
-class LoginScreenViewBinding extends Bindings {
-
-   @override
-   void dependencies() {
-       Get.lazyPut(() => LoginScreenViewController());
-   }
+class LoginScreenBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<LoginScreenController>(() => LoginScreenController());
+  }
 }

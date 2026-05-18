@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
@@ -62,7 +63,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreenView(),
-      binding: LoginScreenViewBinding(),
+      binding: LoginScreenBinding(),
       transition: Transition.fade,
       transitionDuration: Duration(milliseconds: 900),
     ),
