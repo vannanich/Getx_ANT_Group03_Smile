@@ -1,5 +1,7 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_binding.dart';
@@ -181,6 +183,11 @@ class AppPages {
       name: AppRoutes.selectRoleScreen,
       page: () => SelectRoleScreenView(),
       binding: SelectRoleScreenBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.streakScreen,
+      page: () => BuildstreakView(),
+      binding: BuildstreakViewBinding (),
     ),
   ];
 }

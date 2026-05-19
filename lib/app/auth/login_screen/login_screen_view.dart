@@ -17,7 +17,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                SizedBox(height: 30),
-              // _buildLogo(),
+              _buildLogo(),
                SizedBox(height: 20),
               _buildTitle(),
                SizedBox(height: 54),
@@ -59,7 +59,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/logo.png',
+              'assets/logo.png',
               width: 70,
               height: 70,
               errorBuilder: (_, __, ___) =>  Icon(

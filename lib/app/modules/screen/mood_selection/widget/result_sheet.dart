@@ -97,7 +97,7 @@ Image.asset(
               ),
             ),
             child:  GestureDetector(
-              onTap: () => Get.toNamed(AppRoutes.homescreen),
+              onTap: () => Get.toNamed(AppRoutes.streakScreen),
               child: Text(
                 'Done',
                 style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_controller.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,7 +33,7 @@ class BuildstreakView extends GetView<BuildstreakViewController> {
         child: Column(
           children: [
             SizedBox(height: 35),
-            Image.asset("assets/img/Streak.png"),
+            Image.asset("assets/Image (Streak flame).png"),
             Text(
               "2",
               style: TextStyle(
@@ -151,7 +152,7 @@ class BuildstreakView extends GetView<BuildstreakViewController> {
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
-                onPressed: () => Get.toNamed("/letBeginWithUs"),
+                onPressed: () => Get.toNamed(AppRoutes.homescreen),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF5B13EC),
                   shape: RoundedRectangleBorder(

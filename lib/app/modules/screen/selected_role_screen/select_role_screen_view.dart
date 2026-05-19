@@ -147,35 +147,45 @@ class SelectRoleScreenView extends GetView<SelectRoleScreenController> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    return Stack(
-      children: [
-        Container(color: const Color(0xFFF6D6E9)),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.50,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xFFB57EDC),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(200),
-                bottomRight: Radius.circular(200),
-              ),
+  return Stack(
+    children: [
+      Container(color: const Color(0xFFF6D6E9)),
+      Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.50,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            color: Color(0xFFB57EDC),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(200),
+              bottomRight: Radius.circular(200),
             ),
           ),
         ),
-        Positioned(
-          top: 65,
-          left: 115,
-          child: Image.asset(
-            'assets/freepik--Character--inject-62.png',
-            width: 120,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ],
-    );
-  }
+      ),
+      Positioned(
+        top: 65,
+        left: 115,
+        child: Obx(() {
+          final imagePath = controller.selectedRole.value == 'user'
+              ? 'assets/as_user.png'   
+              : 'assets/as_doctor.png';
+
+          return AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            child: Image.asset(
+              imagePath,
+              key: ValueKey(imagePath), // triggers animation on change
+              width: 120,
+              fit: BoxFit.cover,
+            ),
+          );
+        }),
+      ),
+    ],
+  );
+}
 
   Widget _buildContinueButton() {
     return Obx(() => Padding(

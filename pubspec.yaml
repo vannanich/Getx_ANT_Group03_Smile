@@ -27,3 +27,5 @@ flutter:
   assets:
     - assets/
     - assets/Feeling/
+    - assets/as_doctor.png
+    - assets/as_user.png
