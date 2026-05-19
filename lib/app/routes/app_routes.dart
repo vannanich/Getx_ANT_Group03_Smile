@@ -34,4 +34,7 @@ class AppRoutes {
   static const quotescreen = '/quotescreen';
   //video screen
   static const videoscreen = '/videoscreen';
+
+  // b nita select role 
+  static const selectRoleScreen = '/select_role_screen';
 }

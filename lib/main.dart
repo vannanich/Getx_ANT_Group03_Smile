@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // initialRoute: AppRoutes.videoscreen,
-      initialRoute: AppRoutes.onboarding,
+      initialRoute: AppRoutes.selectRoleScreen,
       getPages: AppPages.pages,
     );
   }

@@ -20,6 +20,7 @@ import 'package:flutter_application_1/app/modules/screen/readbookscreen/book_dow
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/detail_book_screen/detail_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/save_book_screen/save_book_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/selected_role_screen/select_role_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_1/survey_1_view.dart';
@@ -175,6 +176,11 @@ class AppPages {
       name: AppRoutes.sleepingMood,
       page: () => SleepModeView(),
       binding: SleepModeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.selectRoleScreen,
+      page: () => SelectRoleScreenView(),
+      binding: SelectRoleScreenBinding(),
     ),
   ];
 }
