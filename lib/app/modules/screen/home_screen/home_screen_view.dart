@@ -50,8 +50,8 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
         Row(
           children: [
             Container(
-              width: 65,
-              height: 65,
+              width: 55,
+              height: 55,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey,
