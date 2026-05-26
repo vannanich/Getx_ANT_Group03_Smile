@@ -19,6 +19,7 @@ class AppRoutes {
   static const bookAppointment = '/book_appointment';
   static const schedule = '/schedule';
   static const scanId='/scan_doctor_id';
+  static const dCompleteForm='/d_complete_form';
 
   //reading book screen
   static const readbook = '/readbook';

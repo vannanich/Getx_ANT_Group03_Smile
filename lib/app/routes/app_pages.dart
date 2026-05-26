@@ -1,4 +1,6 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
@@ -195,6 +197,11 @@ class AppPages {
       name: AppRoutes.scanId,
       page: () => ScanDoctorIdView(),
       binding: ScanDoctorIdBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.dCompleteForm,
+      page: () => DCompleteFormView(),
+      binding: DCompleteFormBinding (),
     ),
   ];
 }
