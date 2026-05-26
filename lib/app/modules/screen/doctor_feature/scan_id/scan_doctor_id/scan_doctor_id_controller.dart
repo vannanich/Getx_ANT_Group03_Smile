@@ -149,14 +149,12 @@ class ScanDoctorIdController extends GetxController {
     scanProgress.value = 0.0;
   }
 
-  // ── Navigate to profile form ─────────────────────────────────────────────
   void proceedToProfileForm() {
     if (scannedId.value != null) {
       Get.toNamed('/profile-form', arguments: scannedId.value);
     }
   }
 
-  // ── Retry ────────────────────────────────────────────────────────────────
   void retry() {
     scannedId.value = null;
     errorMessage.value = '';

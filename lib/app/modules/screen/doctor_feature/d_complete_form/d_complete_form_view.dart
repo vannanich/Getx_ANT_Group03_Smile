@@ -10,7 +10,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
   const DCompleteFormView({super.key});
 
   // ── Brand colors ──────────────────────────────────────────────────────────
-  static const _primary = Color(0xFF2563EB);
+  static const _primary = Color.fromARGB(255, 105, 23, 156);
   static const _primaryLight = Color(0xFFEFF6FF);
   static const _surface = Color(0xFFF8FAFC);
   static const _border = Color(0xFFE2E8F0);

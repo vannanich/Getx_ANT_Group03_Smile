@@ -397,7 +397,6 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
     });
   }
 
-  // ── 3. Error screen ──────────────────────────────────────────────────────
   Widget _buildErrorScreen(BuildContext context) {
     return SafeArea(
       child: Padding(

@@ -151,16 +151,14 @@ class DCompleteFormController extends GetxController {
     }
   }
 
-  // ── Document upload ───────────────────────────────────────────────────────
-  Future<void> pickDocuments() async {
-  final ImagePicker picker = ImagePicker();
-  final List<XFile> images = await picker.pickMultiImage(
+ Future<void> pickDocuments() async {
+  final List<XFile> images = await _picker.pickMultiImage(
     imageQuality: 100,
   );
-  
+
   if (images.isNotEmpty) {
     final newFiles = images.map((x) => File(x.path)).toList();
-    
+
     if (uploadedDocs.length + newFiles.length > 5) {
       Get.snackbar(
         'Limit Reached',
