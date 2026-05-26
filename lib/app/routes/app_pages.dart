@@ -207,7 +207,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.dHomescreen,
-      page: () => DHomescreenView(),
+      page: () => dhomesc(),
       binding: DoctorHomeBinding (),
     ),
   ];
