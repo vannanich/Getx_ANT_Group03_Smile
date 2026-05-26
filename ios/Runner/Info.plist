@@ -46,8 +46,6 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 
-// add here for scan ID 
-
 	<key>NSCameraUsageDescription</key>
 	<string>We need camera access to scan your Khmer ID card for verification.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
