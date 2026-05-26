@@ -1,5 +1,6 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
-import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
+import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding/onboarding/onboarding_view.dart';
@@ -188,6 +190,11 @@ class AppPages {
       name: AppRoutes.streakScreen,
       page: () => BuildstreakView(),
       binding: BuildstreakViewBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.scanId,
+      page: () => ScanDoctorIdView(),
+      binding: ScanDoctorIdBinding (),
     ),
   ];
 }

@@ -18,6 +18,7 @@ class AppRoutes {
   static const chatWithDoctor = '/chat_with_doctor';
   static const bookAppointment = '/book_appointment';
   static const schedule = '/schedule';
+  static const scanId='/scan_doctor_id';
 
   //reading book screen
   static const readbook = '/readbook';
