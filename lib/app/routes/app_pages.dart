@@ -205,10 +205,10 @@ class AppPages {
       page: () => DCompleteFormView(),
       binding: DCompleteFormBinding (),
     ),
-    GetPage(
-      name: AppRoutes.dHomescreen,
-      page: () => DHomescreenView(),
-      binding: DoctorHomeBinding (),
-    ),
+    // GetPage(
+    //   name: AppRoutes.dHomescreen,
+    //   page: () => DHomescreenView(),
+    //   binding: DoctorHomeBinding (),
+    // ),
   ];
 }
