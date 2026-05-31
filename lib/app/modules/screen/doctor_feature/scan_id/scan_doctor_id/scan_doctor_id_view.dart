@@ -368,7 +368,7 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Continue to Profile',
+                              'Continue to Complete form ',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -489,7 +489,6 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
   }
 }
 
-// ── Extracted ID info card ──────────────────────────────────────────────────
 class _IdCard extends StatelessWidget {
   final KhmerIdModel id;
 

@@ -1,4 +1,5 @@
 // lib/controllers/id_scan_controller.dart
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 import 'package:camera/camera.dart';
@@ -151,7 +152,10 @@ class ScanDoctorIdController extends GetxController {
 
   void proceedToProfileForm() {
     if (scannedId.value != null) {
-      Get.toNamed('/profile-form', arguments: scannedId.value);
+      Get.toNamed(
+        AppRoutes.dCompleteForm,
+        arguments: scannedId.value,
+      );
     }
   }
 
@@ -162,3 +166,7 @@ class ScanDoctorIdController extends GetxController {
     scanProgress.value = 0.0;
   }
 }
+
+  
+
+  
