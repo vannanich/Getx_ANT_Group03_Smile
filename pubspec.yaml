@@ -4,7 +4,7 @@ publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: ^3.10.7
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -18,7 +18,7 @@ dependencies:
   google_generative_ai: ^0.4.6
   google_mlkit_text_recognition: ^0.13.0
   camera: ^0.10.5+9
-  permission_handler: ^11.3.1   # ← keep only ONE
+  permission_handler: ^11.3.1
   image_picker: ^1.1.2
   cupertino_icons: ^1.0.2
 

@@ -80,7 +80,7 @@ class MoodSelectorScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(4),
                               child: AnimatedBuilder(
                                 animation: controller.progressAnimation,
-                                builder: (_, _) {
+                                builder: (context, child) {
                                   return LinearProgressIndicator(
                                     value: controller.progressAnimation.value,
                                     minHeight: 6,

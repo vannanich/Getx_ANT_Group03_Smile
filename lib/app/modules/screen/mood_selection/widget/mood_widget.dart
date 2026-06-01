@@ -173,7 +173,8 @@ class MoodGrid extends GetView<MoodSelectorController> {
                             mood.imagePath,
                             width: isSelected ? 42 : 36,
                             height: isSelected ? 42 : 36,
-                            errorBuilder: (_, _, _) =>
+                            // errorBuilder: (_, _, _) =>
+                            errorBuilder: (context, error, stackTrace) =>
                                 const Icon(Icons.image_not_supported, size: 32),
                           )
                         : Text(
