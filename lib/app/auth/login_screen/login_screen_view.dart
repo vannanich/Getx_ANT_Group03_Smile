@@ -68,7 +68,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
                 color: Color(0xFF6B3FD4),
               ),
             ),
-             Text(
+            Text(
               'smile',
               style: TextStyle(
                 fontSize: 13,
