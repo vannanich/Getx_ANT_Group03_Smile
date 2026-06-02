@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'chat_with_doctor_controller.dart';
 
 class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
-  const ChatWithDoctorView({super.key});
+   ChatWithDoctorView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F0FF),
+      backgroundColor:  Color(0xFFF4F0FF),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,7 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+      padding:  EdgeInsets.fromLTRB(20, 16, 20, 8),
       child: Row(
         children: [
           GestureDetector(
@@ -41,17 +41,17 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.07),
                     blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    offset:  Offset(0, 2),
                   ),
                 ],
               ),
-              child: const Icon(Icons.arrow_back_ios_new, size: 15, color: Color(0xFF6B3FD4)),
+              child:  Icon(Icons.arrow_back_ios_new, size: 15, color: Color(0xFF6B3FD4)),
             ),
           ),
-          const SizedBox(width: 14),
+           SizedBox(width: 14),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children:  [
               Text(
                 'Chat with doctor',
                 style: TextStyle(
@@ -73,7 +73,7 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
 
   Widget _buildSearchBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding:  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -84,7 +84,7 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
         ),
         child: TextField(
           onChanged: controller.onSearch,
-          decoration: const InputDecoration(
+          decoration:  InputDecoration(
             hintText: 'Search doctor...',
             hintStyle: TextStyle(color: Color(0xFF9B8AB8), fontSize: 14),
             prefixIcon: Icon(Icons.search, color: Color(0xFF9B8AB8)),
@@ -102,19 +102,19 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
       height: 40,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding:  EdgeInsets.symmetric(horizontal: 20),
         itemCount: controller.categories.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        separatorBuilder: (_, __) =>  SizedBox(width: 8),
         itemBuilder: (_, i) {
           final cat = controller.categories[i];
           final isSelected = controller.selectedCategory.value == cat;
           return GestureDetector(
             onTap: () => controller.selectCategory(cat),
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              duration:  Duration(milliseconds: 200),
+              padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF6B3FD4) : Colors.white,
+                color: isSelected ?  Color(0xFF6B3FD4) : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 6),
@@ -125,7 +125,7 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: isSelected ? Colors.white : const Color(0xFF9B8AB8),
+                  color: isSelected ? Colors.white :  Color(0xFF9B8AB8),
                 ),
               ),
             ),
@@ -141,7 +141,7 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
     builder: (controller) {
       final doctors = controller.filteredDoctors;
       return ListView.builder(
-        padding: const EdgeInsets.all(20),
+        padding:  EdgeInsets.all(20),
         itemCount: doctors.length,
         itemBuilder: (_, i) => _buildDoctorCard(doctors[i]),
       );
@@ -151,13 +151,13 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
 
   Widget _buildDoctorCard(Doctor doctor) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(14),
+      margin:  EdgeInsets.only(bottom: 16),
+      padding:  EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 12, offset: const Offset(0, 4)),
+          BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 12, offset:  Offset(0, 4)),
         ],
       ),
       child: Column(
@@ -177,10 +177,10 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
                         width: 65,
                         height: 65,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE8E0FF),
+                          color:  Color(0xFFE8E0FF),
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Icon(Icons.person, color: Color(0xFF6B3FD4), size: 36),
+                        child:  Icon(Icons.person, color: Color(0xFF6B3FD4), size: 36),
                       ),
                     ),
                   ),
@@ -191,41 +191,41 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
                       width: 20,
                       height: 20,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF6B3FD4),
+                        color:  Color(0xFF6B3FD4),
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 2),
                       ),
-                      child: const Icon(Icons.check, size: 11, color: Colors.white),
+                      child:  Icon(Icons.check, size: 11, color: Colors.white),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(width: 14),
+               SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       doctor.name,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF2D1B6B),
                       ),
                     ),
-                    const SizedBox(height: 3),
+                     SizedBox(height: 3),
                     Text(
                       '${doctor.specialty}  ${doctor.subSpecialty}',
-                      style: const TextStyle(fontSize: 12, color: Color(0xFF9B8AB8)),
+                      style:  TextStyle(fontSize: 12, color: Color(0xFF9B8AB8)),
                     ),
-                    const SizedBox(height: 4),
+                     SizedBox(height: 4),
                     Row(
                       children: [
-                        const Icon(Icons.star_rounded, color: Color(0xFFFFC107), size: 16),
-                        const SizedBox(width: 4),
+                         Icon(Icons.star_rounded, color: Color(0xFFFFC107), size: 16),
+                         SizedBox(width: 4),
                         Text(
                           doctor.rating.toString(),
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF2D1B6B),
@@ -238,7 +238,7 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+           SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -246,10 +246,10 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
                   onPressed: () {
                     Get.toNamed(AppRoutes.bookAppointment);                    
                   },
-                  icon: const SizedBox(),
+                  icon:  SizedBox(),
                   label: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children:  [
                       Text(
                         'Book an appointment',
                         style: TextStyle(
@@ -263,22 +263,22 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
                     ],
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF5B2DC4),
-                    padding: const EdgeInsets.symmetric(vertical: 13),
+                    backgroundColor:  Color(0xFF5B2DC4),
+                    padding:  EdgeInsets.symmetric(vertical: 13),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     elevation: 0,
                   ),
                 ),
               ),
-              const SizedBox(width: 10),
+               SizedBox(width: 10),
               Container(
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF4F0FF),
+                  color:  Color(0xFFF4F0FF),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.chat_bubble_outline_rounded, color: Color(0xFF6B3FD4), size: 20),
+                child:  Icon(Icons.chat_bubble_outline_rounded, color: Color(0xFF6B3FD4), size: 20),
               ),
             ],
           ),

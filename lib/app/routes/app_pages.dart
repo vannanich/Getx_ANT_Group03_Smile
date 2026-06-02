@@ -1,6 +1,8 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
@@ -29,6 +31,7 @@ import 'package:flutter_application_1/app/modules/screen/readbookscreen/save_boo
 import 'package:flutter_application_1/app/modules/screen/selected_role_screen/select_role_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_view.dart';
+import 'package:flutter_application_1/app/modules/screen/splash_screen.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_1/survey_1_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_2/survey_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_3/survey_3_view.dart';
@@ -203,10 +206,15 @@ class AppPages {
       page: () => DCompleteFormView(),
       binding: DCompleteFormBinding (),
     ),
-    // GetPage(
-    //   name: AppRoutes.dHomescreen,
-    //   page: () => DHomescreenView(),
-    //   binding: DoctorHomeBinding (),
-    // ),
+    GetPage(
+      name: AppRoutes.splashScreen,
+      page: () => SplashScreen(),
+      // binding: DCompleteFormBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.dHomescreen,
+      page: () => DHomescreenView(),
+      binding: DHomescreenBinding (),
+    ),
   ];
 }

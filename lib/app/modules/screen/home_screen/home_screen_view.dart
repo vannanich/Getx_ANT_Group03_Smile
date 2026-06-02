@@ -19,7 +19,7 @@ part 'home_screen_binding.dart';
 part 'home_screen_controller.dart';
 
 class HomeScreenView extends GetView<HomeScreenViewController> {
-  const HomeScreenView({super.key});
+   HomeScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding:  EdgeInsets.all(10),
             child: Column(
               children: [
                 _buildHeader(),
@@ -109,7 +109,7 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(5),
+          padding:  EdgeInsets.all(5),
           child: Container(
             width: 800,
             height: 180,
@@ -119,7 +119,7 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
                 image: AssetImage("assets/bg_homescreen_card.jpg"),
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
-                  const Color.fromARGB(0, 160, 157, 157).withOpacity(0.4),
+                   Color.fromARGB(0, 160, 157, 157).withOpacity(0.4),
                   BlendMode.darken,
                 ),
               ),
@@ -157,13 +157,13 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
         ),
         SizedBox(height: 15),
         Padding(
-          padding: const EdgeInsets.all(5),
+          padding:  EdgeInsets.all(5),
           child: Container(
             width: 800,
             height: 100,
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding:  EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(96, 208, 240, 210),
+              color:  Color.fromARGB(96, 208, 240, 210),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: Colors.green.shade200),
             ),
@@ -174,10 +174,10 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
                   width: 55,
                   height: 55,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFD8CFC7),
+                    color:  Color(0xFFD8CFC7),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: const Icon(
+                  child:  Icon(
                     Icons.medical_services_outlined,
                     size: 30,
                     color: Colors.brown,
@@ -344,10 +344,10 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
   Widget _buildBottomNavigation() {
     return Container(
       height: 70,
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      margin:  EdgeInsets.all(10),
+      padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFE5E5),
+        color:  Color(0xFFFFE5E5),
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10),
@@ -367,7 +367,7 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
         tabBorderRadius: 20,
 
         curve: Curves.easeOutExpo,
-        duration: const Duration(milliseconds: 300),
+        duration:  Duration(milliseconds: 300),
 
         gap: 8,
         color: Colors.grey,
@@ -376,7 +376,7 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
 
         tabBackgroundColor: Colors.purple.withOpacity(0.12),
 
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding:  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
 
         selectedIndex: 0,
 
@@ -384,7 +384,7 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
           print("Selected tab: $index");
         },
 
-        tabs: const [
+        tabs:  [
           GButton(icon: LineIcons.home, text: 'Home'),
           GButton(icon: LineIcons.facebookMessenger, text: 'Likes'),
           GButton(icon: LineIcons.video, text: 'Search'),

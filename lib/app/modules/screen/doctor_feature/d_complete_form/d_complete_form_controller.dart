@@ -130,13 +130,11 @@ class DCompleteFormController extends GetxController {
   // ── Gender ────────────────────────────────────────────────────────────────
   void setGender(String value) => selectedGender.value = value;
 
-  // ── Specialty ─────────────────────────────────────────────────────────────
   void setSpecialty(String value) {
     selectedSpecialty.value = value;
     specialtyCtrl.text = value;
   }
 
-  // ── Experience stepper ────────────────────────────────────────────────────
   void incrementExp() {
     if (experienceYears.value < 50) {
       experienceYears.value++;
