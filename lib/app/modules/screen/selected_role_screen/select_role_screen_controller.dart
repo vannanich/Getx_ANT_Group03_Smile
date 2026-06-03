@@ -16,7 +16,7 @@ class SelectRoleScreenController extends GetxController {
     if (!hasSelectedRole) return;
 
     if (isDoctor) {
-      Get.toNamed(AppRoutes.homescreen);
+      Get.toNamed(AppRoutes.scanId);
     } else {
       Get.toNamed(AppRoutes.moodSelection);
     }

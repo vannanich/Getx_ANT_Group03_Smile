@@ -1,14 +1,14 @@
-// lib/views/id_scan_view.dart
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/models/khmer_id.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_controller.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:flutter_application_1/app/widgets/scan_overlay.dart';
 import 'package:get/get.dart';
 
 class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
-  const ScanDoctorIdView({super.key});
+   ScanDoctorIdView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,6 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
     );
   }
 
-  // ── 1. Camera screen ────────────────────────────────────────────────────
   Widget _buildCameraScreen(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
@@ -79,16 +78,16 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const CircularProgressIndicator(
+             CircularProgressIndicator(
               color: Color(0xFF60A5FA),
             ),
-            const SizedBox(height: 16),
+             SizedBox(height: 16),
             Obx(
               () => Text(
                 controller.errorMessage.value.isEmpty
                     ? 'Starting camera…'
                     : controller.errorMessage.value,
-                style: const TextStyle(color: Colors.white70, fontSize: 14),
+                style:  TextStyle(color: Colors.white70, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -101,15 +100,15 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
   Widget _buildTopBar() {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding:  EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Row(
           children: [
             IconButton(
               onPressed: () => Get.back(),
-              icon: const Icon(Icons.arrow_back_ios_new,
+              icon:  Icon(Icons.arrow_back_ios_new,
                   color: Colors.white, size: 20),
             ),
-            const Expanded(
+             Expanded(
               child: Text(
                 'Scan Khmer ID Card',
                 textAlign: TextAlign.center,
@@ -128,7 +127,7 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                       ? Icons.flash_on_rounded
                       : Icons.flash_off_rounded,
                   color: controller.isFlashOn.value
-                      ? const Color(0xFFFBBF24)
+                      ?  Color(0xFFFBBF24)
                       : Colors.white,
                 ),
               ),
@@ -141,7 +140,7 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
 
   Widget _buildBottomControls() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+      padding:  EdgeInsets.fromLTRB(24, 16, 24, 32),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.bottomCenter,
@@ -168,11 +167,11 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   border: Border.all(
-                    color: const Color(0xFF60A5FA),
+                    color:  Color(0xFF60A5FA),
                     width: 3.5,
                   ),
                 ),
-                child: const Icon(
+                child:  Icon(
                   Icons.camera_alt_rounded,
                   size: 34,
                   color: Color(0xFF1D4ED8),
@@ -180,34 +179,45 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
               ),
             ),
           ),
-          const SizedBox(height: 6),
-          const Text(
+           SizedBox(height: 6),
+           Text(
             'Tap to capture',
             style: TextStyle(color: Colors.white38, fontSize: 12),
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16),
           // Gallery fallback
           OutlinedButton.icon(
             onPressed: controller.pickFromGallery,
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white70,
-              side: const BorderSide(color: Colors.white24),
+              side:  BorderSide(color: Colors.white24),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
-            icon: const Icon(Icons.photo_library_outlined, size: 18),
-            label: const Text('Upload from gallery'),
+            icon:  Icon(Icons.photo_library_outlined, size: 18),
+            label:  Text('Upload from gallery'),
           ),
-        ],
-      ),
-    );
-  }
+           SizedBox(height: 12),
 
-  // ── 2. Processing / Success screen ──────────────────────────────────────
-  Widget _buildResultScreen(BuildContext context) {
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton.icon(
+                onPressed: () {
+                  Get.toNamed(AppRoutes.dCompleteForm);
+                },
+                icon:  Icon(Icons.skip_next),
+                label:  Text('Skip Scan (Testing)'),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    Widget _buildResultScreen(BuildContext context) {
     return Obx(() {
       final isSuccess =
           controller.scanState.value == ScanState.success;
@@ -218,25 +228,25 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
             // Top bar
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                   EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Row(
                 children: [
                   if (!isSuccess)
                     IconButton(
                       onPressed: controller.retry,
-                      icon: const Icon(Icons.close, color: Colors.white),
+                      icon:  Icon(Icons.close, color: Colors.white),
                     ),
-                  const Spacer(),
+                   Spacer(),
                   Text(
                     isSuccess ? 'ID Verified' : 'Reading ID…',
-                    style: const TextStyle(
+                    style:  TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const Spacer(),
-                  if (!isSuccess) const SizedBox(width: 48),
+                   Spacer(),
+                  if (!isSuccess)  SizedBox(width: 48),
                 ],
               ),
             ),
@@ -244,48 +254,48 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
             Expanded(
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(32),
+                  padding:  EdgeInsets.all(32),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       // Status icon
                       AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 400),
+                        duration:  Duration(milliseconds: 400),
                         child: isSuccess
                             ? Container(
-                                key: const ValueKey('success'),
+                                key:  ValueKey('success'),
                                 width: 110,
                                 height: 110,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: const Color(0xFF4ADE80)
+                                  color:  Color(0xFF4ADE80)
                                       .withOpacity(0.15),
                                   border: Border.all(
-                                    color: const Color(0xFF4ADE80),
+                                    color:  Color(0xFF4ADE80),
                                     width: 2,
                                   ),
                                 ),
-                                child: const Icon(
+                                child:  Icon(
                                   Icons.check_circle_outline_rounded,
                                   color: Color(0xFF4ADE80),
                                   size: 56,
                                 ),
                               )
                             : Container(
-                                key: const ValueKey('loading'),
+                                key:  ValueKey('loading'),
                                 width: 110,
                                 height: 110,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: const Color(0xFF60A5FA)
+                                  color:  Color(0xFF60A5FA)
                                       .withOpacity(0.1),
                                   border: Border.all(
-                                    color: const Color(0xFF60A5FA)
+                                    color:  Color(0xFF60A5FA)
                                         .withOpacity(0.3),
                                     width: 2,
                                   ),
                                 ),
-                                child: const Padding(
+                                child:  Padding(
                                   padding: EdgeInsets.all(28),
                                   child: CircularProgressIndicator(
                                     color: Color(0xFF60A5FA),
@@ -294,23 +304,23 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                                 ),
                               ),
                       ),
-                      const SizedBox(height: 28),
+                       SizedBox(height: 28),
 
                       Text(
                         isSuccess
                             ? 'Scan Successful!'
                             : 'Processing your ID…',
-                        style: const TextStyle(
+                        style:  TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                       SizedBox(height: 8),
 
                       // Progress bar while processing
                       if (!isSuccess) ...[
-                        const SizedBox(height: 12),
+                         SizedBox(height: 12),
                         SizedBox(
                           width: 220,
                           child: ClipRRect(
@@ -318,15 +328,15 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                             child: LinearProgressIndicator(
                               value: controller.scanProgress.value,
                               backgroundColor: Colors.white12,
-                              color: const Color(0xFF60A5FA),
+                              color:  Color(0xFF60A5FA),
                               minHeight: 6,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 8),
+                         SizedBox(height: 8),
                         Text(
                           '${(controller.scanProgress.value * 100).toInt()}%',
-                          style: const TextStyle(
+                          style:  TextStyle(
                             color: Colors.white38,
                             fontSize: 13,
                           ),
@@ -336,7 +346,7 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                       // Extracted ID data cards
                       if (isSuccess &&
                           controller.scannedId.value != null) ...[
-                        const SizedBox(height: 20),
+                         SizedBox(height: 20),
                         _IdCard(id: controller.scannedId.value!),
                       ],
                     ],
@@ -348,7 +358,7 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
             // Action buttons
             if (isSuccess)
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+                padding:  EdgeInsets.fromLTRB(24, 0, 24, 32),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -358,13 +368,13 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                       child: ElevatedButton(
                         onPressed: controller.proceedToProfileForm,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF2563EB),
+                          backgroundColor:  Color(0xFF2563EB),
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -380,10 +390,10 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                     SizedBox(height: 10),
                     TextButton(
                       onPressed: controller.retry,
-                      child: const Text(
+                      child:  Text(
                         'Scan again',
                         style: TextStyle(color: Colors.white38),
                       ),
@@ -400,7 +410,7 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
   Widget _buildErrorScreen(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding:  EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -409,20 +419,20 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
               height: 110,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFFF87171).withOpacity(0.12),
+                color:  Color(0xFFF87171).withOpacity(0.12),
                 border: Border.all(
-                  color: const Color(0xFFF87171).withOpacity(0.5),
+                  color:  Color(0xFFF87171).withOpacity(0.5),
                   width: 2,
                 ),
               ),
-              child: const Icon(
+              child:  Icon(
                 Icons.error_outline_rounded,
                 color: Color(0xFFF87171),
                 size: 54,
               ),
             ),
-            const SizedBox(height: 24),
-            const Text(
+             SizedBox(height: 24),
+             Text(
               'Scan Failed',
               style: TextStyle(
                 color: Colors.white,
@@ -430,54 +440,54 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 12),
+             SizedBox(height: 12),
             Obx(
               () => Text(
                 controller.errorMessage.value,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white54, fontSize: 14),
+                style:  TextStyle(color: Colors.white54, fontSize: 14),
               ),
             ),
-            const SizedBox(height: 40),
+             SizedBox(height: 40),
             SizedBox(
               width: double.infinity,
               height: 54,
               child: ElevatedButton.icon(
                 onPressed: controller.retry,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2563EB),
+                  backgroundColor:  Color(0xFF2563EB),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
-                icon: const Icon(Icons.refresh_rounded),
-                label: const Text(
+                icon:  Icon(Icons.refresh_rounded),
+                label:  Text(
                   'Try Again',
                   style: TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+             SizedBox(height: 12),
             OutlinedButton.icon(
               onPressed: controller.pickFromGallery,
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white60,
-                side: const BorderSide(color: Colors.white24),
+                side:  BorderSide(color: Colors.white24),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                padding: const EdgeInsets.symmetric(
+                padding:  EdgeInsets.symmetric(
                     horizontal: 20, vertical: 12),
               ),
-              icon: const Icon(Icons.photo_library_outlined),
-              label: const Text('Upload from gallery instead'),
+              icon:  Icon(Icons.photo_library_outlined),
+              label:  Text('Upload from gallery instead'),
             ),
-            const SizedBox(height: 12),
+             SizedBox(height: 12),
             TextButton(
               onPressed: () => Get.back(),
-              child: const Text(
+              child:  Text(
                 'Cancel',
                 style: TextStyle(color: Colors.white30),
               ),
@@ -492,13 +502,13 @@ class ScanDoctorIdView extends GetView<ScanDoctorIdController> {
 class _IdCard extends StatelessWidget {
   final KhmerIdModel id;
 
-  const _IdCard({required this.id});
+   _IdCard({required this.id});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding:  EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.07),
         borderRadius: BorderRadius.circular(16),
@@ -507,7 +517,7 @@ class _IdCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+           Row(
             children: [
               Icon(Icons.verified_rounded,
                   color: Color(0xFF4ADE80), size: 18),
@@ -522,7 +532,7 @@ class _IdCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16),
           _Row(label: 'ID Number', value: id.idNumber ?? '—'),
           _Row(
             label: 'Full Name',
@@ -550,12 +560,12 @@ class _Row extends StatelessWidget {
   final String label;
   final String value;
 
-  const _Row({required this.label, required this.value});
+   _Row({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding:  EdgeInsets.only(bottom: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -563,13 +573,13 @@ class _Row extends StatelessWidget {
             width: 110,
             child: Text(
               label,
-              style: const TextStyle(color: Colors.white38, fontSize: 13),
+              style:  TextStyle(color: Colors.white38, fontSize: 13),
             ),
           ),
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(
+              style:  TextStyle(
                 color: Colors.white,
                 fontSize: 13,
                 fontWeight: FontWeight.w500,

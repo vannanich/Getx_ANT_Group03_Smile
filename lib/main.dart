@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: AppRoutes.profilescreen,
+      // initialRoute: AppRoutes.videoscreen,
       // initialRoute: AppRoutes.login,
       getPages: AppPages.pages,
     );
