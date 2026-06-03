@@ -14,13 +14,13 @@ class AppRoutes {
   static const chatAI = '/chatAI';
   static const sleepingMood = '/sleeping_mood';
 
-  // doctor feature 
+  // doctor feature
   static const chatWithDoctor = '/chat_with_doctor';
   static const bookAppointment = '/book_appointment';
   static const schedule = '/schedule';
-  static const scanId='/scan_doctor_id';
-  static const dCompleteForm='/d_complete_form';
-  static const dHomescreen='/doctor_homescreen';
+  static const scanId = '/scan_doctor_id';
+  static const dCompleteForm = '/d_complete_form';
+  static const dHomescreen = '/doctor_homescreen';
 
   //reading book screen
   static const readbook = '/readbook';
@@ -32,12 +32,14 @@ class AppRoutes {
   static const moodSelection = '/mood_selection';
   static const homescreen = '/homescreen';
   static const streakScreen = '/streakScreen';
+  static const profilescreen = '/profilescreen';
+  static const editProfile = '/editprofile';
 
   //quote screen
   static const quotescreen = '/quotescreen';
   //video screen
   static const videoscreen = '/videoscreen';
 
-  // b nita select role 
+  // b nita select role
   static const selectRoleScreen = '/select_role_screen';
 }
