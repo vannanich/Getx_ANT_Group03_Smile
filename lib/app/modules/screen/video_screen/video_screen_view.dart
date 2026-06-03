@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/widget/categoriesWidget.dart';
+import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:get/get.dart';
 
 part 'video_screen_binding.dart';
@@ -61,7 +62,7 @@ class VideoScreenView extends GetView<VideoScreenViewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F4FA),
+      backgroundColor: AppColors.primary,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

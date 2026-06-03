@@ -1,3 +1,5 @@
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
+
 class AppRoutes {
   static const splashScreen = '/splashScreen';
   static const home = '/';
@@ -22,6 +24,7 @@ class AppRoutes {
   static const scanId='/scan_doctor_id';
   static const dCompleteForm='/d_complete_form';
   static const dHomescreen='/doctor_homescreen';
+  static const dTodayAppoitment='/d_today_appoitment';
 
   //reading book screen
   static const readbook = '/readbook';
