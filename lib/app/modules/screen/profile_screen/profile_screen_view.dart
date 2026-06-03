@@ -11,10 +11,10 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEEEBF8),
+      backgroundColor: Color(0xFFEEEBF8),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             children: [
               // HEADER
@@ -84,9 +84,9 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                 ),
               ),
 
-              const SizedBox(height: 14),
+              SizedBox(height: 14),
 
-              const Text(
+              Text(
                 'Username',
                 style: TextStyle(
                   fontSize: 18,
@@ -95,7 +95,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                 ),
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
 
               // ARCHIVE CARD
               _buildCard(
@@ -105,17 +105,17 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                       width: 52,
                       height: 52,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFDFC6FF),
+                        color: Color(0xFFDFC6FF),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.bookmark,
                         color: Color(0xFF8046CA),
                         size: 25,
                       ),
                     ),
-                    const SizedBox(width: 14),
-                    const Column(
+                    SizedBox(width: 14),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -140,7 +140,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                     ),
                   ],
                 ),
-                bottom: const Text(
+                bottom: Text(
                   '10',
                   style: TextStyle(
                     fontSize: 22,
@@ -160,7 +160,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                             width: 52,
                             height: 52,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFF48E),
+                              color: Color(0xFFFFF48E),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
@@ -171,12 +171,12 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 14),
+                          SizedBox(width: 14),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
+                              children: [
                                 Text(
                                   'ACTIVE',
                                   style: TextStyle(
@@ -200,7 +200,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                           ),
                         ],
                       ),
-                      bottom: const Text(
+                      bottom: Text(
                         '🔥 2 days',
                         style: TextStyle(
                           fontSize: 18,
@@ -210,7 +210,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: _buildCard(
                       child: Row(
@@ -219,7 +219,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                             width: 52,
                             height: 52,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFF1BA),
+                              color: Color(0xFFFFF1BA),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
@@ -227,12 +227,12 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                                 'assets/clam.png',
                                 width: 35,
                                 height: 35,
-                                color: const Color(0xFFFCD53F),
+                                color: Color(0xFFFCD53F),
                               ),
                             ),
                           ),
-                          const SizedBox(width: 12),
-                          const Column(
+                          SizedBox(width: 12),
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -258,7 +258,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                           ),
                         ],
                       ),
-                      bottom: const Text(
+                      bottom: Text(
                         'Mood',
                         style: TextStyle(
                           fontSize: 18,
@@ -271,9 +271,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                 ],
               ),
 
-              const SizedBox(height: 14),
+              SizedBox(height: 14),
 
-              // REFLECTIONS CARD
               _buildCard(
                 child: Row(
                   children: [
@@ -281,17 +280,17 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                       width: 42,
                       height: 42,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF3DAA7A),
+                        color: Color(0xFF3DAA7A),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.menu_book_rounded,
                         color: Colors.white,
                         size: 20,
                       ),
                     ),
-                    const SizedBox(width: 14),
-                    const Column(
+                    SizedBox(width: 14),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -316,7 +315,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                     ),
                   ],
                 ),
-                bottom: const Text(
+                bottom: Text(
                   '0',
                   style: TextStyle(
                     fontSize: 22,
@@ -335,15 +334,15 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
   Widget _buildCard({required Widget child, Widget? bottom}) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 14),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF7C5CBF).withValues(alpha: 0.06),
+            color: Color(0xFF7C5CBF).withValues(alpha: 0.06),
             blurRadius: 16,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -352,7 +351,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
         children: [
           child,
           if (bottom != null) ...[
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             bottom,
           ],
         ],
