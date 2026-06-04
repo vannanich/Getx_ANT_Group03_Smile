@@ -55,9 +55,10 @@ class MoodScreenView extends GetView<MoodScreenController> {
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(12),
             ),
+            child:
+                Icon(Icons.arrow_back_ios, size: 20, color: Color(0xFF2E2C35)),
           ),
         ),
-
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -225,9 +226,8 @@ class MoodScreenView extends GetView<MoodScreenController> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: controller.weekData
-                  .map((d) => _buildDayBar(d))
-                  .toList(),
+              children:
+                  controller.weekData.map((d) => _buildDayBar(d)).toList(),
             ),
           ),
         ],

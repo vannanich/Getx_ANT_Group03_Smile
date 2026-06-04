@@ -8,6 +8,7 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homesc
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
+import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
@@ -16,16 +17,25 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_app
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_view.dart';
+import 'package:flutter_application_1/app/modules/screen/edit_profile_screen/edit_profile_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
-import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding/onboarding/onboarding_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_2/onboarding_2/onboarding_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_3/onboarding_3/onboarding_3_view.dart';
+import 'package:flutter_application_1/app/modules/screen/profile_screen/profile_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/book_download_screen/book_download_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/detail_book_screen/detail_book_screen_view.dart';
@@ -146,6 +156,17 @@ class AppPages {
       page: () => BookDownloadScreenView(),
       binding: BookDownloadScreenViewBinding(),
     ),
+    //profile screen
+    GetPage(
+      name: AppRoutes.profilescreen,
+      page: () => ProfileScreenView(),
+      binding: ProfileScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.editProfile,
+      page: () => EditProfileScreenView(),
+      binding: EditProfileScreenViewBinding(),
+    ),
     //Mood screen
     GetPage(
       name: AppRoutes.moodSelection,
@@ -176,13 +197,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.bookAppointment,
-      page: () =>DoctorAppointmentView (),
-      binding: DoctorAppointmentBinding (),
+      page: () => DoctorAppointmentView(),
+      binding: DoctorAppointmentBinding(),
     ),
     GetPage(
       name: AppRoutes.schedule,
-      page: () =>ScheduleView (),
-      binding: ScheduleBinding (),
+      page: () => ScheduleView(),
+      binding: ScheduleBinding(),
     ),
     GetPage(
       name: AppRoutes.sleepingMood,
@@ -197,17 +218,17 @@ class AppPages {
     GetPage(
       name: AppRoutes.streakScreen,
       page: () => BuildstreakView(),
-      binding: BuildstreakViewBinding (),
+      binding: BuildstreakViewBinding(),
     ),
     GetPage(
       name: AppRoutes.scanId,
       page: () => ScanDoctorIdView(),
-      binding: ScanDoctorIdBinding (),
+      binding: ScanDoctorIdBinding(),
     ),
     GetPage(
       name: AppRoutes.dCompleteForm,
       page: () => DCompleteFormView(),
-      binding: DCompleteFormBinding (),
+      binding: DCompleteFormBinding(),
     ),
     GetPage(
       name: AppRoutes.splashScreen,
@@ -217,12 +238,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.dHomescreen,
       page: () => DHomescreenView(),
-      binding: DHomescreenBinding (),
+      binding: DHomescreenBinding(),
     ),
     GetPage(
       name: AppRoutes.dTodayAppoitment,
       page: () => DTodayAppoitmentView(),
-      binding: DTodayAppoitmentBinding (),
+      binding: DTodayAppoitmentBinding(),
     ),
     GetPage(
       name: AppRoutes.signUp,
