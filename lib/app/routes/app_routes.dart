@@ -26,10 +26,7 @@ class AppRoutes {
   static const dCompleteForm = '/d_complete_form';
   static const dHomescreen = '/doctor_homescreen';
   static const dTodayAppoitment = '/d_today_appoitment';
-  static const scanId='/scan_doctor_id';
-  static const dCompleteForm='/d_complete_form';
-  static const dHomescreen='/doctor_homescreen';
-  static const dTodayAppoitment='/d_today_appoitment';
+
 
   //reading book screen
   static const readbook = '/readbook';
