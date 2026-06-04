@@ -1,4 +1,5 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
+import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_wit
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_binding.dart';
@@ -142,6 +145,17 @@ class AppPages {
       page: () => BookDownloadScreenView(),
       binding: BookDownloadScreenViewBinding(),
     ),
+    //profile screen
+    GetPage(
+      name: AppRoutes.profilescreen,
+      page: () => ProfileScreenView(),
+      binding: ProfileScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.editProfile,
+      page: () => EditProfileScreenView(),
+      binding: EditProfileScreenViewBinding(),
+    ),
     //Mood screen
     GetPage(
       name: AppRoutes.moodSelection,
@@ -196,16 +210,6 @@ class AppPages {
       binding: BuildstreakViewBinding(),
     ),
     GetPage(
-      name: AppRoutes.profilescreen,
-      page: () => ProfileScreenView(),
-      binding: ProfileScreenViewBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.editProfile,
-      page: () => EditProfileScreenView(),
-      binding: EditProfileScreenViewBinding(),
-    ),
-    GetPage(
       name: AppRoutes.scanId,
       page: () => ScanDoctorIdView(),
       binding: ScanDoctorIdBinding(),
@@ -225,5 +229,10 @@ class AppPages {
       page: () => DHomescreenView(),
       binding: DHomescreenBinding(),
     ),
+    // GetPage(
+    //   name: AppRoutes.dTodayAppoitment,
+    //   page: () => DTodayAppoitmentView(),
+    //   binding: DTodayAppoitmentBinding (),
+    // ),
   ];
 }
