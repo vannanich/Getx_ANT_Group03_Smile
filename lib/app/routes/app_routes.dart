@@ -7,6 +7,7 @@ class AppRoutes {
   static const onboarding_2 = '/onboarding_2';
   static const onboarding_3 = '/onboarding_3';
   static const login = '/login_screen';
+  static const signUp = '/Sing_up';
   static const survey_1 = '/survey_1';
   static const survey_2 = '/survey_2';
   static const survey_3 = '/survey_3';

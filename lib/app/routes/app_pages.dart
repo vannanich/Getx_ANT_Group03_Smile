@@ -1,4 +1,5 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
+import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_binding.dart';
@@ -222,6 +223,11 @@ class AppPages {
       name: AppRoutes.dTodayAppoitment,
       page: () => DTodayAppoitmentView(),
       binding: DTodayAppoitmentBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.signUp,
+      page: () => SignUpScreenView(),
+      binding: SignUpScreenViewBinding (),
     ),
   ];
 }
