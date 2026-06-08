@@ -1,5 +1,3 @@
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
-
 class AppRoutes {
   static const splashScreen = '/splashScreen';
   static const home = '/';
@@ -21,17 +19,10 @@ class AppRoutes {
   static const chatWithDoctor = '/chat_with_doctor';
   static const bookAppointment = '/book_appointment';
   static const schedule = '/schedule';
-<<<<<<< HEAD
   static const scanId = '/scan_doctor_id';
   static const dCompleteForm = '/d_complete_form';
   static const dHomescreen = '/doctor_homescreen';
   static const dTodayAppoitment = '/d_today_appoitment';
-=======
-  static const scanId='/scan_doctor_id';
-  static const dCompleteForm='/d_complete_form';
-  static const dHomescreen='/doctor_homescreen';
-  static const dTodayAppoitment='/d_today_appoitment';
->>>>>>> 4e95e2c4c35ec773b4bde8cc2dafb86321342c75
 
   //reading book screen
   static const readbook = '/readbook';
@@ -51,6 +42,11 @@ class AppRoutes {
   //profie screen
   static const profilescreen = '/profilescreen';
   static const editProfile = '/editprofile';
+
+  //scan face screen
+  static const scanFaceScreen = '/scan_face_screen';
+  static const notificationScreen = '/notification_screen';
+  static const notificationDetail = '/notification_deatil';
 
   // b nita select role
   static const selectRoleScreen = '/select_role_screen';

@@ -23,6 +23,8 @@ import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_view.dart';
+import 'package:flutter_application_1/app/modules/screen/notification_detail/notification_detail_view.dart';
+import 'package:flutter_application_1/app/modules/screen/notification_screen/notification_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding/onboarding/onboarding_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_2/onboarding_2/onboarding_2_view.dart';
 import 'package:flutter_application_1/app/modules/screen/onboarding_3/onboarding_3/onboarding_3_view.dart';
@@ -32,6 +34,7 @@ import 'package:flutter_application_1/app/modules/screen/readbookscreen/book_dow
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/detail_book_screen/detail_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/save_book_screen/save_book_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/scan_face_screen/scan_face_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/selected_role_screen/select_role_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_view.dart';
@@ -157,6 +160,24 @@ class AppPages {
       name: AppRoutes.editProfile,
       page: () => EditProfileScreenView(),
       binding: EditProfileScreenViewBinding(),
+    ),
+    //scan face screen
+    GetPage(
+      name: AppRoutes.scanFaceScreen,
+      page: () => ScanFaceScreenView(),
+      binding: ScanFaceScreenBinding(),
+    ),
+    //notification screen
+    GetPage(
+      name: AppRoutes.notificationScreen,
+      page: () => NotificationScreenView(),
+      binding: NotificationScreenViewBinding(),
+    ),
+    //notification screen
+    GetPage(
+      name: AppRoutes.notificationDetail,
+      page: () => NotificationDetailScreenView(),
+      binding: NotificationDetailViewBinding(),
     ),
     //Mood screen
     GetPage(
