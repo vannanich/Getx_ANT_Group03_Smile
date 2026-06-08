@@ -3,6 +3,7 @@ import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_controller.dart';
+import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
@@ -15,10 +16,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-part 'home_screen_binding.dart';
-part 'home_screen_controller.dart';
 
-class HomeScreenView extends GetView<HomeScreenViewController> {
+
+class HomeScreenView extends GetView<HomeScreenController> {
    HomeScreenView({super.key});
 
   @override
@@ -386,8 +386,8 @@ class HomeScreenView extends GetView<HomeScreenViewController> {
 
         tabs:  [
           GButton(icon: LineIcons.home, text: 'Home'),
-          GButton(icon: LineIcons.facebookMessenger, text: 'Likes'),
-          GButton(icon: LineIcons.video, text: 'Search'),
+          GButton(icon: LineIcons.facebookMessenger, text: 'Goal'),
+          GButton(icon: LineIcons.video, text: 'Reel'),
           GButton(icon: LineIcons.user, text: 'Profile'),
         ],
       ),

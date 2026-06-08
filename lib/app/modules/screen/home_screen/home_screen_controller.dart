@@ -1,9 +1,9 @@
-part of 'home_screen_view.dart';
+import 'package:get/get.dart';
 
-class HomeScreenViewController extends GetxController {
+class HomeScreenController extends GetxController {
+  RxInt selectedIndex = 0.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
+  void changePage(int index) {
+    selectedIndex.value = index;
   }
 }

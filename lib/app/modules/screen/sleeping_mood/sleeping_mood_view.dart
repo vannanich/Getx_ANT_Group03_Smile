@@ -3,31 +3,32 @@ import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_
 import 'package:get/get.dart';
 
 class SleepModeView extends StatelessWidget {
-  const SleepModeView({super.key});
+   SleepModeView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SleepModeController>(
-      builder: (controller) {
+    init: SleepModeController(),
+    builder: (controller) {
         return Scaffold(
-          backgroundColor: const Color(0xFF1A1A2E),
+          backgroundColor:  Color(0xFF1A1A2E),
           body: SafeArea(
   child: Column(
     children: [
       _buildHeader(),
       Expanded(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding:  EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
-            physics: const BouncingScrollPhysics(),
+            physics:  BouncingScrollPhysics(),
             children: [
-              const SizedBox(height: 8),
+               SizedBox(height: 8),
               _buildSleepModeCard(),
-              const SizedBox(height: 20),
+               SizedBox(height: 20),
               _buildTimerSection(controller),
-              const SizedBox(height: 24),
+               SizedBox(height: 24),
               _buildSoundsSection(controller),
-              const SizedBox(height: 30),
+               SizedBox(height: 30),
             ],
           ),
         ),
@@ -42,26 +43,26 @@ class SleepModeView extends StatelessWidget {
 
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+      padding:  EdgeInsets.fromLTRB(16, 12, 16, 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () => Get.back(),
             child: Container(
-              padding: const EdgeInsets.all(8),
+              padding:  EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Icon(
+              child:  Icon(
                 Icons.arrow_back_ios_new,
                 color: Colors.white,
                 size: 16,
               ),
             ),
           ),
-          const Text(
+           Text(
             'Sleep Mode',
             style: TextStyle(
               color: Colors.white,
@@ -69,7 +70,7 @@ class SleepModeView extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(width: 40), // Empty space for balance
+           SizedBox(width: 40), // Empty space for balance
         ],
       ),
     );
@@ -78,14 +79,14 @@ class SleepModeView extends StatelessWidget {
   Widget _buildSleepModeCard() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding:  EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            const Color(0xFF6C63FF).withOpacity(0.3),
-            const Color(0xFF3F3D9E).withOpacity(0.2),
+             Color(0xFF6C63FF).withOpacity(0.3),
+             Color(0xFF3F3D9E).withOpacity(0.2),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
@@ -100,8 +101,8 @@ class SleepModeView extends StatelessWidget {
             size: 40,
             color: Colors.white.withOpacity(0.9),
           ),
-          const SizedBox(height: 10),
-          const Text(
+           SizedBox(height: 10),
+           Text(
             'Sleeping mode',
             style: TextStyle(
               color: Colors.white,
@@ -109,7 +110,7 @@ class SleepModeView extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 6),
+           SizedBox(height: 6),
           Text(
             'Have a goodnight sleep',
             style: TextStyle(
@@ -125,14 +126,14 @@ class SleepModeView extends StatelessWidget {
   Widget _buildTimerSection(SleepModeController controller) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding:  EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         children: [
-          const Text(
+           Text(
             'Sleep Timer',
             style: TextStyle(
               color: Colors.white,
@@ -140,12 +141,11 @@ class SleepModeView extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 16),
-          // Time Display
+           SizedBox(height: 16),
           Obx(
             () => Text(
               controller.getFormattedTime(),
-              style: const TextStyle(
+              style:  TextStyle(
                 color: Colors.white,
                 fontSize: 36,
                 fontWeight: FontWeight.w700,
@@ -153,7 +153,7 @@ class SleepModeView extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16),
           // Time Pickers
           // Time Pickers
 Wrap(
@@ -187,7 +187,7 @@ Wrap(
     ),
   ],
 ),
-          const SizedBox(height: 20),
+           SizedBox(height: 20),
           // Start Timer Button
           Obx(
             () => ElevatedButton(
@@ -195,15 +195,15 @@ Wrap(
                   ? controller.pauseTimer
                   : controller.startTimer,
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 48),
-                backgroundColor: const Color(0xFF6C63FF),
+                minimumSize:  Size(double.infinity, 48),
+                backgroundColor:  Color(0xFF6C63FF),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
               ),
               child: Text(
                 controller.isTimerRunning.value ? 'Pause Timer' : 'Start Timer',
-                style: const TextStyle(
+                style:  TextStyle(
                   color: Colors.white,
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
@@ -212,13 +212,13 @@ Wrap(
             ),
           ),
           if (controller.isTimerRunning.value) ...[
-            const SizedBox(height: 10),
+             SizedBox(height: 10),
             TextButton(
               onPressed: controller.resetTimer,
               style: TextButton.styleFrom(
-                minimumSize: const Size(double.infinity, 36),
+                minimumSize:  Size(double.infinity, 36),
               ),
-              child: const Text(
+              child:  Text(
                 'Reset',
                 style: TextStyle(
                   color: Colors.white70,
@@ -232,21 +232,20 @@ Wrap(
     );
   }
 
-  Widget _buildTimePicker(String label, int value, Function(int) onChanged) {
-    return Expanded(
-      child: Column(
+ Widget _buildTimePicker(String label, int value, Function(int) onChanged) {
+  return Column(
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style:  TextStyle(
               color: Colors.white70,
               fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 6),
+           SizedBox(height: 6),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding:  EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
@@ -256,20 +255,20 @@ Wrap(
               children: [
                 IconButton(
                   onPressed: () => onChanged(value - 1),
-                  icon: const Icon(
+                  icon:  Icon(
                     Icons.remove,
                     color: Colors.white,
                     size: 16,
                   ),
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
+                  // raints:  Boxraints(),
                 ),
                 Container(
                   width: 35,
                   alignment: Alignment.center,
                   child: Text(
                     value.toString().padLeft(2, '0'),
-                    style: const TextStyle(
+                    style:  TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -278,19 +277,19 @@ Wrap(
                 ),
                 IconButton(
                   onPressed: () => onChanged(value + 1),
-                  icon: const Icon(
+                  icon:  Icon(
                     Icons.add,
                     color: Colors.white,
                     size: 16,
                   ),
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
+                  // raints:  Boxraints(),
                 ),
               ],
             ),
           ),
         ],
-      ),
+    
     );
   }
 
@@ -298,7 +297,7 @@ Wrap(
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text(
+       Text(
         'Sounds',
         style: TextStyle(
           color: Colors.white,
@@ -306,12 +305,12 @@ Wrap(
           fontWeight: FontWeight.w600,
         ),
       ),
-      const SizedBox(height: 14),
+       SizedBox(height: 14),
       GridView.builder(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+        physics:  NeverScrollableScrollPhysics(),
         itemCount: controller.sounds.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
@@ -337,12 +336,12 @@ Wrap(
       child: Container(
         decoration: BoxDecoration(
           color: isSelected
-              ? const Color(0xFF6C63FF)
+              ?  Color(0xFF6C63FF)
               : Colors.white.withOpacity(0.08),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected
-                ? const Color(0xFF6C63FF)
+                ?  Color(0xFF6C63FF)
                 : Colors.white.withOpacity(0.1),
             width: 1,
           ),
@@ -355,10 +354,10 @@ Wrap(
               color: isSelected ? Colors.white : Colors.white70,
               size: 22,
             ),
-            const SizedBox(height: 6),
+             SizedBox(height: 6),
             Flexible(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+                padding:  EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   soundName,
                   textAlign: TextAlign.center,
