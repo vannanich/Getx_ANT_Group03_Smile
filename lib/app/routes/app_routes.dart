@@ -1,5 +1,3 @@
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
-
 class AppRoutes {
   static const splashScreen = '/splashScreen';
   static const home = '/';
@@ -27,7 +25,6 @@ class AppRoutes {
   static const dHomescreen = '/doctor_homescreen';
   static const dTodayAppoitment = '/d_today_appoitment';
 
-
   //reading book screen
   static const readbook = '/readbook';
   static const detailbook = '/detailbook';
@@ -46,6 +43,11 @@ class AppRoutes {
   //profie screen
   static const profilescreen = '/profilescreen';
   static const editProfile = '/editprofile';
+
+  //scan face screen
+  static const scanFaceScreen = '/scan_face_screen';
+  static const notificationScreen = '/notification_screen';
+  static const notificationDetail = '/notification_deatil';
 
   // b nita select role
   static const selectRoleScreen = '/select_role_screen';
