@@ -1,4 +1,13 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
+import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
@@ -256,6 +265,11 @@ class AppPages {
       name: AppRoutes.dTodayAppoitment,
       page: () => DTodayAppoitmentView(),
       binding: DTodayAppoitmentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.signUp,
+      page: () => SignUpScreenView(),
+      binding: SignUpScreenViewBinding (),
     ),
   ];
 }

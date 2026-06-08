@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,7 +30,7 @@ class SignUpScreenView extends GetView<SignUpScreenViewController> {
                   ),
                   child: Center(
                     child: Image.asset(
-                      'assets/logo_smile.png',
+                      'assets/logo.png',
                       width: 90,
                       height: 90,
                       fit: BoxFit.contain,
@@ -106,11 +107,16 @@ class SignUpScreenView extends GetView<SignUpScreenViewController> {
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      child: Text(
-                        'Next',
-                        style: GoogleFonts.balsamiqSans(
-                          fontSize: 18,
-                          color: Colors.white,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.login);
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: GoogleFonts.balsamiqSans(
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -143,7 +149,6 @@ class SignUpScreenView extends GetView<SignUpScreenViewController> {
                                 ),
                               ),
                             ),
-                          
                           ],
                         ),
                         SizedBox(height: 16),
@@ -184,7 +189,7 @@ class SignUpScreenView extends GetView<SignUpScreenViewController> {
                       _buildSocialButton(
                         label: 'Google',
                         iconWidget: Image.asset(
-                          'assets/icons_google.png',
+                          'assets/flat-color-icons_google.png',
                           width: 20,
                           height: 20,
                         ),
@@ -195,7 +200,7 @@ class SignUpScreenView extends GetView<SignUpScreenViewController> {
                       _buildSocialButton(
                         label: 'Facebook',
                         iconWidget: Image.asset(
-                          'assets/icons_facebook.png',
+                          'assets/logos_facebook.png',
                           width: 20,
                           height: 20,
                         ),

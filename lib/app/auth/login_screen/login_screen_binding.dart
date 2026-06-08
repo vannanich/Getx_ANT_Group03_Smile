@@ -1,9 +1,11 @@
+import 'package:flutter_application_1/app/auth/login_screen/login_screen_controller.dart';
 import 'package:get/get.dart';
-import 'login_screen_controller.dart';
 
 class LoginScreenBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoginScreenController>(() => LoginScreenController());
+    Get.lazyPut<LoginScreenController>(
+      () => LoginScreenController(),
+    );
   }
 }
