@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_controller.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
+import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,7 +34,7 @@ class BuildstreakView extends GetView<BuildstreakViewController> {
         child: Column(
           children: [
             SizedBox(height: 35),
-            Image.asset("assets/Image (Streak flame).png"),
+            Image.asset("assets/streak_image.png"),
             Text(
               "2",
               style: TextStyle(
@@ -148,24 +149,50 @@ class BuildstreakView extends GetView<BuildstreakViewController> {
             ),
 
             Spacer(),
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: () => Get.toNamed(AppRoutes.homescreen),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5B13EC),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                child: Text(
-                  "Continue",
-                  style: GoogleFonts.balsamiqSans(fontSize: 23,color: Colors.white),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   height: 55,
+            //   child: ElevatedButton(
+            //     onPressed: () => Get.toNamed(AppRoutes.homescreen),
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: const Color(0xFF5B13EC),
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(30),
+            //       ),
+            //     ),
+            //     child: Text(
+            //       "Continue",
+            //       style: GoogleFonts.balsamiqSans(fontSize: 23,color: Colors.white),
+            //     ),
+            //   ),
+            // ),
+            _buildButton(),
+            
             SizedBox(height: 40),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _buildButton() {
+    return SizedBox(
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.secondary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(10),
+          ),
+        ),
+        onPressed: () {
+          Get.toNamed(AppRoutes.signUp);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Continue", style: TextStyle(color: Colors.white, fontSize: 16)),
+            SizedBox(width: 20),
+            Icon(Icons.arrow_forward, color: Colors.white),
           ],
         ),
       ),

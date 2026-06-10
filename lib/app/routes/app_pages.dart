@@ -20,6 +20,7 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_view.dart';
 import 'package:flutter_application_1/app/modules/screen/edit_profile_screen/edit_profile_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/mood_selection_binding.dart';
@@ -55,8 +56,8 @@ class AppPages {
     GetPage(
       name: AppRoutes.homescreen,
       page: () => HomeScreenView(),
-      binding: HomeScreenViewBinding(),
-      transition: Transition.circularReveal,
+      binding: HomeScreenBinding(),
+      transition: Transition.cupertino,
       transitionDuration: Duration(milliseconds: 1200),
     ),
     GetPage(

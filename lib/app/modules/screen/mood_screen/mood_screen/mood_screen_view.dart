@@ -46,19 +46,11 @@ class MoodScreenView extends GetView<MoodScreenController> {
   Widget _buildAppBar() {
     return Row(
       children: [
-        GestureDetector(
-          onTap: () => Get.back(),
-          child: Container(
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child:
-                Icon(Icons.arrow_back_ios, size: 20, color: Color(0xFF2E2C35)),
-          ),
+        IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Get.back(),
         ),
+        SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
