@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:get/get.dart';
 
 part 'mood_screen_binding.dart';
@@ -12,7 +13,7 @@ class MoodScreenView extends GetView<MoodScreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0EFFA),
+      backgroundColor: AppColors.primary,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,9 +55,10 @@ class MoodScreenView extends GetView<MoodScreenController> {
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(12),
             ),
+            child:
+                Icon(Icons.arrow_back_ios, size: 20, color: Color(0xFF2E2C35)),
           ),
         ),
-
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -224,9 +226,8 @@ class MoodScreenView extends GetView<MoodScreenController> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: controller.weekData
-                  .map((d) => _buildDayBar(d))
-                  .toList(),
+              children:
+                  controller.weekData.map((d) => _buildDayBar(d)).toList(),
             ),
           ),
         ],

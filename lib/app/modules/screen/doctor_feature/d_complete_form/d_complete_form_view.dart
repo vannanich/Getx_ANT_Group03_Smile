@@ -1,22 +1,17 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_application_1/app/routes/app_pages.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:get/get.dart';
-
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_controller.dart';
 
 class DCompleteFormView extends GetView<DCompleteFormController> {
-   DCompleteFormView({super.key});
-
+  DCompleteFormView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface,
+      backgroundColor: AppColors.primary, // light purple bg
       body: Obx(() {
         if (controller.submitState.value == SubmitState.success) {
           return _buildSuccessScreen();
@@ -26,9 +21,6 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
     );
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
-  // Form screen
-  // ══════════════════════════════════════════════════════════════════════════
   Widget _buildFormScreen(BuildContext context) {
     return Column(
       children: [
@@ -51,30 +43,29 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
     );
   }
 
-  // ── Header ────────────────────────────────────────────────────────────────
   Widget _buildHeader() {
     return Container(
-      decoration:  BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: AppColors.primary, // light purple bg
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding:  EdgeInsets.fromLTRB(8, 8, 16, 16),
+          padding: EdgeInsets.fromLTRB(8, 8, 16, 16),
           child: Row(
             children: [
               IconButton(
                 onPressed: () => Get.back(),
-                icon:  Icon(Icons.arrow_back_ios_new_rounded,
+                icon: Icon(Icons.arrow_back_ios_new_rounded,
                     size: 18, color: AppColors.textDark),
               ),
-               SizedBox(width: 4),
+              SizedBox(width: 4),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
+                    Text(
                       'Doctor Registration',
                       style: TextStyle(
                         fontSize: 18,
@@ -85,7 +76,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                     ),
                     Obx(() => Text(
                           _stepSubtitle(),
-                          style:  TextStyle(
+                          style: TextStyle(
                               fontSize: 13, color: AppColors.textMid),
                         )),
                   ],
@@ -93,25 +84,23 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               ),
               // ID badge
               Container(
-                padding:
-                     EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: AppColors.primary,
+                  color: AppColors.secondary.withOpacity(0.1), // subtle secondary tint
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                      color:AppColors.primary),
+                  border: Border.all(color: AppColors.secondary),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                     Icon(Icons.verified_rounded,
-                        size: 13, color: AppColors.primary),
-                     SizedBox(width: 4),
+                    Icon(Icons.verified_rounded,
+                        size: 13, color: Colors.green),
+                    SizedBox(width: 4),
                     Text(
                       'ID Verified',
                       style: TextStyle(
                         fontSize: 11,
-                        color: AppColors.secondary,
+                        color: AppColors.secondary, // dark purple text
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -127,16 +116,19 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
 
   String _stepSubtitle() {
     switch (controller.currentStep.value) {
-      case FormStep.personal: return 'Step 1 of 3 · Personal Info';
-      case FormStep.professional: return 'Step 2 of 3 · Professional Info';
-      case FormStep.documents: return 'Step 3 of 3 · Upload Documents';
+      case FormStep.personal:
+        return 'Step 1 of 3 · Personal Info';
+      case FormStep.professional:
+        return 'Step 2 of 3 · Professional Info';
+      case FormStep.documents:
+        return 'Step 3 of 3 · Upload Documents';
     }
   }
 
   Widget _buildStepIndicator() {
     return Container(
-      color: Colors.white,
-      padding:  EdgeInsets.fromLTRB(20, 0, 20, 16),
+      color: AppColors.primary, // light purple bg
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
       child: Obx(() {
         final step = controller.stepIndex;
         return Row(
@@ -148,19 +140,19 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                 children: [
                   Expanded(
                     child: AnimatedContainer(
-                      duration:  Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: 300),
                       height: 4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: isDone
-                            ? AppColors.success
+                            ? AppColors.secondary   // completed = dark purple
                             : isActive
-                                ? AppColors.primary
-                                : AppColors.border,
+                                ? AppColors.secondary.withOpacity(0.5) // active = medium purple
+                                : AppColors.border, // inactive = grey
                       ),
                     ),
                   ),
-                  if (i < 2)  SizedBox(width: 6),
+                  if (i < 2) SizedBox(width: 6),
                 ],
               ),
             );
@@ -175,16 +167,14 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
   // ══════════════════════════════════════════════════════════════════════════
   Widget _buildPersonalStep(BuildContext context) {
     return SingleChildScrollView(
-      padding:  EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Profile photo
           Center(child: _buildProfilePhotoWidget()),
-           SizedBox(height: 28),
-
+          SizedBox(height: 28),
           _sectionLabel('Full Name'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -196,7 +186,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                       v == null || v.isEmpty ? 'Required' : null,
                 ),
               ),
-               SizedBox(width: 12),
+              SizedBox(width: 12),
               Expanded(
                 child: _buildTextField(
                   controller: controller.lastNameCtrl,
@@ -208,15 +198,13 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               ),
             ],
           ),
-           SizedBox(height: 20),
-
+          SizedBox(height: 20),
           _sectionLabel('Gender'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildGenderSelector(),
-           SizedBox(height: 20),
-
+          SizedBox(height: 20),
           _sectionLabel('Contact'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildTextField(
             controller: controller.phoneCtrl,
             label: 'Phone Number',
@@ -224,7 +212,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
             keyboardType: TextInputType.phone,
             validator: (v) => v == null || v.isEmpty ? 'Required' : null,
           ),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildTextField(
             controller: controller.emailCtrl,
             label: 'Email Address',
@@ -236,7 +224,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               return null;
             },
           ),
-           SizedBox(height: 100),
+          SizedBox(height: 100),
         ],
       ),
     );
@@ -254,8 +242,8 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               height: 100,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.primary,
-                border: Border.all(color: AppColors.primary, width: 2),
+                color: AppColors.primary, // light purple bg
+                border: Border.all(color: AppColors.secondary, width: 2), // dark purple border
                 image: photo != null
                     ? DecorationImage(
                         image: FileImage(photo),
@@ -264,8 +252,8 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                     : null,
               ),
               child: photo == null
-                  ?  Icon(Icons.person_rounded,
-                      size: 48, color: Color.fromARGB(239, 233, 229, 241))
+                  ? Icon(Icons.person_rounded,
+                      size: 48, color: AppColors.secondary) // dark purple icon
                   : null,
             ),
             Positioned(
@@ -275,11 +263,11 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: AppColors.secondary,
+                  color: AppColors.secondary, // dark purple
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 2),
                 ),
-                child:  Icon(Icons.camera_alt_rounded,
+                child: Icon(Icons.camera_alt_rounded,
                     size: 15, color: Colors.white),
               ),
             ),
@@ -297,15 +285,15 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               child: GestureDetector(
                 onTap: () => controller.setGender(g),
                 child: AnimatedContainer(
-                  duration:  Duration(milliseconds: 200),
+                  duration: Duration(milliseconds: 200),
                   margin: EdgeInsets.only(
                       right: g == controller.genders.last ? 0 : 12),
-                  padding:  EdgeInsets.symmetric(vertical: 14),
+                  padding: EdgeInsets.symmetric(vertical: 14),
                   decoration: BoxDecoration(
-                    color: selected ? AppColors.primary : Colors.white,
+                    color: selected ? AppColors.secondary : Colors.white, // selected = dark purple
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: selected ? AppColors.primary : AppColors.border,
+                      color: selected ? AppColors.secondary : AppColors.border,
                       width: selected ? 2 : 1,
                     ),
                   ),
@@ -319,7 +307,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                         color: selected ? Colors.white : AppColors.textMid,
                         size: 20,
                       ),
-                       SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text(
                         g,
                         style: TextStyle(
@@ -342,41 +330,38 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
   // ══════════════════════════════════════════════════════════════════════════
   Widget _buildProfessionalStep(BuildContext context) {
     return SingleChildScrollView(
-      padding:  EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _sectionLabel('Specialty'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildSpecialtyGrid(),
-           SizedBox(height: 20),
-
+          SizedBox(height: 20),
           _sectionLabel('Hospital / Clinic'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildTextField(
             controller: controller.hospitalCtrl,
             label: 'Hospital or Clinic Name',
             icon: Icons.local_hospital_outlined,
             validator: (v) => v == null || v.isEmpty ? 'Required' : null,
           ),
-           SizedBox(height: 20),
-
+          SizedBox(height: 20),
           _sectionLabel('Years of Experience'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildExperienceStepper(),
-           SizedBox(height: 20),
+          SizedBox(height: 20),
           _sectionLabel('Education'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildTextField(
             controller: controller.educationCtrl,
             label: 'e.g. MD from University of Health Sciences',
             icon: Icons.school_outlined,
             maxLines: 2,
           ),
-           SizedBox(height: 20),
-
+          SizedBox(height: 20),
           _sectionLabel('Professional Background'),
-           SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildTextField(
             controller: controller.backgroundCtrl,
             label: 'Briefly describe your medical background...',
@@ -384,7 +369,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
             maxLines: 4,
             validator: (v) => v == null || v.isEmpty ? 'Required' : null,
           ),
-           SizedBox(height: 100),
+          SizedBox(height: 100),
         ],
       ),
     );
@@ -399,14 +384,13 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
             return GestureDetector(
               onTap: () => controller.setSpecialty(s),
               child: AnimatedContainer(
-                duration:  Duration(milliseconds: 180),
-                padding:  EdgeInsets.symmetric(
-                    horizontal: 14, vertical: 8),
+                duration: Duration(milliseconds: 180),
+                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 decoration: BoxDecoration(
-                  color: selected ? AppColors.primary : Colors.white,
+                  color: selected ? AppColors.secondary : Colors.white, // selected = dark purple
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: selected ? AppColors.primary : AppColors.border,
+                    color: selected ? AppColors.secondary : AppColors.border,
                   ),
                 ),
                 child: Text(
@@ -414,7 +398,8 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                   style: TextStyle(
                     fontSize: 13,
                     color: selected ? Colors.white : AppColors.textMid,
-                    fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight:
+                        selected ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
@@ -425,7 +410,7 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
 
   Widget _buildExperienceStepper() {
     return Container(
-      padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
@@ -433,10 +418,10 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
       ),
       child: Row(
         children: [
-           Icon(Icons.work_history_outlined,
-              color: AppColors.textLight, size: 20),
-           SizedBox(width: 12),
-           Expanded(
+          Icon(Icons.work_history_outlined,
+              color: AppColors.secondary, size: 20), // dark purple icon
+          SizedBox(width: 12),
+          Expanded(
             child: Text('Years of experience',
                 style: TextStyle(color: AppColors.textMid, fontSize: 14)),
           ),
@@ -447,24 +432,24 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: AppColors.primary, // light purple bg
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.border),
+                border: Border.all(color: AppColors.secondary),
               ),
-              child:  Icon(Icons.remove_rounded,
-                  size: 18, color: AppColors.textMid),
+              child: Icon(Icons.remove_rounded,
+                  size: 18, color: AppColors.secondary), // dark purple icon
             ),
           ),
-           SizedBox(width: 16),
+          SizedBox(width: 16),
           Obx(() => Text(
                 '${controller.experienceYears.value}',
-                style:  TextStyle(
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.primary,
+                  color: AppColors.secondary, // dark purple
                 ),
               )),
-           SizedBox(width: 16),
+          SizedBox(width: 16),
           // Increment
           GestureDetector(
             onTap: controller.incrementExp,
@@ -472,11 +457,11 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: AppColors.secondary, // dark purple bg
                 borderRadius: BorderRadius.circular(10),
               ),
-              child:  Icon(Icons.add_rounded,
-                  size: 18, color: Colors.white),
+              child: Icon(Icons.add_rounded,
+                  size: 18, color: Colors.white), // white icon on dark
             ),
           ),
         ],
@@ -484,30 +469,26 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
     );
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
-  // Step 3 — Documents
-  // ══════════════════════════════════════════════════════════════════════════
   Widget _buildDocumentsStep(BuildContext context) {
     return SingleChildScrollView(
-      padding:  EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Info banner
           Container(
-            padding:  EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.primary,
+              color: AppColors.secondary, // dark purple banner
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+              border: Border.all(color: AppColors.secondary.withOpacity(0.15)),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Icon(Icons.info_outline_rounded,
-                    color: Colors.white,),
-                 SizedBox(width: 12),
-                 Expanded(
+                Icon(Icons.info_outline_rounded, color: Colors.white),
+                SizedBox(width: 12),
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -522,7 +503,8 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                       SizedBox(height: 4),
                       Text(
                         'Please upload your medical degree, license, or any graduation certificate. Max 5 files (PDF, JPG, PNG).',
-                        style: TextStyle(color: Colors.white, fontSize: 12, height: 1.5),
+                        style: TextStyle(
+                            color: Colors.white, fontSize: 12, height: 1.5),
                       ),
                     ],
                   ),
@@ -530,24 +512,21 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               ],
             ),
           ),
-           SizedBox(height: 20),
-
+          SizedBox(height: 20),
           _sectionLabel('Upload Documents'),
-           SizedBox(height: 12),
-
+          SizedBox(height: 12),
           // Upload button
           GestureDetector(
             onTap: controller.pickDocuments,
             child: Container(
               width: double.infinity,
-              padding:  EdgeInsets.symmetric(vertical: 24),
+              padding: EdgeInsets.symmetric(vertical: 24),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.primary, // light purple bg
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: AppColors.primary.withOpacity(0.4),
+                  color: AppColors.secondary.withOpacity(0.4),
                   width: 1.5,
-                  // dashed via CustomPaint or just solid
                 ),
               ),
               child: Column(
@@ -556,55 +535,53 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                     width: 56,
                     height: 56,
                     decoration: BoxDecoration(
-                      color: AppColors.primary,
+                      color: AppColors.secondary, // dark purple circle
                       shape: BoxShape.circle,
                     ),
-                    child:  Icon(Icons.cloud_upload_outlined,
-                        color: Color.fromARGB(239, 231, 228, 238), size: 28),
+                    child: Icon(Icons.cloud_upload_outlined,
+                        color: Colors.white, size: 28),
                   ),
-                   SizedBox(height: 12),
-                   Text(
+                  SizedBox(height: 12),
+                  Text(
                     'Tap to upload files',
                     style: TextStyle(
-                      color: AppColors.primary,
+                      color: AppColors.secondary, // dark purple text
                       fontWeight: FontWeight.w600,
                       fontSize: 15,
                     ),
                   ),
-                   SizedBox(height: 4),
-                   Text(
+                  SizedBox(height: 4),
+                  Text(
                     'PDF, JPG, PNG · Max 5 files',
-                    style: TextStyle(color: AppColors.textLight, fontSize: 12),
+                    style:
+                        TextStyle(color: AppColors.textLight, fontSize: 12),
                   ),
                 ],
               ),
             ),
           ),
-           SizedBox(height: 16),
-
+          SizedBox(height: 16),
           // Uploaded files list
           Obx(() {
-            if (controller.uploadedDocs.isEmpty) {
-              return  SizedBox();
-            }
+            if (controller.uploadedDocs.isEmpty) return SizedBox();
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     _sectionLabel('Uploaded'),
-                     SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Obx(() => Container(
-                          padding:  EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                               horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
-                            color: AppColors.successLight,
+                            color: AppColors.primary, // light purple bg
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
                             '${controller.uploadedDocs.length}/5',
-                            style:  TextStyle(
-                              color: AppColors.success,
+                            style: TextStyle(
+                              color: AppColors.secondary, // dark purple text
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
@@ -612,14 +589,14 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                         )),
                   ],
                 ),
-                 SizedBox(height: 12),
+                SizedBox(height: 12),
                 ...controller.uploadedDocs.asMap().entries.map(
                       (e) => _buildDocTile(e.key, e.value),
                     ),
               ],
             );
           }),
-           SizedBox(height: 100),
+          SizedBox(height: 100),
         ],
       ),
     );
@@ -628,12 +605,12 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
   Widget _buildDocTile(int index, File file) {
     final isPdf = file.path.endsWith('.pdf');
     return Container(
-      margin:  EdgeInsets.only(bottom: 10),
-      padding:  EdgeInsets.all(14),
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.border,),
+        border: Border.all(color: AppColors.border),
       ),
       child: Row(
         children: [
@@ -641,38 +618,33 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: isPdf
-                  ?  Color(0xFFFEE2E2)
-                  :  Color(0xFFE0F2FE),
+              color: isPdf ? Color(0xFFFEE2E2) : Color(0xFFE0F2FE),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
-              isPdf
-                  ? Icons.picture_as_pdf_rounded
-                  : Icons.image_rounded,
-              color: isPdf
-                  ?  Color(0xFFDC2626)
-                  :  Color(0xFF0284C7),
+              isPdf ? Icons.picture_as_pdf_rounded : Icons.image_rounded,
+              color: isPdf ? Color(0xFFDC2626) : Color(0xFF0284C7),
               size: 22,
             ),
           ),
-           SizedBox(width: 12),
+          SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   controller.docName(file),
-                  style:  TextStyle(
+                  style: TextStyle(
                     color: AppColors.textDark,
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                 SizedBox(height: 2),
+                SizedBox(height: 2),
                 Text(
                   isPdf ? 'PDF Document' : 'Image File',
-                  style:  TextStyle(color: AppColors.textLight, fontSize: 11),
+                  style:
+                      TextStyle(color: AppColors.textLight, fontSize: 11),
                 ),
               ],
             ),
@@ -683,10 +655,10 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color:  Color(0xFFFEE2E2),
+                color: Color(0xFFFEE2E2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child:  Icon(Icons.close_rounded,
+              child: Icon(Icons.close_rounded,
                   size: 16, color: Color(0xFFDC2626)),
             ),
           ),
@@ -695,26 +667,23 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
     );
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
-  // Bottom bar
-  // ══════════════════════════════════════════════════════════════════════════
   Widget _buildBottomBar() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        border:  Border(top: BorderSide(color: AppColors.border)),
+        border: Border(top: BorderSide(color: AppColors.border)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
             blurRadius: 12,
-            offset:  Offset(0, -4),
+            offset: Offset(0, -4),
           ),
         ],
       ),
       child: SafeArea(
         top: false,
         child: Padding(
-          padding:  EdgeInsets.fromLTRB(20, 12, 20, 12),
+          padding: EdgeInsets.fromLTRB(20, 12, 20, 12),
           child: Obx(() {
             final isLast =
                 controller.currentStep.value == FormStep.documents;
@@ -725,7 +694,6 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
 
             return Row(
               children: [
-                // Back button
                 if (!isFirst) ...[
                   GestureDetector(
                     onTap: controller.prevStep,
@@ -733,17 +701,16 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                       width: 52,
                       height: 52,
                       decoration: BoxDecoration(
-                        color: AppColors.surface,
+                        color: AppColors.primary, // light purple bg
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: AppColors.border),
+                        border: Border.all(color: AppColors.secondary),
                       ),
-                      child:  Icon(Icons.arrow_back_rounded,
-                          color: AppColors.textMid),
+                      child: Icon(Icons.arrow_back_rounded,
+                          color: AppColors.secondary), // dark purple icon
                     ),
                   ),
-                   SizedBox(width: 12),
+                  SizedBox(width: 12),
                 ],
-
                 Expanded(
                   child: GestureDetector(
                     onTap: isSubmitting
@@ -752,16 +719,15 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                             ? controller.submit
                             : controller.nextStep,
                     child: AnimatedContainer(
-                      duration:  Duration(milliseconds: 200),
+                      duration: Duration(milliseconds: 200),
                       height: 52,
                       decoration: BoxDecoration(
-                        color: AppColors.primary,
+                        color: AppColors.secondary, // dark purple button
                         borderRadius: BorderRadius.circular(14),
                       ),
-                      
                       child: Center(
                         child: isSubmitting
-                            ?  SizedBox(
+                            ? SizedBox(
                                 width: 22,
                                 height: 22,
                                 child: CircularProgressIndicator(
@@ -770,18 +736,19 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                                 ),
                               )
                             : Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    isLast ? 'Submit Registration' : 'Continue',
-                                    style:  TextStyle(
+                                    isLast
+                                        ? 'Submit Registration'
+                                        : 'Continue',
+                                    style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                   SizedBox(width: 6),
+                                  SizedBox(width: 6),
                                   Icon(
                                     isLast
                                         ? Icons.check_circle_outline_rounded
@@ -789,13 +756,8 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                                     color: Colors.white,
                                     size: 18,
                                   ),
-                                  ElevatedButton(onPressed:  () {
-                                    Get.toNamed(AppRoutes.homescreen);
-                                    
-                                  }, child: Text("test"))
                                 ],
                               ),
-                              
                       ),
                     ),
                   ),
@@ -808,29 +770,27 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
     );
   }
 
-
   Widget _buildSuccessScreen() {
     return SafeArea(
       child: Padding(
-        padding:  EdgeInsets.all(32),
+        padding: EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Spacer(),
-            // Success animation container
+            Spacer(),
             Container(
               width: 130,
               height: 130,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.successLight,
-                border: Border.all(color: AppColors.success, width: 2),
+                color: AppColors.primary, // light purple bg
+                border: Border.all(color: AppColors.secondary, width: 2),
               ),
-              child:  Icon(Icons.check_circle_rounded,
-                  color: AppColors.success, size: 72),
+              child: Icon(Icons.check_circle_rounded,
+                  color: AppColors.secondary, size: 72), // dark purple
             ),
-             SizedBox(height: 32),
-             Text(
+            SizedBox(height: 32),
+            Text(
               'Registration Submitted!',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -840,8 +800,8 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                 letterSpacing: -0.5,
               ),
             ),
-             SizedBox(height: 12),
-             Text(
+            SizedBox(height: 12),
+            Text(
               'Your profile is under review.\nOur team will verify your documents\nand activate your account within 24–48 hours.',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -850,11 +810,10 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
                 height: 1.6,
               ),
             ),
-             SizedBox(height: 32),
-            // Info card
+            SizedBox(height: 32),
             Container(
               width: double.infinity,
-              padding:  EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
@@ -863,47 +822,37 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
               child: Column(
                 children: [
                   _successInfoRow(
-                    Icons.access_time_rounded,
-                    'Review Time',
-                    '24–48 hours',
-                  ),
-                   Divider(height: 24, color: AppColors.border),
-                  _successInfoRow(
-                    Icons.notifications_outlined,
-                    'Notification',
-                    'Email & App notification',
-                  ),
-                   Divider(height: 24, color: AppColors.border),
-                  _successInfoRow(
-                    Icons.shield_outlined,
-                    'Status',
-                    'Pending Verification',
-                  ),
+                      Icons.access_time_rounded, 'Review Time', '24–48 hours'),
+                  Divider(height: 24, color: AppColors.border),
+                  _successInfoRow(Icons.notifications_outlined, 'Notification',
+                      'Email & App notification'),
+                  Divider(height: 24, color: AppColors.border),
+                  _successInfoRow(Icons.shield_outlined, 'Status',
+                      'Pending Verification'),
                 ],
               ),
             ),
-             Spacer(),
+            Spacer(),
             SizedBox(
               width: double.infinity,
               height: 54,
               child: ElevatedButton(
-                onPressed: () => Get.offAllNamed('/home'),
+                onPressed: () => Get.offAllNamed(AppRoutes.dHomescreen),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: AppColors.secondary, // dark purple button
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                   elevation: 0,
                 ),
-                child:  Text(
+                child: Text(
                   'Back to Home',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
-             SizedBox(height: 12),
+            SizedBox(height: 12),
           ],
         ),
       ),
@@ -917,19 +866,19 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            color: AppColors.primary,
+            color: AppColors.primary, // light purple bg
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, color: AppColors.primary, size: 18),
+          child: Icon(icon, color: AppColors.secondary, size: 18), // dark purple icon
         ),
-         SizedBox(width: 12),
+        SizedBox(width: 12),
         Expanded(
           child: Text(label,
-              style:  TextStyle(color: AppColors.textMid, fontSize: 13)),
+              style: TextStyle(color: AppColors.textMid, fontSize: 13)),
         ),
         Text(
           value,
-          style:  TextStyle(
+          style: TextStyle(
             color: AppColors.textDark,
             fontSize: 13,
             fontWeight: FontWeight.w600,
@@ -939,13 +888,10 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
     );
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
-  // Shared helpers
-  // ══════════════════════════════════════════════════════════════════════════
   Widget _sectionLabel(String text) {
     return Text(
       text,
-      style:  TextStyle(
+      style: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w600,
         color: AppColors.textMid,
@@ -967,35 +913,34 @@ class DCompleteFormView extends GetView<DCompleteFormController> {
       keyboardType: keyboardType,
       maxLines: maxLines,
       validator: validator,
-      style:  TextStyle(
+      style: TextStyle(
         fontSize: 14,
         color: AppColors.textDark,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
         hintText: label,
-        hintStyle:  TextStyle(color: AppColors.textLight, fontSize: 14),
-        prefixIcon: Icon(icon, color: AppColors.textLight, size: 20),
+        hintStyle: TextStyle(color: AppColors.textLight, fontSize: 14),
+        prefixIcon: Icon(icon, color: AppColors.secondary, size: 20), // dark purple icon
         filled: true,
         fillColor: Colors.white,
-        contentPadding:  EdgeInsets.symmetric(
-            horizontal: 16, vertical: 14),
+        contentPadding:
+            EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide:  BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: AppColors.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide:  BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: AppColors.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide:  BorderSide(color: AppColors.primary, width: 1.5),
+          borderSide: BorderSide(color: AppColors.secondary, width: 1.5), // dark purple focus
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide:
-               BorderSide(color: Color(0xFFEF4444)),
+          borderSide: BorderSide(color: Color(0xFFEF4444)),
         ),
       ),
     );

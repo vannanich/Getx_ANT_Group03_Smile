@@ -1,3 +1,5 @@
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
+
 class AppRoutes {
   static const splashScreen = '/splashScreen';
   static const home = '/';
@@ -5,6 +7,7 @@ class AppRoutes {
   static const onboarding_2 = '/onboarding_2';
   static const onboarding_3 = '/onboarding_3';
   static const login = '/login_screen';
+  static const signUp = '/Sing_up';
   static const survey_1 = '/survey_1';
   static const survey_2 = '/survey_2';
   static const survey_3 = '/survey_3';
@@ -15,13 +18,15 @@ class AppRoutes {
   static const chatAI = '/chatAI';
   static const sleepingMood = '/sleeping_mood';
 
-  // doctor feature 
+  // doctor feature
   static const chatWithDoctor = '/chat_with_doctor';
   static const bookAppointment = '/book_appointment';
   static const schedule = '/schedule';
-  static const scanId='/scan_doctor_id';
-  static const dCompleteForm='/d_complete_form';
-  static const dHomescreen='/doctor_homescreen';
+  static const scanId = '/scan_doctor_id';
+  static const dCompleteForm = '/d_complete_form';
+  static const dHomescreen = '/doctor_homescreen';
+  static const dTodayAppoitment = '/d_today_appoitment';
+
 
   //reading book screen
   static const readbook = '/readbook';
@@ -38,7 +43,10 @@ class AppRoutes {
   static const quotescreen = '/quotescreen';
   //video screen
   static const videoscreen = '/videoscreen';
+  //profie screen
+  static const profilescreen = '/profilescreen';
+  static const editProfile = '/editprofile';
 
-  // b nita select role 
+  // b nita select role
   static const selectRoleScreen = '/select_role_screen';
 }
