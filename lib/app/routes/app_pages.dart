@@ -1,6 +1,7 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
 import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/add_task_screen/add_task_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
@@ -20,6 +21,7 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_view.dart';
 import 'package:flutter_application_1/app/modules/screen/edit_profile_screen/edit_profile_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/goal_screen/goal_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
@@ -46,6 +48,7 @@ import 'package:flutter_application_1/app/modules/screen/survey/survey_2/survey_
 import 'package:flutter_application_1/app/modules/screen/survey/survey_3/survey_3_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_4/survey_4_view.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_5/survey_5_view.dart';
+import 'package:flutter_application_1/app/modules/screen/update_task_screen/update_task_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/video_screen/video_screen_view.dart';
 import 'package:get/get.dart';
 
@@ -181,6 +184,24 @@ class AppPages {
       page: () => NotificationDetailScreenView(),
       binding: NotificationDetailViewBinding(),
     ),
+
+    //goal screen
+    GetPage(
+      name: AppRoutes.goalScreen,
+      page: () => GoalScreenView(),
+      binding: GoalScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addtask,
+      page: () => AddTaskScreenView(),
+      binding: AddTaskScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.updatetask,
+      page: () => UpdateTaskScreenView(),
+      binding: UpdateTaskScreenViewBinding(),
+    ),
+
     //Mood screen
     GetPage(
       name: AppRoutes.moodSelection,

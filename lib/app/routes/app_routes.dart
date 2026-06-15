@@ -49,6 +49,11 @@ class AppRoutes {
   static const notificationScreen = '/notification_screen';
   static const notificationDetail = '/notification_detail';
 
+  //scan face screen
+  static const goalScreen = '/goalscreen';
+  static const addtask = '/addtask';
+  static const updatetask = '/updatetask';
+
   // b nita select role
   static const selectRoleScreen = '/select_role_screen';
 }
