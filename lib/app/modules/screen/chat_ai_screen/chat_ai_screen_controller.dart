@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,8 +23,7 @@ class AiChatController extends GetxController {
   late GenerativeModel _model;
   late ChatSession _chat;
 
-  static const String _apiKey = 'AQ.Ab8RN6L053Ut77lSGDLeE3fdY32jGn3rXvoD07OQzPux86d4xQ';
-
+  static String get _apiKey => dotenv.env['GEMINI_API_KEY'] ?? '';
   @override
   void onInit() {
     super.onInit();

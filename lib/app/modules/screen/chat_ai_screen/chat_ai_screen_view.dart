@@ -3,7 +3,6 @@ import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// ── Design tokens ─────────────────────────────────────────────────────────────
 const _purple      = Color(0xFF5B13EC);
 const _purpleLight = Color(0xFFF3EEFF);
 const _purpleMid   = Color(0xFF9C6BFF);
@@ -21,7 +20,6 @@ class AiChatView extends GetView<AiChatController> {
       backgroundColor: _bg,
       resizeToAvoidBottomInset: true,
 
-      // ── App bar ────────────────────────────────────────────────────────────
       appBar: AppBar(
         backgroundColor: _bg,
         elevation: 0,
