@@ -1,10 +1,10 @@
-part of 'sign_up_screen_view.dart';
 
-class SignUpScreenViewBinding extends Bindings {
+import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_controller.dart';
+import 'package:get/get.dart';
+
+class SignUpScreenBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<SignUpScreenViewController>(
-      () => SignUpScreenViewController(),
-    );
+    Get.lazyPut<SignUpScreenController>(() => SignUpScreenController());
   }
 }

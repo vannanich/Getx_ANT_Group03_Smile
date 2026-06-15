@@ -1,297 +1,223 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_controller.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
+import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
+import 'package:flutter_application_1/app/shared/widgets/auth_animated_scaffold.dart';
+import 'package:flutter_application_1/app/shared/widgets/auth_form_card.dart';
+import 'package:flutter_application_1/app/shared/widgets/auth_input_field.dart';
+import 'package:flutter_application_1/app/shared/widgets/auth_primary_button.dart';
+import 'package:flutter_application_1/app/shared/widgets/auth_shimmer_divider.dart';
+
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-part 'sign_up_screen_binding.dart';
-part 'sign_up_screen_controller.dart';
-
-class SignUpScreenView extends GetView<SignUpScreenViewController> {
+class SignUpScreenView extends GetView<SignUpScreenController> {
   const SignUpScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xffF5F0FF),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
+    return AuthAnimatedScaffold(
+      child: AuthFormCard(
+        itemCount: 7,
+        builder: (context, staggered, pulseAnim, shimmerAnim) {
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 40),
-              Center(
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFEDE0FF),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.contain,
+              // Header
+              staggered(0, _buildHeader()),
+              const SizedBox(height: 28),
+
+              // Username
+              staggered(
+                1,
+                Obx(() => AuthInputField(
+                      controller: controller.usernameController,
+                      hint: 'Username',
+                      errorText: controller.usernameError.value.isEmpty
+                          ? null
+                          : controller.usernameError.value,
+                    )),
+              ),
+              const SizedBox(height: 14),
+
+              // Password
+              staggered(
+                2,
+                Obx(() => AuthInputField(
+                      controller: controller.passwordController,
+                      hint: 'Password',
+                      obscureText: !controller.isPasswordVisible.value,
+                      errorText: controller.passwordError.value.isEmpty
+                          ? null
+                          : controller.passwordError.value,
+                      suffixIcon: GestureDetector(
+                        onTap: controller.togglePasswordVisibility,
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          transitionBuilder: (child, anim) =>
+                              ScaleTransition(scale: anim, child: child),
+                          child: Icon(
+                            controller.isPasswordVisible.value
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                            key: ValueKey(controller.isPasswordVisible.value),
+                            color: AppColors.textLight,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    )),
+              ),
+              const SizedBox(height: 14),
+
+              // Confirm Password
+              staggered(
+                3,
+                Obx(() => AuthInputField(
+                      controller: controller.confirmPasswordController,
+                      hint: 'Confirm password',
+                      obscureText:
+                          !controller.isConfirmPasswordVisible.value,
+                      errorText:
+                          controller.confirmPasswordError.value.isEmpty
+                              ? null
+                              : controller.confirmPasswordError.value,
+                      suffixIcon: GestureDetector(
+                        onTap: controller.toggleConfirmPasswordVisibility,
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          transitionBuilder: (child, anim) =>
+                              ScaleTransition(scale: anim, child: child),
+                          child: Icon(
+                            controller.isConfirmPasswordVisible.value
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                            key: ValueKey(
+                                controller.isConfirmPasswordVisible.value),
+                            color: AppColors.textLight,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    )),
+              ),
+              const SizedBox(height: 44),
+
+              staggered(
+                4,
+                Obx(() => AuthPrimaryButton(
+                      label: 'Next',
+                      pulseAnim: pulseAnim,
+                      isLoading: controller.isLoading.value,
+                      onTap: controller.signUp,
+                    )),
+              ),
+              const SizedBox(height: 16),
+
+              // Already have account
+              staggered(
+                5,
+                Center(
+                  child: GestureDetector(
+                    onTap: () => Get.toNamed(AppRoutes.login),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Already have an account?  ',
+                            style: TextStyle(
+                                fontSize: 13, color: AppColors.textLight),
+                          ),
+                          TextSpan(
+                            text: 'Sign in',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.secondary,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 36),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Sign",
-                        style: GoogleFonts.balsamiqSans(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff5B13EC),
-                        ),
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        "Up",
-                        style: GoogleFonts.balsamiqSans(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Sign up your account',
-                    style: GoogleFonts.balsamiqSans(
-                      fontSize: 15,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              
-              SizedBox(height: 24),
-              Column(
-                children: [
-                  _buildTextField(
-                    hint: 'Username',
-                    icon: Icons.person_outline,
-                  ),
-                  SizedBox(height: 14),
-                  _buildTextField(
-                    hint: 'Password',
-                    icon: Icons.lock_outline,
-                    obscure: true,
-                  ),
-                  SizedBox(height: 14),
-                  _buildTextField(
-                    hint: 'Confirm password',
-                    icon: Icons.lock_outline,
-                    obscure: true,
-                  ),
-                  SizedBox(height: 28),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 52,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4B0FCC),
-                        foregroundColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoutes.login);
-                        },
-                        child: Text(
-                          'Sign Up',
-                          style: GoogleFonts.balsamiqSans(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 18),
-                  Center(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Already have an account? ',
-                              style: GoogleFonts.balsamiqSans(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(width: 4),
-                            GestureDetector(
-                              onTap: () => Get.back(),
-                              child: Text(
-                                'Sign in',
-                                style: GoogleFonts.balsamiqSans(
-                                  fontSize: 15,
-                                  color: const Color(0xff5B13EC),
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
+              const SizedBox(height: 28),
 
-                            Expanded(
-                              child: Divider(
-                                color: Colors.grey,
-                                thickness: 1,
-                                endIndent: 16,
-                              ),
-                            ),
-                            Text(
-                              'Or continues with',
-                              style: GoogleFonts.balsamiqSans(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            Expanded(
-                              child: Divider(
-                                color: Colors.grey,
-                                thickness: 1,
-                                indent: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 28),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildSocialButton(
-                        label: 'Google',
-                        iconWidget: Image.asset(
-                          'assets/flat-color-icons_google.png',
-                          width: 20,
-                          height: 20,
-                        ),
-                        
-                        onTap: controller.onGoogleSignUp,
-                      ),
-                      SizedBox(height: 12),
-                      _buildSocialButton(
-                        label: 'Facebook',
-                        iconWidget: Image.asset(
-                          'assets/logos_facebook.png',
-                          width: 20,
-                          height: 20,
-                        ),
-                        onTap: controller.onFacebookSignUp,
-                      ),
-                    ],
-                  ),
-                ],
+              // Shimmer divider
+              staggered(6, AuthShimmerDivider(shimmerAnim: shimmerAnim)),
+              const SizedBox(height: 40),
+
+              _buildGoogleButton(),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'Sign ',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.secondary,
+                ),
+              ),
+              TextSpan(
+                text: 'Up',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.textDark,
+                ),
               ),
             ],
           ),
         ),
-      ),
+        const SizedBox(height: 6),
+        Text(
+          'Sign up your account',
+          style: TextStyle(fontSize: 13, color: AppColors.textLight),
+        ),
+      ],
     );
   }
 
-  Widget _buildTextField({
-    required String hint,
-    required IconData icon,
-    bool obscure = false,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.75),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
+  Widget _buildGoogleButton() {
+    return GestureDetector(
+      onTap: controller.signUpWithGoogle,
+      child: Container(
+        width: double.infinity,
+        height: 52,
+        decoration: BoxDecoration(
           color: Colors.white,
-          width: 1,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.secondary, width: 1.4),
         ),
-      ),
-      child: TextField(
-        obscureText: obscure,
-        style: GoogleFonts.balsamiqSans(
-          color: Colors.black,
-          fontSize: 16,
-        ),
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: const TextStyle(
-            color: Colors.black38,
-            fontSize: 16,
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 15,
-          ),
+        
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/google.png', width: 24, height: 24),
+            const SizedBox(width: 10),
+            Text(
+              'Continue with Google',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: AppColors.secondary,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-
-
-  Widget _buildSocialButton({
-  required String label,
-  required Widget iconWidget,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: double.infinity,
-      height: 52,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE0D6F5), width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 6,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          iconWidget,
-          SizedBox(width: 10),
-          Text(
-            label,
-            style: GoogleFonts.balsamiqSans(
-              fontSize: 15,
-              color: Colors.black87,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
 }

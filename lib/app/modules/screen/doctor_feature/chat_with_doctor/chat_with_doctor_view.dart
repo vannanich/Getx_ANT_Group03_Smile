@@ -250,12 +250,17 @@ class ChatWithDoctorView extends GetView<ChatWithDoctorController> {
                   label: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:  [
-                      Text(
-                        'Book an appointment',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.bookAppointment);
+                        },
+                        child: Text(
+                          'Book an appointment',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                       SizedBox(width: 8),

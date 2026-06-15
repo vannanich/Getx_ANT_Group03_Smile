@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -48,7 +49,7 @@ class OtpScreenView extends GetView<OtpScreenViewController> {
               ),
               SizedBox(height: 5),
               Image.asset(
-                "assets/img/img_otp_check.png",
+                "assets/Confirmed-pana 1.png",
                 height: 350,
                 width: double.infinity,
                 fit: BoxFit.contain,
@@ -101,12 +102,17 @@ class OtpScreenView extends GetView<OtpScreenViewController> {
                   ),
                   elevation: 0,
                 ),
-                child: Text(
-                  "Next",
-                  style: GoogleFonts.balsamiqSans(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.sendCode);
+                  },
+                  child: Text(
+                    "Next",
+                    style: GoogleFonts.balsamiqSans(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

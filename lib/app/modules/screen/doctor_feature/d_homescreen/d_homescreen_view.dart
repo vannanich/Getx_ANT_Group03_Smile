@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_controller.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:get/get.dart';
 
@@ -205,7 +206,9 @@ class DHomescreenView extends GetView<DHomescreenController> {
 
   Widget _buildTodayAppointment() {
     return GestureDetector(
-      onTap: controller.onAppointmentTap,
+      onTap: () {
+        Get.toNamed(AppRoutes.dTodayAppoitment);
+      },
       child: Container(
         padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
@@ -372,7 +375,9 @@ class DHomescreenView extends GetView<DHomescreenController> {
               ),
             ),
             GestureDetector(
-              onTap: controller.onSeeAllPatients,
+              onTap: () {
+                Get.toNamed(AppRoutes.dTodayAppoitment);
+              },
               child:  Text(
                 'See all',
                 style: TextStyle(
@@ -404,92 +409,97 @@ class DHomescreenView extends GetView<DHomescreenController> {
   }
 
 Widget _patientCard({required PatientModel patient}) {
-    return Container(
-      width: 140,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.border),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset:  Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius:
-                 BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.network(
-              patient.image,
-              height: 100,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(AppRoutes.dAppointmentDetail);
+      },
+      child: Container(
+        width: 140,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.border),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 8,
+              offset:  Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius:
+                   BorderRadius.vertical(top: Radius.circular(16)),
+              child: Image.network(
+                patient.image,
                 height: 100,
-                color: AppColors.primary,
-                child:  Icon(Icons.person, color: AppColors.secondary),
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
+                  height: 100,
+                  color: AppColors.primary,
+                  child:  Icon(Icons.person, color: AppColors.secondary),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding:  EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  patient.name,
-                  style:  TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textDark,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  patient.subtitle,
-                  style:  TextStyle(
-                    fontSize: 10,
-                    color: AppColors.textLight,
-                  ),
-                ),
-                 SizedBox(height: 8),
-                GestureDetector(
-                  onTap: () => controller.onMessageTap(patient),
-                  child: Container(
-                    padding:  EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(20),
+            Padding(
+              padding:  EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    patient.name,
+                    style:  TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textDark,
                     ),
-                    child:  Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Message',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.secondary,
-                            fontWeight: FontWeight.w600,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    patient.subtitle,
+                    style:  TextStyle(
+                      fontSize: 10,
+                      color: AppColors.textLight,
+                    ),
+                  ),
+                   SizedBox(height: 8),
+                  GestureDetector(
+                    onTap: () => controller.onMessageTap(patient),
+                    child: Container(
+                      padding:  EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child:  Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Message',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: AppColors.secondary,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 3),
-                        Icon(Icons.chevron_right,
-                            size: 12, color: AppColors.secondary),
-                      ],
+                          SizedBox(width: 3),
+                          Icon(Icons.chevron_right,
+                              size: 12, color: AppColors.secondary),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

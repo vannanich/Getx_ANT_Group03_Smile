@@ -1,5 +1,6 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/add_task_screen/add_task_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_binding.dart';
@@ -40,7 +41,7 @@ import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_boo
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/save_book_screen/save_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/scan_face_screen/scan_face_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/selected_role_screen/select_role_screen_view.dart';
-import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_view.dart';
 import 'package:flutter_application_1/app/modules/screen/splash_screen.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_1/survey_1_view.dart';
@@ -241,9 +242,11 @@ class AppPages {
       binding: ScheduleBinding(),
     ),
     GetPage(
-      name: AppRoutes.sleepingMood,
-      page: () => SleepModeView(),
-      binding: SleepModeBinding(),
+      name: '/sleeping-mood',
+      page: () => SleepingmoodScreenView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => SleepingmoodScreenViewController());
+      }),
     ),
     GetPage(
       name: AppRoutes.selectRoleScreen,
@@ -283,7 +286,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.signUp,
       page: () => SignUpScreenView(),
-      binding: SignUpScreenViewBinding(),
+      binding: SignUpScreenBinding(),
     ),
   ];
 }
