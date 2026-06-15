@@ -149,6 +149,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                   ),
                 ),
               ),
+              SizedBox(height: 20,),
 
               Row(
                 children: [

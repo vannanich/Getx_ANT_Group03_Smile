@@ -1,392 +1,297 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_controller.dart';
+import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class SleepModeView extends StatelessWidget {
-   SleepModeView({super.key});
+
+class SleepingmoodScreenView extends GetView<SleepingmoodScreenViewController> {
+  
+  const SleepingmoodScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SleepModeController>(
-    init: SleepModeController(),
-    builder: (controller) {
-        return Scaffold(
-          backgroundColor:  Color(0xFF1A1A2E),
-          body: SafeArea(
-  child: Column(
-    children: [
-      _buildHeader(),
-      Expanded(
-        child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 16),
-          child: ListView(
-            physics:  BouncingScrollPhysics(),
-            children: [
-               SizedBox(height: 8),
-              _buildSleepModeCard(),
-               SizedBox(height: 20),
-              _buildTimerSection(controller),
-               SizedBox(height: 24),
-              _buildSoundsSection(controller),
-               SizedBox(height: 30),
-            ],
+    return Scaffold(
+      backgroundColor: AppColors.primary,
+      body: Stack(
+        children: [
+          /// Background
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/img/sleepmode.png",
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildHeader(),
+                  SizedBox(height: 40),
+                  _buildTimerCard(),
+                  SizedBox(height: 25),
+                  _buildSoundsSection(),
+                  SizedBox(height: 11),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
-    ],
-  ),
-),
-        );
-      },
     );
   }
 
   Widget _buildHeader() {
-    return Container(
-      padding:  EdgeInsets.fromLTRB(16, 12, 16, 8),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () => Get.back(),
             child: Container(
-              padding:  EdgeInsets.all(8),
+              width: 42,
+              height: 42,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child:  Icon(
-                Icons.arrow_back_ios_new,
-                color: Colors.white,
-                size: 16,
-              ),
-            ),
-          ),
-           Text(
-            'Sleep Mode',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-           SizedBox(width: 40), // Empty space for balance
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSleepModeCard() {
-    return Container(
-      width: double.infinity,
-      padding:  EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-             Color(0xFF6C63FF).withOpacity(0.3),
-             Color(0xFF3F3D9E).withOpacity(0.2),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-        ),
-      ),
-      child: Column(
-        children: [
-          Icon(
-            Icons.nightlight_round,
-            size: 40,
-            color: Colors.white.withOpacity(0.9),
-          ),
-           SizedBox(height: 10),
-           Text(
-            'Sleeping mode',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-           SizedBox(height: 6),
-          Text(
-            'Have a goodnight sleep',
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.7),
-              fontSize: 13,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTimerSection(SleepModeController controller) {
-    return Container(
-      width: double.infinity,
-      padding:  EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        children: [
-           Text(
-            'Sleep Timer',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-           SizedBox(height: 16),
-          Obx(
-            () => Text(
-              controller.getFormattedTime(),
-              style:  TextStyle(
-                color: Colors.white,
-                fontSize: 36,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'monospace',
-              ),
-            ),
-          ),
-           SizedBox(height: 16),
-          // Time Pickers
-          // Time Pickers
-Wrap(
-  spacing: 8,
-  runSpacing: 8,
-  alignment: WrapAlignment.center,
-  children: [
-    SizedBox(
-      width: 100,
-      child: _buildTimePicker(
-        'HRS',
-        controller.hours.value,
-        controller.updateHours,
-      ),
-    ),
-    SizedBox(
-      width: 100,
-      child: _buildTimePicker(
-        'MIN',
-        controller.minutes.value,
-        controller.updateMinutes,
-      ),
-    ),
-    SizedBox(
-      width: 100,
-      child: _buildTimePicker(
-        'SEC',
-        controller.seconds.value,
-        controller.updateSeconds,
-      ),
-    ),
-  ],
-),
-           SizedBox(height: 20),
-          // Start Timer Button
-          Obx(
-            () => ElevatedButton(
-              onPressed: controller.isTimerRunning.value
-                  ? controller.pauseTimer
-                  : controller.startTimer,
-              style: ElevatedButton.styleFrom(
-                minimumSize:  Size(double.infinity, 48),
-                backgroundColor:  Color(0xFF6C63FF),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                color: Colors.white.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.1),
                 ),
               ),
-              child: Text(
-                controller.isTimerRunning.value ? 'Pause Timer' : 'Start Timer',
-                style:  TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-          if (controller.isTimerRunning.value) ...[
-             SizedBox(height: 10),
-            TextButton(
-              onPressed: controller.resetTimer,
-              style: TextButton.styleFrom(
-                minimumSize:  Size(double.infinity, 36),
-              ),
-              child:  Text(
-                'Reset',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
- Widget _buildTimePicker(String label, int value, Function(int) onChanged) {
-  return Column(
-        children: [
-          Text(
-            label,
-            style:  TextStyle(
-              color: Colors.white70,
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-           SizedBox(height: 6),
-          Container(
-            padding:  EdgeInsets.symmetric(horizontal: 4),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () => onChanged(value - 1),
-                  icon:  Icon(
-                    Icons.remove,
-                    color: Colors.white,
-                    size: 16,
+              child: GestureDetector(
+                onTap: () => Get.back(),
+                child: Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  padding: EdgeInsets.zero,
-                  // raints:  Boxraints(),
+                  child: const Icon(Icons.arrow_back,
+                  size: 26, color: Colors.white),
                 ),
-                Container(
-                  width: 35,
-                  alignment: Alignment.center,
-                  child: Text(
-                    value.toString().padLeft(2, '0'),
-                    style:  TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          SizedBox(width: 14),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Sleeping mode',
+                style: GoogleFonts.balsamiqSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                'Have a goodnight sleep',
+                style: GoogleFonts.balsamiqSans(
+                  fontSize: 12,
+                  color: Colors.white70,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimerCard() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: Colors.white.withOpacity(0.08),
+        border: Border.all(color: Colors.white.withOpacity(0.12)),
+      ),
+      child: Column(
+        children: [
+          Text(
+            "Sleep Timer",
+            style: GoogleFonts.balsamiqSans(
+              color: Colors.white70,
+              fontSize: 16,
+            ),
+          ),
+          SizedBox(height: 15),
+          Obx(() => Text(
+                "${controller.pad(controller.hours.value)} : ${controller.pad(controller.minutes.value)} : ${controller.pad(controller.seconds.value)}",
+                style: GoogleFonts.balsamiqSans(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              )),
+          SizedBox(height: 20),
+          Obx(() => GestureDetector(
+                onTap: controller.toggleTimer,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: double.infinity,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(17),
+                    gradient: LinearGradient(
+                      colors: controller.isRunning.value
+                          ? [const Color(0xFFFF6B6B), const Color(0xFFCC0000)]
+                          : [const Color(0xFFE887FF), const Color(0xFFB200FF)],
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: (controller.isRunning.value
+                                ? const Color(0xFFCC0000)
+                                : const Color(0xFFB200FF))
+                            .withOpacity(0.4),
+                        blurRadius: 15,
+                        spreadRadius: 2,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      controller.isRunning.value ? "Stop Timer" : "Start Timer",
+                      style: GoogleFonts.balsamiqSans(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () => onChanged(value + 1),
-                  icon:  Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 16,
-                  ),
-                  padding: EdgeInsets.zero,
-                  // raints:  Boxraints(),
-                ),
-              ],
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSoundsSection() {
+    final sounds = [
+      {"title": "Typhoon",      "image": "assets/img/typhoon.png"},
+      {"title": "Sleet",        "image": "assets/img/sleet.png"},
+      {"title": "Heavenly Day", "image": "assets/img/Sunny.png"},
+      {"title": "Snowy Winter", "image": "assets/img/snow.png"},
+      {"title": "Cloudiness",   "image": "assets/img/cloudness.png"},
+      {"title": "Desert Wind",  "image": "assets/img/Heavy Sandstorm.png"},
+      {"title": "Starry Nights","image": "assets/img/Night.png"},
+      {"title": "Tribal Drums", "image": "assets/img/durms.png"},
+      {"title": "Medium Rain",  "image": "assets/img/Rain.png"},
+      {"title": "Snowy Breeze", "image": "assets/img/Blowing-snow.png"},
+      {"title": "Heavy Rain",   "image": "assets/img/Drizzle.png"},
+      {"title": "Wind",         "image": "assets/img/Gale.png"},
+      {"title": "Light Rain",   "image": "assets/img/Showers.png"},
+      {"title": "Wind",         "image": "assets/img/Storm.png"},
+      {"title": "Thunder",      "image": "assets/img/Thundershower.png"},
+      {"title": "Tornado",      "image": "assets/img/Tornado.png"},
+    ];
+
+    // ── Gradient per item matching the screenshot ──
+    final List<List<Color>> gradients = [
+      [const Color(0xFF6B0080), const Color(0xFF2A0040)], // Typhoon
+      [const Color(0xFF9D27FF), const Color(0xFF5500CC)], // Sleet
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Heavenly Day
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Snowy Winter
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Cloudiness
+      [const Color(0xFF7B00CC), const Color(0xFF3D0066)], // Desert Wind
+      [const Color(0xFFE887FF), const Color(0xFF9D27FF)], // Starry Nights
+      [const Color(0xFFE887FF), const Color(0xFF9D27FF)], // Tribal Drums
+      [const Color(0xFF2A0040), const Color(0xFF0D001A)], // Medium Rain
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Snowy Breeze
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Heavy Rain
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Wind
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Light Rain
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Wind
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Thunder
+      [const Color(0xFF1A0030), const Color(0xFF0D001A)], // Tornado
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Sounds",
+            style: GoogleFonts.balsamiqSans(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
             ),
+          ),
+          const SizedBox(height: 20),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: sounds.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 8,
+              childAspectRatio: 0.72,
+            ),
+            itemBuilder: (context, index) {
+              final item = sounds[index];
+
+              return Column(
+                children: [
+                  Container(
+                    width: 68,
+                    height: 68,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(22),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: gradients[index],
+                      ),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.12),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: gradients[index][0].withOpacity(0.4),
+                          blurRadius: 8,
+                          spreadRadius: 1,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(14),
+                      child: Image.asset(
+                        item["image"] as String,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    width: 68,
+                    child: Text(
+                      item["title"] as String,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.balsamiqSans(
+                        color: Colors.white70,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
-    
-    );
-  }
-
- Widget _buildSoundsSection(SleepModeController controller) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-       Text(
-        'Sounds',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-       SizedBox(height: 14),
-      GridView.builder(
-        shrinkWrap: true,
-        physics:  NeverScrollableScrollPhysics(),
-        itemCount: controller.sounds.length,
-        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 1.1, // 🔥 adjusted to prevent overflow
-        ),
-        itemBuilder: (context, index) {
-          return Obx(
-            () => _buildSoundCard(
-              controller.sounds[index],
-              controller.selectedSoundIndex.value == index,
-              () => controller.selectSound(index),
-            ),
-          );
-        },
-      ),
-    ],
-  );
-}
-
-  Widget _buildSoundCard(String soundName, bool isSelected, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: isSelected
-              ?  Color(0xFF6C63FF)
-              : Colors.white.withOpacity(0.08),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: isSelected
-                ?  Color(0xFF6C63FF)
-                : Colors.white.withOpacity(0.1),
-            width: 1,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              _getSoundIcon(soundName),
-              color: isSelected ? Colors.white : Colors.white70,
-              size: 22,
-            ),
-             SizedBox(height: 6),
-            Flexible(
-              child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 4),
-                child: Text(
-                  soundName,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.white70,
-                    fontSize: 10,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
-  }
-
-  IconData _getSoundIcon(String soundName) {
-    if (soundName.contains('Rain')) return Icons.grain;
-    if (soundName.contains('Wind')) return Icons.air;
-    if (soundName.contains('Snow')) return Icons.ac_unit;
-    if (soundName.contains('Night') || soundName.contains('Starry')) return Icons.nightlight_round;
-    if (soundName.contains('Drum') || soundName.contains('Tribal')) return Icons.music_note;
-    if (soundName.contains('Typhoon')) return Icons.tornado;
-    if (soundName.contains('Sleet')) return Icons.cloud_queue;
-    if (soundName.contains('Cloudiness')) return Icons.cloud;
-    if (soundName.contains('Heavenly')) return Icons.spa;
-    return Icons.volume_up;
   }
 }

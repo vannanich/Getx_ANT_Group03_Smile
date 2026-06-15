@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/modules/screen/selected_role_screen/select_role_screen_controller.dart';
-import 'package:flutter_application_1/app/modules/screen/selected_role_screen/select_role_screen_view.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Motivation App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFCEB6FF)),
-        useMaterial3: true,
-      ),
-      home: const SplashScreen(),
-    );
-  }
-}
+import 'package:flutter/services.dart';
+import 'package:flutter_application_1/app/shared/widgets/animated_logo.dart';
+import 'package:get/get.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
+import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -34,434 +14,319 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  late AnimationController _bgController;
-  late AnimationController _logoController;
-  late AnimationController _textController;
-  late AnimationController _taglineController;
-  late AnimationController _dotsController;
-  late AnimationController _shimmerController;
+  // ── Controllers ──────────────────────────────
+  late AnimationController _contentCtrl;
+  late AnimationController _quoteCtrl;
+  late AnimationController _progressCtrl;
 
-  late Animation<double> _bgScale;
-  late Animation<double> _logoScale;
-  late Animation<double> _logoOpacity;
-  late Animation<double> _logoRotate;
-  late Animation<double> _textOpacity;
-  late Animation<Offset> _textSlide;
-  late Animation<double> _taglineOpacity;
-  late Animation<Offset> _taglineSlide;
-  late Animation<double> _dotsOpacity;
-  late Animation<double> _shimmerAnim;
+  // ── Brand tagline ─────────────────────────────
+  late Animation<double> _brandOpacity;
+  late Animation<Offset> _brandSlide;
+
+  // ── Quote card ───────────────────────────────
+  late Animation<double> _quoteOpacity;
+  late Animation<Offset> _quoteSlide;
+
+  // ── Progress ─────────────────────────────────
+  late Animation<double> _progressOpacity;
+  double _loadProgress = 0.0;
+
+  // ── Quotes ───────────────────────────────────
+  final List<Map<String, String>> _quotes = [
+    {
+      'text': '"The secret of getting ahead is getting started."',
+      'author': '— Mark Twain',
+    },
+    {
+      'text': '"Push yourself, because no one else is going to do it for you."',
+      'author': '— Smile',
+    },
+    {
+      'text': '"Believe you can and you\'re halfway there."',
+      'author': '— Theodore Roosevelt',
+    },
+  ];
+  late Map<String, String> _selectedQuote;
 
   @override
   void initState() {
     super.initState();
+
+    _selectedQuote = _quotes[DateTime.now().millisecond % _quotes.length];
+
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ));
+
     _setupAnimations();
-    _startAnimationSequence();
+    _startSequence();
   }
 
   void _setupAnimations() {
-    _bgController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1800),
-    );
-    _bgScale = Tween<double>(begin: 0.85, end: 1.0).animate(
-      CurvedAnimation(parent: _bgController, curve: Curves.easeOutCubic),
-    );
-
-    _logoController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 900),
-    );
-    _logoScale = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _logoController, curve: Curves.elasticOut),
-    );
-    _logoOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _logoController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeIn),
-      ),
-    );
-    _logoRotate = Tween<double>(begin: -0.3, end: 0.0).animate(
-      CurvedAnimation(parent: _logoController, curve: Curves.elasticOut),
-    );
-
-    _textController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 600),
-    );
-    _textOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _textController, curve: Curves.easeIn),
-    );
-    _textSlide = Tween<Offset>(
-      begin: const Offset(0, 0.5),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _textController, curve: Curves.easeOutCubic),
-    );
-
-    _taglineController = AnimationController(
+    // Brand tagline slide up
+    _contentCtrl = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    _taglineOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _taglineController, curve: Curves.easeIn),
+    _brandOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _contentCtrl, curve: Curves.easeOut),
     );
-    _taglineSlide = Tween<Offset>(
-      begin: const Offset(0, 0.4),
+    _brandSlide = Tween<Offset>(
+      begin: const Offset(0, 0.3),
       end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _taglineController, curve: Curves.easeOut),
-    );
+    ).animate(CurvedAnimation(parent: _contentCtrl, curve: Curves.easeOut));
 
-    // Loading dots
-    _dotsController = AnimationController(
+    // Quote card
+    _quoteCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 550),
+    );
+    _quoteOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _quoteCtrl, curve: Curves.easeOut),
+    );
+    _quoteSlide = Tween<Offset>(
+      begin: const Offset(0, 0.25),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _quoteCtrl, curve: Curves.easeOut));
+
+    // Progress bar fade in
+    _progressCtrl = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-    _dotsOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _dotsController, curve: Curves.easeIn),
-    );
-
-    // Shimmer on logo circle
-    _shimmerController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1600),
-    )..repeat(reverse: true);
-    _shimmerAnim = Tween<double>(begin: 0.7, end: 1.0).animate(
-      CurvedAnimation(parent: _shimmerController, curve: Curves.easeInOut),
+    _progressOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _progressCtrl, curve: Curves.easeOut),
     );
   }
 
-  Future<void> _startAnimationSequence() async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    _bgController.forward();
+  Future<void> _startSequence() async {
+    // AnimatedAppLogo handles its own entrance animation
+    await Future.delayed(const Duration(milliseconds: 900));
+    if (!mounted) return;
+    _contentCtrl.forward();
 
-    await Future.delayed(const Duration(milliseconds: 200));
-    _logoController.forward();
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (!mounted) return;
+    _quoteCtrl.forward();
 
-    await Future.delayed(const Duration(milliseconds: 700));
-    _textController.forward();
+    await Future.delayed(const Duration(milliseconds: 300));
+    if (!mounted) return;
+    _progressCtrl.forward();
+    _simulateLoading();
+  }
 
-    await Future.delayed(const Duration(milliseconds: 400));
-    _taglineController.forward();
+  void _simulateLoading() {
+    const totalMs = 5000; // 5 seconds
+    const tickMs = 80;
+    int elapsed = 0;
 
-    await Future.delayed(const Duration(milliseconds: 400));
-    _dotsController.forward();
+    Future.doWhile(() async {
+      await Future.delayed(const Duration(milliseconds: tickMs));
+      elapsed += tickMs;
+      if (!mounted) return false;
 
-await Future.delayed(const Duration(milliseconds: 2000));
-if (mounted) {
-  Navigator.of(context).pushReplacement(
-    PageRouteBuilder(
-      transitionDuration: const Duration(milliseconds: 600),
-      pageBuilder: (_, __, ___) {
-        Get.put(SelectRoleScreenController());
-        return SelectRoleScreenView();
-      },
-      transitionsBuilder: (_, animation, __, child) {
-        return FadeTransition(opacity: animation, child: child);
-      },
-    ),
-  );
-}
+      setState(() {
+        _loadProgress = (elapsed / totalMs).clamp(0.0, 1.0);
+      });
+
+      if (elapsed >= totalMs) {
+        await Future.delayed(const Duration(milliseconds: 300));
+        if (mounted) {
+          Get.offAllNamed(AppRoutes.selectRoleScreen);
+        }
+        return false;
+      }
+      return true;
+    });
   }
 
   @override
   void dispose() {
-    _bgController.dispose();
-    _logoController.dispose();
-    _textController.dispose();
-    _taglineController.dispose();
-    _dotsController.dispose();
-    _shimmerController.dispose();
+    _contentCtrl.dispose();
+    _quoteCtrl.dispose();
+    _progressCtrl.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryPurple = Color(0xFFCEB6FF);
-    const Color deepPurple = Color(0xFF7B4FBF);
-    const Color lightPurple = Color(0xFFEDE0FF);
-
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: AnimatedBuilder(
-        animation: Listenable.merge([
-          _bgController,
-          _logoController,
-          _textController,
-          _taglineController,
-          _dotsController,
-          _shimmerController,
-        ]),
-        builder: (context, child) {
-          return Stack(
-            children: [
-              ScaleTransition(
-                scale: _bgScale,
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.white,
-                        Color(0xFFF5EEFF),
-                        Color(0xFFE8D5FF),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+      backgroundColor: AppColors.primary,
+      body: SafeArea(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            _buildBgBlobs(),
+            Column(
+              children: [
+                const Spacer(flex: 2),
 
-              Positioned(
-                top: -80,
-                right: -60,
-                child: Opacity(
-                  opacity: _bgScale.value * 0.4,
-                  child: Container(
-                    width: 260,
-                    height: 260,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: primaryPurple.withOpacity(0.25),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: -100,
-                left: -80,
-                child: Opacity(
-                  opacity: _bgScale.value * 0.3,
-                  child: Container(
-                    width: 300,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: primaryPurple.withOpacity(0.2),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 180,
-                right: -40,
-                child: Opacity(
-                  opacity: _bgScale.value * 0.2,
-                  child: Container(
-                    width: 140,
-                    height: 140,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: deepPurple.withOpacity(0.15),
-                    ),
-                  ),
-                ),
-              ),
+                // Logo — AnimatedAppLogo handles float + orbit + entrance
+                const AnimatedAppLogo(),
 
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Logo container
-                    Opacity(
-                      opacity: _logoOpacity.value,
-                      child: Transform.scale(
-                        scale: _logoScale.value,
-                        child: Transform.rotate(
-                          angle: _logoRotate.value,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              // Outer glow ring
-                              AnimatedBuilder(
-                                animation: _shimmerController,
-                                builder: (_, __) => Container(
-                                  width: 150,
-                                  height: 150,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: primaryPurple
-                                        .withOpacity(0.15 * _shimmerAnim.value),
-                                  ),
-                                ),
-                              ),
-                              // Inner circle
-                              Container(
-                                width: 120,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      lightPurple,
-                                      primaryPurple,
-                                    ],
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: primaryPurple.withOpacity(0.45),
-                                      blurRadius: 32,
-                                      spreadRadius: 4,
-                                      offset: const Offset(0, 8),
-                                    ),
-                                  ],
-                                ),
-                                // ── PUT YOUR LOGO IMAGE HERE ───────────
-                                // Replace the Icon below with:
-                                //   Image.asset(
-                                //     'assets/images/logo.png',
-                                //     width: 60,
-                                //     height: 60,
-                                //   )
-                                // child: const Icon(
-                                //   Icons.bolt_rounded,
-                                //   size: 60,
-                                //   color: Colors.white,
-                                // ),
-                                child: Image(image: AssetImage("assets/Ellipse 249.png")),
-                              ),
-                            ],
-                          ),
-                        ),
+                const SizedBox(height: 12),
+
+                // Tagline slides up after logo appears
+                FadeTransition(
+                  opacity: _brandOpacity,
+                  child: SlideTransition(
+                    position: _brandSlide,
+                    child: Text(
+                      'FUEL YOUR POTENTIAL',
+                      style: TextStyle(
+                        fontSize: 11,
+                        letterSpacing: 2,
+                        color: AppColors.textLight,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-
-                    const SizedBox(height: 36),
-
-                    // App name
-                    SlideTransition(
-                      position: _textSlide,
-                      child: FadeTransition(
-                        opacity: _textOpacity,
-                        child: const Text(
-                          'Smile',        
-                          style: TextStyle(
-                            fontSize: 34,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF4A2580),
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 10),
-
-                    SlideTransition(
-                      position: _taglineSlide,
-                      child: FadeTransition(
-                        opacity: _taglineOpacity,
-                        child: const Text(
-                          'Unlock your potential every day',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFF9B72CF),
-                            letterSpacing: 0.3,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 70),
-
-                    // Loading dots
-                    FadeTransition(
-                      opacity: _dotsOpacity,
-                      child: const _PulsingDots(),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
 
-              Positioned(
-                bottom: 36,
-                left: 0,
-                right: 0,
-                child: FadeTransition(
-                  opacity: _dotsOpacity,
-                  child: const Text(
-                    'v1.0.0',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFFBFA0E0),
-                      letterSpacing: 1.2,
+                const Spacer(flex: 2),
+
+                // Quote card
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: FadeTransition(
+                    opacity: _quoteOpacity,
+                    child: SlideTransition(
+                      position: _quoteSlide,
+                      child: _buildQuoteCard(),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+
+                const SizedBox(height: 28),
+
+                // Progress bar
+                FadeTransition(
+                  opacity: _progressOpacity,
+                  child: _buildProgressBar(),
+                ),
+
+                const SizedBox(height: 36),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
-}
 
-class _PulsingDots extends StatefulWidget {
-  const _PulsingDots();
-
-  @override
-  State<_PulsingDots> createState() => _PulsingDotsState();
-}
-
-class _PulsingDotsState extends State<_PulsingDots>
-    with TickerProviderStateMixin {
-  final List<AnimationController> _controllers = [];
-  final List<Animation<double>> _anims = [];
-
-  @override
-  void initState() {
-    super.initState();
-    for (int i = 0; i < 3; i++) {
-      final ctrl = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 600),
-      );
-      final anim = Tween<double>(begin: 0.4, end: 1.0).animate(
-        CurvedAnimation(parent: ctrl, curve: Curves.easeInOut),
-      );
-      _controllers.add(ctrl);
-      _anims.add(anim);
-
-      Future.delayed(Duration(milliseconds: i * 160), () {
-        if (mounted) ctrl.repeat(reverse: true);
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    for (final c in _controllers) {
-      c.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(3, (i) {
-        return AnimatedBuilder(
-          animation: _anims[i],
-          builder: (_, __) => Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            width: 8,
-            height: 8,
+  Widget _buildBgBlobs() {
+    return Stack(
+      children: [
+        Positioned(
+          top: -60,
+          right: -60,
+          child: Container(
+            width: 200,
+            height: 200,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFFCEB6FF).withOpacity(_anims[i].value),
+              color: AppColors.secondary.withOpacity(0.06),
             ),
           ),
-        );
-      }),
+        ),
+        Positioned(
+          bottom: -40,
+          left: -50,
+          child: Container(
+            width: 160,
+            height: 160,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.secondary.withOpacity(0.07),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 180,
+          left: 20,
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.secondary.withOpacity(0.05),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuoteCard() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 28,
+            height: 3,
+            decoration: BoxDecoration(
+              color: AppColors.secondary,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            _selectedQuote['text']!,
+            style: const TextStyle(
+              fontSize: 13,
+              height: 1.7,
+              color: AppColors.textMid,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            _selectedQuote['author']!,
+            style: TextStyle(
+              fontSize: 12,
+              color: AppColors.secondary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProgressBar() {
+    return Column(
+      children: [
+        SizedBox(
+          width: 80,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: _loadProgress,
+              minHeight: 2.5,
+              backgroundColor: AppColors.border,
+              valueColor:
+                  AlwaysStoppedAnimation<Color>(AppColors.secondary),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          _loadProgress >= 1.0 ? 'ready' : 'loading',
+          style: const TextStyle(
+            fontSize: 10,
+            color: AppColors.textLight,
+            letterSpacing: 0.8,
+          ),
+        ),
+      ],
     );
   }
 }
-
-

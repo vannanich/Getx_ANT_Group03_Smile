@@ -15,6 +15,10 @@ class AppRoutes {
   static const surveyScreen = '/surveyscreen';
   static const chatAI = '/chatAI';
   static const sleepingMood = '/sleeping_mood';
+  // forget password
+  static const emailVer = '/email_verification';
+  static const sendCode = '/send_code';
+
 
   // doctor feature
   static const chatWithDoctor = '/chat_with_doctor';
@@ -24,6 +28,8 @@ class AppRoutes {
   static const dCompleteForm = '/d_complete_form';
   static const dHomescreen = '/doctor_homescreen';
   static const dTodayAppoitment = '/d_today_appoitment';
+  static const dAppointmentDetail = '/d_appointment_detail';
+
 
   //reading book screen
   static const readbook = '/readbook';
@@ -51,4 +57,7 @@ class AppRoutes {
 
   // b nita select role
   static const selectRoleScreen = '/select_role_screen';
+  static const otpScreen = '/otp_screen';
+  static const reelScreen = '/reelscreen';
+  static const searchReelsScreen = '/searchReelsScreen';
 }

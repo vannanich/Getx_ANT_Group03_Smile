@@ -4,6 +4,6 @@ class VideoScreenViewBinding extends Bindings {
 
    @override
    void dependencies() {
-       Get.lazyPut(() => VideoScreenViewController());
+       Get.lazyPut(() => VideoScreenViewController(),fenix: true);
    }
 }

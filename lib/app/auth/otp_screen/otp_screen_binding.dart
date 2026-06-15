@@ -1,8 +1,10 @@
 part of 'otp_screen_view.dart';
 
-class OtpScreenViewBinding extends Bindings {
+class OtpScreenBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => OtpScreenViewController());
+    Get.lazyPut<OtpScreenViewController>(
+      () => OtpScreenViewController(),
+    );
   }
 }

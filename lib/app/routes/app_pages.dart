@@ -1,5 +1,9 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
+import 'package:flutter_application_1/app/auth/otp_screen/otp_screen_view.dart';
+import 'package:flutter_application_1/app/auth/otp_screen_send_code/otp_screen_send_code_view.dart';
+import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/apointment_detail_screen/apointment_detail_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_binding.dart';
@@ -36,9 +40,13 @@ import 'package:flutter_application_1/app/modules/screen/readbookscreen/book_dow
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/detail_book_screen/detail_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/save_book_screen/save_book_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/real_screen/real_screen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/real_screen/real_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/real_screen/search_screen/search_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/scan_face_screen/scan_face_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/selected_role_screen/select_role_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_view.dart';
 import 'package:flutter_application_1/app/modules/screen/splash_screen.dart';
 import 'package:flutter_application_1/app/modules/screen/survey/survey_1/survey_1_view.dart';
@@ -220,9 +228,11 @@ class AppPages {
       binding: ScheduleBinding(),
     ),
     GetPage(
-      name: AppRoutes.sleepingMood,
-      page: () => SleepModeView(),
-      binding: SleepModeBinding(),
+      name: '/sleeping-mood',
+      page: () => SleepingmoodScreenView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => SleepingmoodScreenViewController());
+      }),
     ),
     GetPage(
       name: AppRoutes.selectRoleScreen,
@@ -262,7 +272,37 @@ class AppPages {
     GetPage(
       name: AppRoutes.signUp,
       page: () => SignUpScreenView(),
-      binding: SignUpScreenViewBinding (),
+      binding: SignUpScreenBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.emailVer,
+      page: () => OtpScreenView(),
+      binding: OtpScreenBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.sendCode,
+      page: () => OtpScreenSendCodeView(),
+      binding: OtpScreenSendCodeViewBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.dAppointmentDetail,
+      page: () => ApointmentDetailScreenView(),
+      binding: ApointmentDetailScreenViewBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.otpScreen,
+      page: () => OtpScreenView(),
+      binding: OtpScreenSendCodeViewBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.reelScreen,
+      page: () => RealScreenView(),
+      binding: ReelsBinding (),
+    ),
+    GetPage(
+      name: AppRoutes.searchReelsScreen,
+      page: () => SearchScreenView(),
+      binding: SearchScreenViewBinding (),
     ),
   ];
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -57,7 +58,7 @@ class OtpScreenSendCodeView extends GetView<OtpScreenSendCodeViewController> {
                 ),
                 SizedBox(height: 15),
                 Image.asset(
-                  "assets/img/img_otp_check.png",
+                  "assets/Confirmed-pana 1.png",
                   height: 250, 
                   width: double.infinity,
                   fit: BoxFit.contain,
@@ -128,12 +129,17 @@ class OtpScreenSendCodeView extends GetView<OtpScreenSendCodeViewController> {
                     ),
                     elevation: 0,
                   ),
-                  child: Text(
-                    "Verify", 
-                    style: GoogleFonts.balsamiqSans(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.login);
+                    },
+                    child: Text(
+                      "Verify", 
+                      style: GoogleFonts.balsamiqSans(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
