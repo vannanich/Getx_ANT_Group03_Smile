@@ -1,13 +1,14 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreenController extends GetxController {
-  // Text Controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // Observable states
   final isPasswordVisible = false.obs;
   final isLoading = false.obs;
   final emailError = ''.obs;
@@ -27,7 +28,6 @@ class LoginScreenController extends GetxController {
   bool _validateInputs() {
     bool isValid = true;
 
-    // Validate email
     final email = emailController.text.trim();
     if (email.isEmpty) {
       emailError.value = 'Email is required';
@@ -39,7 +39,6 @@ class LoginScreenController extends GetxController {
       emailError.value = '';
     }
 
-    // Validate password
     final password = passwordController.text;
     if (password.isEmpty) {
       passwordError.value = 'Password is required';
@@ -60,88 +59,48 @@ class LoginScreenController extends GetxController {
     try {
       isLoading.value = true;
 
-      // TODO: Replace with your actual sign-in logic / API call
-      await Future.delayed(const Duration(seconds: 2));
-
-      Get.offAllNamed(AppRoutes.homescreen);
-
-      Get.snackbar(
-        'Success',
-        'Signed in successfully!',
-        snackPosition: SnackPosition.BOTTOM,
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:8000/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': emailController.text.trim(),
+          'password': passwordController.text,
+        }),
       );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && data['token'] != null) {
+        GetStorage().write('token', data['token']);
+        Get.offAllNamed(AppRoutes.homescreen);
+        Get.snackbar('Success', 'Signed in successfully!',
+            snackPosition: SnackPosition.BOTTOM);
+      } else {
+        Get.snackbar('Error', data['error'] ?? 'Login failed',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: const Color(0xFFEF4444),
+            colorText: Colors.white);
+      }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: const Color(0xFFEF4444),
-        colorText: Colors.white,
-        borderRadius: 12,
-        margin: const EdgeInsets.all(16),
-      );
+      Get.snackbar('Error', 'Cannot connect to server',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: const Color(0xFFEF4444),
+          colorText: Colors.white);
     } finally {
       isLoading.value = false;
     }
   }
 
   Future<void> continueAsGuest() async {
-    // TODO: Navigate to home as guest
-    // Get.offAllNamed(Routes.HOME);
-    Get.snackbar(
-      'Guest Mode',
-      'Continuing as guest...',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: const Color(0xFF6A30DE),
-      colorText: Colors.white,
-      borderRadius: 12,
-      margin: const EdgeInsets.all(16),
-    );
+    Get.offAllNamed(AppRoutes.homescreen);
   }
 
-  Future<void> signInWithGoogle() async {
-    try {
-      isLoading.value = true;
-      // TODO: Implement Google Sign-In
-      await Future.delayed(const Duration(seconds: 1));
-    } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Google sign-in failed: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: const Color(0xFFEF4444),
-        colorText: Colors.white,
-      );
-    } finally {
-      isLoading.value = false;
-    }
-  }
+  Future<void> signInWithGoogle() async {}
+  Future<void> signInWithFacebook() async {}
 
-  Future<void> signInWithFacebook() async {
-    try {
-      isLoading.value = true;
-      // TODO: Implement Facebook Sign-In
-      await Future.delayed(const Duration(seconds: 1));
-    } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Facebook sign-in failed: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: const Color(0xFFEF4444),
-        colorText: Colors.white,
-      );
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
-  void onForgotPassword() {
-    // TODO: Navigate to forgot password screen
-    // Get.toNamed(Routes.FORGOT_PASSWORD);
-  }
+  void onForgotPassword() {}
 
   void onSignUp() {
-    // TODO: Navigate to sign up screen
-    // Get.toNamed(Routes.SIGN_UP);
+    Get.toNamed(AppRoutes.signUp);
   }
 }

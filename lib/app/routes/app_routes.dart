@@ -18,6 +18,8 @@ class AppRoutes {
   static const chatAI = '/chatAI';
   static const sleepingMood = '/sleeping_mood';
 
+  static const testLogout = '/test-logout';
+
   // doctor feature
   static const chatWithDoctor = '/chat_with_doctor';
   static const bookAppointment = '/book_appointment';
