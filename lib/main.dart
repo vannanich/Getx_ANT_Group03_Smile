@@ -6,7 +6,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");       
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 
@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.updatetask,
+      initialRoute: AppRoutes.goalScreen,
       getPages: AppPages.pages,
     );
   }
