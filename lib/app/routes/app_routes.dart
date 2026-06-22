@@ -23,12 +23,16 @@ class AppRoutes {
   // doctor feature
   static const chatWithDoctor = '/chat_with_doctor';
   static const bookAppointment = '/book_appointment';
+  static const bookAppointmentdetail = '/book_appointmentdetail';
   static const schedule = '/schedule';
   static const scanId = '/scan_doctor_id';
   static const dCompleteForm = '/d_complete_form';
   static const dHomescreen = '/doctor_homescreen';
   static const dTodayAppoitment = '/d_today_appoitment';
   static const dAppointmentDetail = '/d_appointment_detail';
+  static const dChatWithPatient = '/d_chatWithPatient';
+  static const dCheckMessage = '/d_checkMessage';
+  static const patientList = '/patientList';
 
 
   //reading book screen

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_controller.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_controller.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/profile_screen/profile_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/quote_screen/quote_screen/quote_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/readbookscreen/read_book_screen/read_book_screen_view.dart';
-import 'package:flutter_application_1/app/modules/screen/real_screen/search_screen/search_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/real_screen/real_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/sleeping_mood/sleeping_mood_view.dart';
 import 'package:flutter_application_1/app/modules/screen/video_screen/video_screen_view.dart';
@@ -26,43 +26,46 @@ class HomeScreenView extends GetView<HomeScreenController> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-  children: [
-    PageView(
-      controller: controller.pageController,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [
-        // index 0 - Home (your existing content)
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
+        children: [
+          PageView(
+            controller: controller.pageController,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
-              _buildHeader(),
-              SizedBox(height: 25),
-              _buildslidstack(),
-              SizedBox(height: 30),
-              _buildGridMenu(),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    _buildHeader(),
+                    SizedBox(height: 25),
+                    _buildslidstack(),
+                    SizedBox(height: 30),
+                    _buildGridMenu(),
+                  ],
+                ),
+              ),
+              Builder(
+                builder: (context) {
+                  Get.lazyPut(() => ChatWithDoctorController());
+                  return ChatWithDoctorView();
+                },
+              ),
+              Builder(
+                builder: (context) {
+                  Get.lazyPut(() => RealScreenViewController());
+                  return RealScreenView();
+                },
+              ),
+              ProfileScreenView(),
             ],
           ),
-        ),
-        // index 1 - Chat
-      Builder(
-        builder: (context) {
-          Get.lazyPut(() => ChatWithDoctorController());
-          return ChatWithDoctorView();
-        },
-      ),
-        SearchScreenView(),
-        ProfileScreenView(),
-      ],
-    ),
-    Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: _buildBottomNavigation(),
-    ),
-  ],
-),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _buildBottomNavigation(),
+          ),
+        ],
+       ),
       ),
     );
   }

@@ -9,26 +9,13 @@ part 'real_screen_controller.dart';
 class RealScreenView extends GetView<RealScreenViewController> {
   const RealScreenView({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-   return Scaffold(
-  backgroundColor: AppColors.primary,
-  body: 
-    Stack(
-        children: [
-          Positioned.fill(
-            child: _buildHeader(),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 25,
-            child: _buildBottomNavigation(),
-          ),
-        ],
-      ),
-    );
-  }
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: AppColors.primary,
+    body: _buildHeader(), 
+  );
+}
 
   Widget _buildHeader() {
     return Container(
@@ -100,106 +87,5 @@ class RealScreenView extends GetView<RealScreenViewController> {
     );
   }
 
-  Widget _buildBottomNavigation() {
-    final List<Map<String, dynamic>> navItems = [
-      {"image": "assets/buttom_nav_icons/home.png", "label": "Home"},
-      {"image": "assets/buttom_nav_icons/chart-success.png", "label": "Chat"},
-      {"image": "assets/buttom_nav_icons/video-play.png", "label": "Video"},
-      {"image": "assets/buttom_nav_icons/profile.png", "label": "Profile"},
-    ];
-
-    return Container(
-      height: 70,
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.symmetric(horizontal: 12 , vertical: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFE5E5),
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Obx(
-        () => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(navItems.length, (index) {
-            final isActive = controller.selectedIndex.value == index;
-
-            return GestureDetector(
-              onTap: () => controller.changeTab(index),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 350),
-                curve: Curves.easeInOut,
-                padding: EdgeInsets.symmetric(
-                  horizontal: isActive ? 20 : 12,
-                  vertical: isActive ? 14 : 10,
-                ),
-                decoration: BoxDecoration(
-                  color: isActive
-                      ? Colors.purple.withOpacity(0.15)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AnimatedScale(
-                      duration: const Duration(milliseconds: 300),
-                      scale: isActive ? 1.1 : 1.0,
-                      child: Image.asset(
-                        navItems[index]["image"],
-                        width: 24,
-                        height: 24,
-                        color: isActive
-                            ? Colors.purple
-                            : Colors.grey.shade600,
-                      ),
-                    ),
-
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 250),
-                      transitionBuilder: (child, animation) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: SizeTransition(
-                            sizeFactor: animation,
-                            axis: Axis.horizontal,
-                            child: child,
-                          ),
-                        );
-                      },
-                      child: isActive
-                          ? Padding(
-                              key: ValueKey(index),
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  navItems[index]["label"],
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.balsamiqSans(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.purple,
-                                    height: 1,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
-        ),
-      ),
-    );
-  }
+ 
 }

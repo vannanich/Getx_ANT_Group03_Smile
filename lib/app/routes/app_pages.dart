@@ -7,20 +7,24 @@ import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak
 import 'package:flutter_application_1/app/modules/screen/buildstreak/buildstreak_view.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/book_appointment/book_appointment_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/chat_with_doctor/chat_with_doctor_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_complete_form/d_complete_form_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/apointment_detail_screen/apointment_detail_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/book_appointment_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/book_appointment_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/chat_with_patient_screen/chat_with_patient_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_complete_form/d_complete_form_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_complete_form/d_complete_form_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_homescreen/d_homescreen_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_homescreen/d_homescreen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_homescreen/d_today_appoitment/d_today_appoitment_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/docter_check_message/docter_check_message_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/patient%20_list_screen/patient_list_screen_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/schedule/schedule_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/schedule/schedule_view.dart';
 import 'package:flutter_application_1/app/modules/screen/edit_profile_screen/edit_profile_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/goal_screen/goal_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_binding.dart';
@@ -287,6 +291,26 @@ class AppPages {
       name: AppRoutes.signUp,
       page: () => SignUpScreenView(),
       binding: SignUpScreenBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.bookAppointmentdetail,
+      page: () => ApointmentDetailScreenView(),
+      binding: ApointmentDetailScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.dChatWithPatient,
+      page: () => ChatWithPatientScreenView(patientName: '',),
+      binding: ChatWithPatientScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.dCheckMessage,
+      page: () => DocterCheckMessageView(),
+      binding: DocterCheckMessageViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.patientList,
+      page: () => PatientListScreenView(),
+      binding: PatientListScreenViewBinding(),
     ),
   ];
 }
