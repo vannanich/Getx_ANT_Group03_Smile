@@ -1,6 +1,7 @@
 // ignore_for_file: unused_element
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
 import 'package:get/get.dart';
 
 part 'add_task_screen_binding.dart';
@@ -12,7 +13,7 @@ class AddTaskScreenView extends GetView<AddTaskScreenViewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0EDF9),
+      backgroundColor: Color(0xFFF0EDF9),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -20,16 +21,16 @@ class AddTaskScreenView extends GetView<AddTaskScreenViewController> {
         leading: GestureDetector(
           onTap: () => Get.back(),
           child: Container(
-            margin: const EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF0EDF9),
+              color: Color(0xFFF0EDF9),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.arrow_back_ios_new_rounded,
+            child: Icon(Icons.arrow_back_ios_new_rounded,
                 color: Color(0xFF6C3CE1), size: 18),
           ),
         ),
-        title: const Text(
+        title: Text(
           'Add new task',
           style: TextStyle(
             fontSize: 16,
@@ -38,12 +39,12 @@ class AddTaskScreenView extends GetView<AddTaskScreenViewController> {
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(0.5),
-          child: Container(color: const Color(0xFFEEEBF8), height: 0.5),
+          preferredSize: Size.fromHeight(0.7),
+          child: Container(color: Colors.black, height: 0.7),
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -53,36 +54,34 @@ class AddTaskScreenView extends GetView<AddTaskScreenViewController> {
               hint: 'Task title',
               autofocus: true,
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             _FieldLabel(label: 'Description'),
             _TaskTextField(
               controller: controller.descController,
               hint: 'What do you need to do?',
               maxLines: 4,
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             _FieldLabel(label: 'Priority'),
             _PrioritySelector(controller: controller),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             _FieldLabel(label: 'Due date & time'),
             _DateTimeRow(controller: controller),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             _FieldLabel(label: 'Tags'),
             _TagsRow(controller: controller),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             _PrimaryButton(
               label: 'Add task',
               onTap: controller.addTask,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 }
-
-// ── Shared widgets ────────────────────────────────────────────────────────────
 
 class _FieldLabel extends StatelessWidget {
   final String label;
@@ -94,11 +93,11 @@ class _FieldLabel extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 6),
       child: Text(
         label.toUpperCase(),
-        style: const TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
-          color: Color(0xFF7B6FA0),
-          letterSpacing: 0.5,
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: Colors.grey,
+          letterSpacing: 0.4,
         ),
       ),
     );
@@ -130,23 +129,22 @@ class _TaskTextField extends StatelessWidget {
         controller: controller,
         autofocus: autofocus,
         maxLines: maxLines,
-        style: const TextStyle(fontSize: 14, color: Color(0xFF2D2D2D)),
+        style: TextStyle(fontSize: 14, color: Color(0xFF2D2D2D)),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: const TextStyle(fontSize: 14, color: Color(0xFFBBBBBB)),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
+          contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFD8D0F5), width: 1.5),
+            borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFD8D0F5), width: 1.5),
+            borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFF6C3CE1), width: 1.5),
+            borderSide: BorderSide(color: AppColors.secondary, width: 1.5),
           ),
         ),
       ),
@@ -193,8 +191,8 @@ class _PriorityChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = _priorityColors(priority);
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      duration: Duration(milliseconds: 180),
+      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
         color: selected ? colors.activeColor : colors.bgColor,
         borderRadius: BorderRadius.circular(20),
@@ -228,32 +226,30 @@ class _DateTimeRow extends GetView<AddTaskScreenViewController> {
     return Obx(() => GestureDetector(
           onTap: () => controller.pickDateTime(context),
           child: Container(
-            margin: const EdgeInsets.only(bottom: 14),
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            margin: EdgeInsets.only(bottom: 14),
+            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFFD8D0F5), width: 1.5),
+              border: Border.all(color: Color(0xFFD8D0F5), width: 1.5),
             ),
             child: Row(
               children: [
-                const Icon(Icons.calendar_today_rounded,
+                Icon(Icons.calendar_today_rounded,
                     color: Color(0xFF6C3CE1), size: 18),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     controller.formattedDate,
-                    style:
-                        const TextStyle(fontSize: 14, color: Color(0xFF2D2D2D)),
+                    style: TextStyle(fontSize: 14, color: Color(0xFF2D2D2D)),
                   ),
                 ),
                 Text(
                   controller.formattedTime,
-                  style:
-                      const TextStyle(fontSize: 13, color: Color(0xFF7B6FA0)),
+                  style: TextStyle(fontSize: 13, color: Color(0xFF7B6FA0)),
                 ),
-                const SizedBox(width: 6),
-                const Icon(Icons.keyboard_arrow_down_rounded,
+                SizedBox(width: 6),
+                Icon(Icons.keyboard_arrow_down_rounded,
                     color: Color(0xFF9E9E9E), size: 20),
               ],
             ),
@@ -284,17 +280,16 @@ class _TagsRow extends GetView<AddTaskScreenViewController> {
               GestureDetector(
                 onTap: () => controller.showAddTagDialog(),
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF0EDF9),
+                    color: Color(0xFFF0EDF9),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                        color: const Color(0xFFD8D0F5),
+                        color: Color(0xFFD8D0F5),
                         width: 1.5,
                         style: BorderStyle.solid),
                   ),
-                  child: const Text('+ Add',
+                  child: Text('+ Add',
                       style: TextStyle(fontSize: 12, color: Color(0xFF9E9E9E))),
                 ),
               ),
@@ -312,24 +307,24 @@ class _TagChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color(0xFFEEEDFE),
+        color: Color(0xFFEEEDFE),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(label,
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 12,
                   color: Color(0xFF534AB7),
                   fontWeight: FontWeight.w500)),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           GestureDetector(
             onTap: onRemove,
-            child: const Icon(Icons.close_rounded,
-                size: 14, color: Color(0xFF534AB7)),
+            child:
+                Icon(Icons.close_rounded, size: 14, color: Color(0xFF534AB7)),
           ),
         ],
       ),
@@ -349,14 +344,14 @@ class _PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF6C3CE1),
+          backgroundColor: AppColors.secondary,
           padding: const EdgeInsets.symmetric(vertical: 14),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           elevation: 0,
         ),
         child: Text(label,
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
                 color: Colors.white)),
@@ -392,8 +387,6 @@ class _OutlineButton extends StatelessWidget {
   }
 }
 
-// ── Priority helpers ──────────────────────────────────────────────────────────
-
 enum Priority { high, medium, low }
 
 extension PriorityExt on Priority {
@@ -424,21 +417,21 @@ class _PriorityColors {
 _PriorityColors _priorityColors(Priority p) {
   switch (p) {
     case Priority.high:
-      return const _PriorityColors(
+      return _PriorityColors(
         bgColor: Color(0xFFFDECEC),
         borderColor: Color(0xFFF5B5B5),
         textColor: Color(0xFFC0392B),
         activeColor: Color(0xFFE74C3C),
       );
     case Priority.medium:
-      return const _PriorityColors(
+      return _PriorityColors(
         bgColor: Color(0xFFFFF4E0),
         borderColor: Color(0xFFF5D49A),
         textColor: Color(0xFFB36A00),
         activeColor: Color(0xFFE67E22),
       );
     case Priority.low:
-      return const _PriorityColors(
+      return _PriorityColors(
         bgColor: Color(0xFFEAF8EE),
         borderColor: Color(0xFFA8E0B8),
         textColor: Color(0xFF1A7F3C),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/models/task_model.dart';
 import 'package:get/get.dart';
 
 part 'goal_screen_binding.dart';
@@ -131,8 +132,7 @@ class _AddTaskRow extends GetView<GoalScreenController> {
         ),
         SizedBox(width: 10),
         GestureDetector(
-          // onTap: controller.goToAddTask,
-          onTap: () => Get.toNamed('/addtask'),
+          onTap: controller.goToAddTask,
           child: Container(
             height: 50,
             width: 50,
@@ -242,9 +242,7 @@ class _TaskItem extends GetView<GoalScreenController> {
             // Card
             Expanded(
               child: GestureDetector(
-                onTap: () {
-                  if (!isCompleted) controller.showCompleteDialog(index);
-                },
+                onTap: () => controller.showTaskOptions(index),
                 child: Container(
                   margin: EdgeInsets.only(bottom: 12),
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -307,9 +305,7 @@ class _TaskItem extends GetView<GoalScreenController> {
                               task.subtitle,
                               style: TextStyle(
                                 fontSize: 14,
-                                color: isCompleted
-                                    ? Color(0xFF9E9E9E)
-                                    : Color(0xFF9E9E9E),
+                                color: Color(0xFF9E9E9E),
                                 decoration: isCompleted
                                     ? TextDecoration.lineThrough
                                     : TextDecoration.none,
@@ -340,5 +336,67 @@ class _TaskItem extends GetView<GoalScreenController> {
         ),
       );
     });
+  }
+}
+
+class _OptionTile extends StatelessWidget {
+  final IconData icon;
+  final Color iconBg, tileBg, borderColor, titleColor;
+  final String title, subtitle;
+  final VoidCallback onTap;
+
+  const _OptionTile({
+    required this.icon,
+    required this.iconBg,
+    required this.tileBg,
+    required this.borderColor,
+    required this.title,
+    required this.subtitle,
+    required this.titleColor,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+        decoration: BoxDecoration(
+          color: tileBg,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: borderColor, width: 1.5),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 38,
+              height: 38,
+              decoration: BoxDecoration(
+                color: iconBg,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: Colors.white, size: 20),
+            ),
+            SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: titleColor)),
+                  Text(subtitle,
+                      style: TextStyle(fontSize: 12, color: Color(0xFF9E9E9E))),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: borderColor, size: 20),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 part of 'update_task_screen_view.dart';
 
 class UpdateTaskScreenViewController extends GetxController {
@@ -15,14 +17,11 @@ class UpdateTaskScreenViewController extends GetxController {
     titleController = TextEditingController();
     descController = TextEditingController();
 
-    final task = Get.arguments;
-    if (task != null) {
-      titleController.text = task['title'] ?? '';
-      descController.text = task['description'] ?? '';
-      selectedStatus.value = task['status'] ?? TaskStatus.todo;
-      selectedPriority.value = task['priority'] ?? Priority.medium;
-      pickedDateTime.value = task['dueDate'];
-      tags.assignAll(List<String>.from(task['tags'] ?? []));
+    final args = Get.arguments;
+    if (args != null) {
+      final task = args['task'] as TaskModel;
+      titleController.text = task.title;
+      descController.text = task.subtitle;
     }
   }
 
