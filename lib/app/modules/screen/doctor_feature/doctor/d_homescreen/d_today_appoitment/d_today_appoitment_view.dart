@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_homescreen/d_today_appoitment/d_today_appoitment_controller.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
 import 'package:get/get.dart';
 
 

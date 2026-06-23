@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
 import 'package:get/get.dart';
 
 part 'mood_screen_binding.dart';

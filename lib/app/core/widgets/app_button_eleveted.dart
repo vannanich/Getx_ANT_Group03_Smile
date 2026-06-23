@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
 
-class AppButtonOutline extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
   final IconData? icon;
 
-  const AppButtonOutline({
+  const AppButton({
     super.key,
     required this.title,
     required this.onPressed,
@@ -18,12 +18,12 @@ class AppButtonOutline extends StatelessWidget {
     return SizedBox(
       height: 50,
       width: double.infinity,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.secondary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          side: BorderSide(width: 2, color: AppColors.secondary),
         ),
         onPressed: onPressed,
         child: Row(
@@ -32,7 +32,7 @@ class AppButtonOutline extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                color: AppColors.secondary,
+                color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,7 +1,7 @@
 // ignore_for_file: unused_element
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
 import 'package:get/get.dart';
 
 part 'add_task_screen_binding.dart';

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_selection/widget/categoriesWidget.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
 import 'package:get/get.dart';
 
 part 'video_screen_binding.dart';

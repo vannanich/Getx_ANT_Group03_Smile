@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/core/themes/theme_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_view.dart';
+import 'package:flutter_application_1/app/modules/screen/goal_screen/goal_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_controller.dart';
 import 'package:flutter_application_1/app/modules/screen/mood_screen/mood_screen/mood_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/profile_screen/profile_screen_view.dart';
@@ -16,61 +18,71 @@ import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 class HomeScreenView extends GetView<HomeScreenController> {
    HomeScreenView({super.key});
 
+  final ThemeController _theme = Get.find<ThemeController>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-        children: [
-          PageView(
-            controller: controller.pageController,
-            physics: const NeverScrollableScrollPhysics(),
+    return Obx(() {
+      final isDark = _theme.isDarkMode.value;
+
+      return Scaffold(
+        backgroundColor: isDark ? const Color(0xFF0F0E1A) : Colors.white,
+        body: SafeArea(
+          child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    _buildHeader(),
-                    SizedBox(height: 25),
-                    _buildslidstack(),
-                    SizedBox(height: 30),
-                    _buildGridMenu(),
-                  ],
-                ),
+              PageView(
+                controller: controller.pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        _buildHeader(isDark),
+                        SizedBox(height: 25),
+                        _buildslidstack(isDark),
+                        SizedBox(height: 30),
+                        _buildGridMenu(isDark),
+                      ],
+                    ),
+                  ),
+                  Builder(
+                    builder: (context) {
+                      Get.lazyPut(() => GoalScreenController());
+                      return GoalScreenView();
+                    },
+                  ),
+                  Builder(
+                    builder: (context) {
+                      Get.lazyPut(() => RealScreenViewController());
+                      return RealScreenView();
+                    },
+                  ),
+                  Builder(
+                    builder: (context) {
+                      Get.lazyPut(() => ProfileScreenViewController());
+                      return ProfileScreenView();
+                    },
+                  ),
+                ],
               ),
-              Builder(
-                builder: (context) {
-                  Get.lazyPut(() => ChatWithDoctorController());
-                  return ChatWithDoctorView();
-                },
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: _buildBottomNavigation(isDark),
               ),
-              Builder(
-                builder: (context) {
-                  Get.lazyPut(() => RealScreenViewController());
-                  return RealScreenView();
-                },
-              ),
-              ProfileScreenView(),
             ],
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: _buildBottomNavigation(),
-          ),
-        ],
-       ),
-      ),
-    );
+        ),
+      );
+    });
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(bool isDark) {
     return Column(
       children: [
         Row(
@@ -92,7 +104,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                     "Good morning keep Smiling",
                     style: GoogleFonts.balsamiqSans(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: isDark ? Colors.white60 : Colors.grey,
                     ),
                   ),
                   SizedBox(height: 3),
@@ -100,7 +112,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                     "Scott",
                     style: GoogleFonts.balsamiqSans(
                       fontSize: 21,
-                      color: Colors.black,
+                      color: isDark ? Colors.white : Colors.black,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -125,7 +137,6 @@ class HomeScreenView extends GetView<HomeScreenController> {
           ],
         ),
       ],
-
     );
   }
 
@@ -133,18 +144,18 @@ class HomeScreenView extends GetView<HomeScreenController> {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1), // Light purple background
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Icon(icon, color: color, size: 24),
     );
   }
 
-  Widget _buildslidstack() {
+  Widget _buildslidstack(bool isDark) {
     return Column(
       children: [
         Padding(
-          padding:  EdgeInsets.all(5),
+          padding: EdgeInsets.all(5),
           child: Container(
             width: 800,
             height: 180,
@@ -161,7 +172,6 @@ class HomeScreenView extends GetView<HomeScreenController> {
             ),
             child: Stack(
               children: [
-                // Top Left Text
                 Positioned(
                   top: 35,
                   left: 20,
@@ -192,33 +202,39 @@ class HomeScreenView extends GetView<HomeScreenController> {
         ),
         SizedBox(height: 15),
         Padding(
-          padding:  EdgeInsets.all(5),
+          padding: EdgeInsets.all(5),
           child: Container(
             width: 800,
             height: 100,
-            padding:  EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(
-              color:  Color.fromARGB(96, 208, 240, 210),
+              color: isDark
+                  ? const Color(0xFF1A2A1F)
+                  : Color.fromARGB(96, 208, 240, 210),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.green.shade200),
+              border: Border.all(
+                color: isDark
+                    ? Colors.green.shade800.withOpacity(0.5)
+                    : Colors.green.shade200,
+              ),
             ),
             child: Row(
               children: [
-                // Left Icon Box
                 Container(
                   width: 55,
                   height: 55,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(122, 148, 243, 161),
+                    color: isDark
+                        ? Colors.green.withOpacity(0.15)
+                        : const Color.fromARGB(122, 148, 243, 161),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Image.asset(
                     "assets/doctor.png",
-                    color: Colors.brown.shade400,
+                    color: isDark ? Colors.green.shade400 : Colors.brown.shade400,
                   ),
                 ),
                 SizedBox(width: 15),
-                // Text
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -231,7 +247,9 @@ class HomeScreenView extends GetView<HomeScreenController> {
                           style: GoogleFonts.balsamiqSans(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.brown.shade700,
+                            color: isDark
+                                ? Colors.green.shade300
+                                : Colors.brown.shade700,
                           ),
                         ),
                       ),
@@ -240,7 +258,9 @@ class HomeScreenView extends GetView<HomeScreenController> {
                         "Safe, trustworthy & professional",
                         style: GoogleFonts.balsamiqSans(
                           fontSize: 15,
-                          color: Colors.brown.shade300,
+                          color: isDark
+                              ? Colors.green.shade700
+                              : Colors.brown.shade300,
                         ),
                       ),
                     ],
@@ -249,7 +269,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                 Icon(
                   Icons.arrow_forward_ios,
                   size: 20,
-                  color: Colors.brown.shade400,
+                  color: isDark ? Colors.green.shade400 : Colors.brown.shade400,
                 ),
               ],
             ),
@@ -259,7 +279,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
     );
   }
 
-  Widget _buildGridMenu() {
+  Widget _buildGridMenu(bool isDark) {
     final List<Map<String, dynamic>> items = [
       {
         "image": "assets/emoji_square.png",
@@ -341,13 +361,19 @@ class HomeScreenView extends GetView<HomeScreenController> {
       ),
       itemBuilder: (context, index) {
         final item = items[index];
+        final color = item["color"] as Color;
 
         return GestureDetector(
           onTap: () => item["route"]?.call(),
           child: Container(
             decoration: BoxDecoration(
-              color: (item["color"] as Color).withOpacity(0.12),
+              color: isDark
+                  ? color.withOpacity(0.15)
+                  : color.withOpacity(0.12),
               borderRadius: BorderRadius.circular(22),
+              border: isDark
+                  ? Border.all(color: color.withOpacity(0.2), width: 1)
+                  : null,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -357,6 +383,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                   width: 45,
                   height: 45,
                   fit: BoxFit.contain,
+                  color: isDark ? color.withOpacity(0.85) : null,
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -364,7 +391,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.balsamiqSans(
                     fontSize: 13,
-                    color: item["color"] as Color,
+                    color: isDark ? color.withOpacity(0.85) : color,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -376,20 +403,20 @@ class HomeScreenView extends GetView<HomeScreenController> {
     );
   }
 
-  Widget _buildBottomNavigation() {
+  Widget _buildBottomNavigation(bool isDark) {
     final List<Map<String, dynamic>> navItems = [
       {"image": "assets/home.png", "label": "Home"},
-      {"image": "assets/chart_success.png", "label": "Chat"},
+      {"image": "assets/chart_success.png", "label": "Goals"},
       {"image": "assets/video-play.png", "label": "Reels"},
       {"image": "assets/profile.png", "label": "Profile"},
     ];
 
     return Container(
       height: 70,
-      margin:  EdgeInsets.all(10),
-      padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color:  Color(0xFFFFE5E5),
+        color: isDark ? const Color(0xFF1C1A2E) : const Color(0xFFFFE5E5),
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
@@ -431,7 +458,11 @@ class HomeScreenView extends GetView<HomeScreenController> {
                         navItems[index]["image"],
                         width: 24,
                         height: 24,
-                        color: isActive ? Colors.purple : Colors.grey.shade600,
+                        color: isActive
+                            ? Colors.purple
+                            : isDark
+                                ? Colors.white54
+                                : Colors.grey.shade600,
                       ),
                     ),
                     AnimatedSwitcher(
