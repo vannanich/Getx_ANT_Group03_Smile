@@ -225,7 +225,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                             ),
                             child: Center(
                               child: Image.asset(
-                                'assets/clam.png',
+                                'assets/img/clam.png',
                                 width: 35,
                                 height: 35,
                                 color: Color(0xFFFCD53F),
