@@ -17,6 +17,7 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homesc
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_today_appoitment/d_today_appoitment_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_profilescreen/d_profilescreen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/schedule/schedule_binding.dart';
@@ -287,6 +288,13 @@ class AppPages {
       name: AppRoutes.signUp,
       page: () => SignUpScreenView(),
       binding: SignUpScreenBinding(),
+    ),
+
+    //doctor prfile screen
+    GetPage(
+      name: AppRoutes.dprofile,
+      page: () => DProfilescreenView(),
+      binding: DCompleteFormBinding(),
     ),
   ];
 }
