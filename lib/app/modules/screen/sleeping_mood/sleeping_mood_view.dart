@@ -21,7 +21,7 @@ class SleepingmoodScreenView extends GetView<SleepingmoodScreenViewController> {
             width: double.infinity,
             height: double.infinity,
             child: Image.asset(
-              "assets/img/sleepmode.png",
+              "assets/bg_sleepMode.png",
               fit: BoxFit.cover,
             ),
           ),
@@ -175,8 +175,9 @@ class SleepingmoodScreenView extends GetView<SleepingmoodScreenViewController> {
 
   Widget _buildSoundsSection() {
     final sounds = [
+      
       {"title": "Typhoon",      "image": "assets/img/typhoon.png"},
-      {"title": "Sleet",        "image": "assets/img/sleet.png"},
+      {"title": "Sleet",        "image": "assets/img/Sleet copy.png"},
       {"title": "Heavenly Day", "image": "assets/img/Sunny.png"},
       {"title": "Snowy Winter", "image": "assets/img/snow.png"},
       {"title": "Cloudiness",   "image": "assets/img/cloudness.png"},

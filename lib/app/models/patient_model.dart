@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_homescreen/d_homescreen_controller.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_homescreen/d_homescreen_controller.dart';
 
 final List<PatientModel> patients = [
   PatientModel(
