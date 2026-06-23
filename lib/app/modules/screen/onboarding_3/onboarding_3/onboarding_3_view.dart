@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
-import 'package:flutter_application_1/app/shared/widgets/three_dot.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/widgets/three_dot.dart';
 import 'package:get/get.dart';
 
 part 'onboarding_3_binding.dart';

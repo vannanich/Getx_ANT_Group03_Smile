@@ -193,8 +193,8 @@ class _Header extends GetView<SelectRoleScreenController> {
             right: 0,
             child: Obx(() {
               final imagePath = controller.selectedRole.value == 'user'
-                  ? 'assets/as_user.png'
-                  : 'assets/as_doctor.png';
+                  ? 'assets/patient.png'
+                  : 'assets/doctor.png';
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
                 transitionBuilder: (child, anim) => FadeTransition(

@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/modules/screen/chat_ai_screen/chat_ai_screen_controller.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-const _purple      = Color(0xFF5B13EC);
-const _purpleLight = Color(0xFFF3EEFF);
-const _purpleMid   = Color(0xFF9C6BFF);
-const _bg          = Color(0xFFF7F4FF);
-const _dark        = Color(0xFF1A1A2E);
-const _grey        = Color(0xFF9B8AB8);
-const _border      = Color(0xFFE8E0F7);
 
 class AiChatView extends GetView<AiChatController> {
   const AiChatView({super.key});
@@ -17,11 +10,11 @@ class AiChatView extends GetView<AiChatController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _bg,
+      backgroundColor: AppColors.primary,
       resizeToAvoidBottomInset: true,
 
       appBar: AppBar(
-        backgroundColor: _bg,
+        backgroundColor: AppColors.primary,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         leadingWidth: 56,
@@ -33,12 +26,12 @@ class AiChatView extends GetView<AiChatController> {
               width: 38,
               height: 38,
               decoration: BoxDecoration(
-                color: Colors.white,
+                // color: AppColors.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: _border, width: 1.5),
+                // border: Border.all(color: AppColors.border, width: 1.5),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
@@ -47,7 +40,7 @@ class AiChatView extends GetView<AiChatController> {
               child: const Icon(
                 Icons.arrow_back_ios_new_rounded,
                 size: 15,
-                color: _purple,
+                color: AppColors.icons,
               ),
             ),
           ),
@@ -55,18 +48,17 @@ class AiChatView extends GetView<AiChatController> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // AI avatar
             Container(
               width: 36,
               height: 36,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: const LinearGradient(
-                  colors: [_purpleMid, _purple],
+                  colors: [Color(0xFF9C6BFF), AppColors.secondary],
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: _purple.withOpacity(0.3),
+                    color: AppColors.secondary.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -87,7 +79,7 @@ class AiChatView extends GetView<AiChatController> {
                   style: GoogleFonts.balsamiqSans(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: _dark,
+                    color: AppColors.textDark,
                   ),
                 ),
                 Row(
@@ -116,7 +108,6 @@ class AiChatView extends GetView<AiChatController> {
         ),
         centerTitle: false,
         actions: [
-          // Clear chat button
           GestureDetector(
             onTap: () => _showClearDialog(context),
             child: Container(
@@ -124,25 +115,24 @@ class AiChatView extends GetView<AiChatController> {
               width: 38,
               height: 38,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: _border, width: 1.5),
+                border: Border.all(color: AppColors.border, width: 1.5),
               ),
               child: const Icon(
                 Icons.refresh_rounded,
                 size: 18,
-                color: _grey,
+                color: AppColors.textLight,
               ),
             ),
           ),
-          // Profile image
           Obx(() => Container(
                 margin: const EdgeInsets.only(right: 14),
                 width: 38,
                 height: 38,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: _border, width: 2),
+                  border: Border.all(color: AppColors.border, width: 2),
                   image: DecorationImage(
                     image: controller.profileImage.value,
                     fit: BoxFit.cover,
@@ -152,13 +142,10 @@ class AiChatView extends GetView<AiChatController> {
         ],
       ),
 
-      // ── Body ───────────────────────────────────────────────────────────────
       body: Column(
         children: [
-          // Thin divider
-          Container(height: 1, color: _border),
+          Container(height: 1, color: AppColors.border),
 
-          // Messages
           Expanded(
             child: Obx(() => controller.messages.isEmpty
                 ? _EmptyState()
@@ -171,15 +158,13 @@ class AiChatView extends GetView<AiChatController> {
                         (controller.isLoading.value ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index < controller.messages.length) {
-                        return _MessageBubble(
-                            msg: controller.messages[index]);
+                        return _MessageBubble(msg: controller.messages[index]);
                       }
                       return const _TypingIndicator();
                     },
                   )),
           ),
 
-          // Input bar
           _InputBar(),
         ],
       ),
@@ -190,26 +175,29 @@ class AiChatView extends GetView<AiChatController> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        backgroundColor: AppColors.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           'Clear chat?',
           style: GoogleFonts.balsamiqSans(
             fontWeight: FontWeight.bold,
-            color: _dark,
+            color: AppColors.textDark,
           ),
         ),
         content: Text(
           'This will delete all messages and start a new conversation.',
-          style: GoogleFonts.balsamiqSans(color: _grey, fontSize: 14),
+          style: GoogleFonts.balsamiqSans(
+            color: AppColors.textMid,
+            fontSize: 14,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Get.back(),
-            child: Text('Cancel',
-                style: GoogleFonts.balsamiqSans(color: _grey)),
+            child: Text(
+              'Cancel',
+              style: GoogleFonts.balsamiqSans(color: AppColors.textLight),
+            ),
           ),
           GestureDetector(
             onTap: () {
@@ -217,11 +205,10 @@ class AiChatView extends GetView<AiChatController> {
               Get.back();
             },
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [_purpleMid, _purple],
+                  colors: [Color(0xFF9C6BFF), AppColors.secondary],
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -255,23 +242,19 @@ class _EmptyState extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: const LinearGradient(
-                colors: [_purpleMid, _purple],
+                colors: [Color(0xFF9C6BFF), AppColors.secondary],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: _purple.withOpacity(0.3),
+                  color: AppColors.secondary.withValues(alpha: 0.3),
                   blurRadius: 24,
                   offset: const Offset(0, 8),
                 ),
               ],
             ),
-            child: const Icon(
-              Icons.psychology_rounded,
-              size: 50,
-              color: Colors.white,
-            ),
+            child: const Icon(Icons.psychology_rounded, size: 50, color: Colors.white),
           ),
           const SizedBox(height: 24),
           Text(
@@ -279,7 +262,7 @@ class _EmptyState extends StatelessWidget {
             style: GoogleFonts.balsamiqSans(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: _dark,
+              color: AppColors.textDark,
             ),
           ),
           const SizedBox(height: 8),
@@ -288,13 +271,11 @@ class _EmptyState extends StatelessWidget {
             textAlign: TextAlign.center,
             style: GoogleFonts.balsamiqSans(
               fontSize: 14,
-              color: _grey,
+              color: AppColors.textMid,
               height: 1.5,
             ),
           ),
           const SizedBox(height: 32),
-
-          // Suggestion chips
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
             child: Wrap(
@@ -323,7 +304,6 @@ class _SuggestionChip extends GetView<AiChatController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Strip emoji prefix for cleaner message
         final text = label.replaceAll(RegExp(r'^[\S]+ '), '');
         controller.messageController.text = text;
         controller.sendMessage();
@@ -331,12 +311,12 @@ class _SuggestionChip extends GetView<AiChatController> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: _border, width: 1.5),
+          border: Border.all(color: AppColors.border, width: 1.5),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 6,
               offset: const Offset(0, 2),
             ),
@@ -344,10 +324,7 @@ class _SuggestionChip extends GetView<AiChatController> {
         ),
         child: Text(
           label,
-          style: GoogleFonts.balsamiqSans(
-            fontSize: 13,
-            color: _dark,
-          ),
+          style: GoogleFonts.balsamiqSans(fontSize: 13, color: AppColors.textDark),
         ),
       ),
     );
@@ -370,15 +347,14 @@ class _MessageBubble extends StatelessWidget {
             isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          // AI avatar
           if (!isUser) ...[
             Container(
               width: 32,
               height: 32,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: const LinearGradient(
-                  colors: [_purpleMid, _purple],
+                gradient: LinearGradient(
+                  colors: [Color(0xFF9C6BFF), AppColors.secondary],
                 ),
               ),
               child: const Icon(Icons.psychology_rounded,
@@ -387,23 +363,21 @@ class _MessageBubble extends StatelessWidget {
             const SizedBox(width: 8),
           ],
 
-          // Bubble
           Flexible(
             child: Container(
               constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width * 0.72,
               ),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 gradient: isUser
                     ? const LinearGradient(
-                        colors: [_purpleMid, _purple],
+                        colors: [Color(0xFF9C6BFF), AppColors.secondary],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       )
                     : null,
-                color: isUser ? null : Colors.white,
+                color: isUser ? null : AppColors.surface,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(18),
                   topRight: const Radius.circular(18),
@@ -412,12 +386,12 @@ class _MessageBubble extends StatelessWidget {
                 ),
                 border: isUser
                     ? null
-                    : Border.all(color: _border, width: 1.5),
+                    : Border.all(color: AppColors.border, width: 1.5),
                 boxShadow: [
                   BoxShadow(
                     color: isUser
-                        ? _purple.withOpacity(0.25)
-                        : Colors.black.withOpacity(0.04),
+                        ? AppColors.secondary.withValues(alpha: 0.25)
+                        : Colors.black.withValues(alpha: 0.04),
                     blurRadius: 10,
                     offset: const Offset(0, 3),
                   ),
@@ -427,14 +401,13 @@ class _MessageBubble extends StatelessWidget {
                 msg['text'] as String,
                 style: GoogleFonts.balsamiqSans(
                   fontSize: 14,
-                  color: isUser ? Colors.white : _dark,
+                  color: isUser ? Colors.white : AppColors.textDark,
                   height: 1.5,
                 ),
               ),
             ),
           ),
 
-          // User avatar spacer
           if (isUser) const SizedBox(width: 4),
         ],
       ),
@@ -456,10 +429,10 @@ class _TypingIndicator extends StatelessWidget {
           Container(
             width: 32,
             height: 32,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              gradient: const LinearGradient(
-                colors: [_purpleMid, _purple],
+              gradient: LinearGradient(
+                colors: [Color(0xFF9C6BFF), AppColors.secondary],
               ),
             ),
             child: const Icon(Icons.psychology_rounded,
@@ -467,17 +440,16 @@ class _TypingIndicator extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(18),
                 topRight: Radius.circular(18),
                 bottomLeft: Radius.circular(4),
                 bottomRight: Radius.circular(18),
               ),
-              border: Border.all(color: _border, width: 1.5),
+              border: Border.all(color: AppColors.border, width: 1.5),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -487,7 +459,7 @@ class _TypingIndicator extends StatelessWidget {
                   height: 16,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: _purple,
+                    color: AppColors.icons,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -495,7 +467,7 @@ class _TypingIndicator extends StatelessWidget {
                   'AI is typing...',
                   style: GoogleFonts.balsamiqSans(
                     fontSize: 13,
-                    color: _grey,
+                    color: AppColors.textLight,
                   ),
                 ),
               ],
@@ -513,11 +485,11 @@ class _InputBar extends GetView<AiChatController> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: _border)),
+        color: AppColors.surface,
+        border: const Border(top: BorderSide(color: AppColors.border)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 12,
             offset: const Offset(0, -4),
           ),
@@ -526,17 +498,15 @@ class _InputBar extends GetView<AiChatController> {
       child: SafeArea(
         top: false,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(
             children: [
-              // Text field
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: _bg,
+                    color: AppColors.primary,
                     borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: _border, width: 1.5),
+                    border: Border.all(color: AppColors.border, width: 1.5),
                   ),
                   child: TextField(
                     controller: controller.messageController,
@@ -546,12 +516,12 @@ class _InputBar extends GetView<AiChatController> {
                     maxLines: null,
                     style: GoogleFonts.balsamiqSans(
                       fontSize: 14,
-                      color: _dark,
+                      color: AppColors.textDark,
                     ),
                     decoration: InputDecoration(
                       hintText: 'Ask something...',
                       hintStyle: GoogleFonts.balsamiqSans(
-                        color: _grey,
+                        color: AppColors.textLight,
                         fontSize: 14,
                       ),
                       border: InputBorder.none,
@@ -566,7 +536,6 @@ class _InputBar extends GetView<AiChatController> {
 
               const SizedBox(width: 10),
 
-              // Send button
               Obx(() => GestureDetector(
                     onTap: controller.isLoading.value
                         ? null
@@ -580,18 +549,18 @@ class _InputBar extends GetView<AiChatController> {
                         gradient: controller.isLoading.value
                             ? null
                             : const LinearGradient(
-                                colors: [_purpleMid, _purple],
+                                colors: [Color(0xFF9C6BFF), AppColors.secondary],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
                         color: controller.isLoading.value
-                            ? _border
+                            ? AppColors.border
                             : null,
                         boxShadow: controller.isLoading.value
                             ? []
                             : [
                                 BoxShadow(
-                                  color: _purple.withOpacity(0.35),
+                                  color: AppColors.secondary.withValues(alpha: 0.35),
                                   blurRadius: 12,
                                   offset: const Offset(0, 4),
                                 ),
@@ -602,7 +571,7 @@ class _InputBar extends GetView<AiChatController> {
                               padding: EdgeInsets.all(14),
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                color: _grey,
+                                color: AppColors.textLight,
                               ),
                             )
                           : const Icon(

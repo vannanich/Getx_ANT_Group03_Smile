@@ -3,6 +3,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/core/themes/theme_controller.dart';
 import 'package:get/get.dart';
 
 import '../notification_screen/notification_screen_view.dart';
@@ -16,23 +17,27 @@ class NotificationDetailScreenView
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Get.find<ThemeController>().isDarkMode.value;
     final DateTime date = controller.notif.appointmentDate ?? DateTime.now();
 
     return Scaffold(
-      backgroundColor: Color(0xFFEEECF5),
+      backgroundColor: isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEECF5),
       appBar: AppBar(
-        backgroundColor: Color(0xFFEEECF5),
+        backgroundColor: isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEECF5),
         toolbarHeight: 70,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: isDark ? Colors.white : Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Notification",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? Colors.white : Colors.black)),
             SizedBox(height: 4),
             Text("Review your notification",
                 style: TextStyle(
@@ -47,24 +52,24 @@ class NotificationDetailScreenView
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildNotificationCard(),
+            _buildNotificationCard(isDark),
             SizedBox(height: 24),
-            _buildDateSection(date),
+            _buildDateSection(date, isDark),
             SizedBox(height: 24),
-            _buildClock(),
+            _buildClock(isDark),
             SizedBox(height: 24),
-            _buildLocation(),
+            _buildLocation(isDark),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNotificationCard() {
+  Widget _buildNotificationCard(bool isDark) {
     return Container(
       padding: EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? const Color(0xFF1C1A2E) : Colors.white,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -73,7 +78,7 @@ class NotificationDetailScreenView
             width: 46,
             height: 46,
             decoration: BoxDecoration(
-              color: Color(0xFFEEECF5),
+              color: isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEECF5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Image.asset(
@@ -88,8 +93,10 @@ class NotificationDetailScreenView
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(controller.notif.title,
-                    style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: isDark ? Colors.white : Colors.black)),
                 SizedBox(height: 4),
                 Text(controller.notif.subtitle,
                     style: TextStyle(fontSize: 12, color: Color(0xFF9F9DA4))),
@@ -106,7 +113,7 @@ class NotificationDetailScreenView
     );
   }
 
-  Widget _buildDateSection(DateTime date) {
+  Widget _buildDateSection(DateTime date, bool isDark) {
     final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     final startDay = date.day - (date.weekday - 1);
 
@@ -116,7 +123,10 @@ class NotificationDetailScreenView
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("Date & Times",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? Colors.white : Colors.black)),
             Text(
               "${controller.monthName(date.month)}, ${date.year}",
               style: TextStyle(fontSize: 14, color: Color(0xFF9F9DA4)),
@@ -134,10 +144,8 @@ class NotificationDetailScreenView
                 Text(days[i],
                     style: TextStyle(
                         fontSize: 11,
-                        color:
-                            isSelected ? Color(0xFF5B3EFF) : Color(0xFF9F9DA4),
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w400)),
+                        color: isSelected ? Color(0xFF5B3EFF) : Color(0xFF9F9DA4),
+                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400)),
                 SizedBox(height: 6),
                 Container(
                   width: 36,
@@ -152,7 +160,11 @@ class NotificationDetailScreenView
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
-                          color: isSelected ? Colors.white : Color(0xFF3D3D3D)),
+                          color: isSelected
+                              ? Colors.white
+                              : isDark
+                                  ? Colors.white70
+                                  : Color(0xFF3D3D3D)),
                     ),
                   ),
                 ),
@@ -164,108 +176,100 @@ class NotificationDetailScreenView
     );
   }
 
-  Widget _buildClock() {
-  return Column(
-    children: [
-      // Hour / Minute toggle chips
-      Obx(() => Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildModeChip("Hour", controller.isSelectingHour.value,
-                  () => controller.isSelectingHour.value = true),
-              SizedBox(width: 12),
-              _buildModeChip("Minute", !controller.isSelectingHour.value,
-                  () => controller.isSelectingHour.value = false),
-            ],
-          )),
-      SizedBox(height: 16),
-      Obx(() => RichText(
-            text: TextSpan(
-              style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF3D3D3D),
-                  letterSpacing: 2),
+  Widget _buildClock(bool isDark) {
+    return Column(
+      children: [
+        Obx(() => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextSpan(
-                  text: controller.selectedHour.value
-                      .toString()
-                      .padLeft(2, '0'),
-                  style: TextStyle(
-                    color: controller.isSelectingHour.value
-                        ? Color(0xFF5B3EFF) 
-                        : Color(0xFF3D3D3D),
-                  ),
-                ),
-                TextSpan(text: ":"),
-                TextSpan(
-                  text: controller.selectedMinute.value
-                      .toString()
-                      .padLeft(2, '0'),
-                  style: TextStyle(
-                    color: !controller.isSelectingHour.value
-                        ? Color(0xFF5B3EFF) 
-                        : Color(0xFF3D3D3D),
-                  ),
-                ),
+                _buildModeChip("Hour", controller.isSelectingHour.value,
+                    () => controller.isSelectingHour.value = true, isDark),
+                SizedBox(width: 12),
+                _buildModeChip("Minute", !controller.isSelectingHour.value,
+                    () => controller.isSelectingHour.value = false, isDark),
               ],
-            ),
-          )),
-      SizedBox(height: 16),
-
-      // Clock
-      Obx(() => Center(
-            child: SizedBox(
-              width: 260,
-              height: 260,
-              child: GestureDetector(
-                onPanStart: (details) => controller.onClockDrag(
-                    details.localPosition, Size(260, 260)),
-                onPanUpdate: (details) => controller.onClockDrag(
-                    details.localPosition, Size(260, 260)),
-                child: CustomPaint(
-                  painter: InteractiveClockPainter(
-                    hour: controller.selectedHour.value,
-                    minute: controller.selectedMinute.value,
-                    isSelectingHour: controller.isSelectingHour.value,
+            )),
+        SizedBox(height: 16),
+        Obx(() => RichText(
+              text: TextSpan(
+                style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? Colors.white : Color(0xFF3D3D3D),
+                    letterSpacing: 2),
+                children: [
+                  TextSpan(
+                    text: controller.selectedHour.value.toString().padLeft(2, '0'),
+                    style: TextStyle(
+                      color: controller.isSelectingHour.value
+                          ? Color(0xFF5B3EFF)
+                          : isDark ? Colors.white : Color(0xFF3D3D3D),
+                    ),
+                  ),
+                  TextSpan(text: ":"),
+                  TextSpan(
+                    text: controller.selectedMinute.value.toString().padLeft(2, '0'),
+                    style: TextStyle(
+                      color: !controller.isSelectingHour.value
+                          ? Color(0xFF5B3EFF)
+                          : isDark ? Colors.white : Color(0xFF3D3D3D),
+                    ),
+                  ),
+                ],
+              ),
+            )),
+        SizedBox(height: 16),
+        Obx(() => Center(
+              child: SizedBox(
+                width: 260,
+                height: 260,
+                child: GestureDetector(
+                  onPanStart: (details) => controller.onClockDrag(
+                      details.localPosition, Size(260, 260)),
+                  onPanUpdate: (details) => controller.onClockDrag(
+                      details.localPosition, Size(260, 260)),
+                  child: CustomPaint(
+                    painter: InteractiveClockPainter(
+                      hour: controller.selectedHour.value,
+                      minute: controller.selectedMinute.value,
+                      isSelectingHour: controller.isSelectingHour.value,
+                      isDark: isDark,
+                    ),
                   ),
                 ),
               ),
-            ),
-          )),
-      SizedBox(height: 20),
+            )),
+        SizedBox(height: 20),
+        Obx(() => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildQuickTimeBtn("AM", controller.selectedHour.value < 12,
+                    () => controller.setAM(), isDark),
+                SizedBox(width: 12),
+                _buildQuickTimeBtn("PM", controller.selectedHour.value >= 12,
+                    () => controller.setPM(), isDark),
+              ],
+            )),
+      ],
+    );
+  }
 
-      // AM / PM buttons
-      Obx(() => Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildQuickTimeBtn("AM", controller.selectedHour.value < 12,
-                  () => controller.setAM()),
-              SizedBox(width: 12),
-              _buildQuickTimeBtn("PM", controller.selectedHour.value >= 12,
-                  () => controller.setPM()),
-            ],
-          )),
-    ],
-  );
-}
-
-  Widget _buildModeChip(String label, bool selected, VoidCallback onTap) {
+  Widget _buildModeChip(String label, bool selected, VoidCallback onTap, bool isDark) {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         decoration: BoxDecoration(
-          color: selected ? Color(0xFF5B3EFF) : Colors.white,
+          color: selected
+              ? Color(0xFF5B3EFF)
+              : isDark ? const Color(0xFF1C1A2E) : Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: selected
-              ? [
-                  BoxShadow(
-                      color: Color(0xFF5B3EFF).withOpacity(0.3),
-                      blurRadius: 8,
-                      offset: Offset(0, 3))
-                ]
+              ? [BoxShadow(
+                  color: Color(0xFF5B3EFF).withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: Offset(0, 3))]
               : [],
         ),
         child: Text(
@@ -279,14 +283,16 @@ class NotificationDetailScreenView
     );
   }
 
-  Widget _buildQuickTimeBtn(String label, bool active, VoidCallback onTap) {
+  Widget _buildQuickTimeBtn(String label, bool active, VoidCallback onTap, bool isDark) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 60,
         height: 36,
         decoration: BoxDecoration(
-          color: active ? Color(0xFF5B3EFF) : Colors.white,
+          color: active
+              ? Color(0xFF5B3EFF)
+              : isDark ? const Color(0xFF1C1A2E) : Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
@@ -302,17 +308,20 @@ class NotificationDetailScreenView
     );
   }
 
-  Widget _buildLocation() {
+  Widget _buildLocation(bool isDark) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Location",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: isDark ? Colors.white : Colors.black)),
         SizedBox(height: 12),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: isDark ? const Color(0xFF1C1A2E) : Colors.white,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
@@ -321,7 +330,7 @@ class NotificationDetailScreenView
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Color(0xFFEEECF5),
+                  color: isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEECF5),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Image.asset("assets/map.png"),
@@ -347,11 +356,13 @@ class InteractiveClockPainter extends CustomPainter {
   final int hour;
   final int minute;
   final bool isSelectingHour;
+  final bool isDark;
 
   InteractiveClockPainter({
     required this.hour,
     required this.minute,
     required this.isSelectingHour,
+    required this.isDark,
   });
 
   @override
@@ -359,9 +370,13 @@ class InteractiveClockPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
 
-    canvas.drawCircle(center, radius, Paint()..color = Color(0xFFE8E6F0));
+    canvas.drawCircle(
+        center,
+        radius,
+        Paint()..color = isDark ? const Color(0xFF1C1A2E) : Color(0xFFE8E6F0));
+
     final tickPaint = Paint()
-      ..color = Color(0xFFCBC8D8)
+      ..color = isDark ? Colors.white24 : Color(0xFFCBC8D8)
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round;
 
@@ -380,7 +395,9 @@ class InteractiveClockPainter extends CustomPainter {
     }
 
     final textStyle = TextStyle(
-        fontSize: 14, color: Colors.grey[700], fontWeight: FontWeight.w600);
+        fontSize: 14,
+        color: isDark ? Colors.white70 : Colors.grey[700],
+        fontWeight: FontWeight.w600);
 
     for (int i = 1; i <= 12; i++) {
       final angle = (i * 30 - 90) * math.pi / 180;
@@ -478,5 +495,6 @@ class InteractiveClockPainter extends CustomPainter {
   bool shouldRepaint(covariant InteractiveClockPainter old) =>
       old.hour != hour ||
       old.minute != minute ||
-      old.isSelectingHour != isSelectingHour;
+      old.isSelectingHour != isSelectingHour ||
+      old.isDark != isDark;
 }

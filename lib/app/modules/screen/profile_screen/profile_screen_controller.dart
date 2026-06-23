@@ -10,6 +10,7 @@ class ProfileScreenViewController extends GetxController {
   final reflectionsCount = 0.obs;
   final username = 'Username'.obs;
 
+
   @override
   void onInit() {}
 }

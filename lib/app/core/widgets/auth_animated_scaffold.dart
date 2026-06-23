@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
-import 'package:flutter_application_1/app/shared/widgets/animated_logo.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/widgets/animated_logo.dart';
 
 class AuthAnimatedScaffold extends StatefulWidget {
   final Widget child;

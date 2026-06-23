@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
-import 'package:flutter_application_1/app/shared/widgets/app_button_eleveted.dart';
-import 'package:flutter_application_1/app/shared/widgets/app_button_outline.dart';
-import 'package:flutter_application_1/app/shared/widgets/app_space.dart';
-import 'package:flutter_application_1/app/shared/widgets/app_stepper.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/widgets/app_button_eleveted.dart';
+import 'package:flutter_application_1/app/core/widgets/app_button_outline.dart';
+import 'package:flutter_application_1/app/core/widgets/app_space.dart';
+import 'package:flutter_application_1/app/core/widgets/app_stepper.dart';
 import 'package:get/get.dart';
 
 part 'survey_1_binding.dart';

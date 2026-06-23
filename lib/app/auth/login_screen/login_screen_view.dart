@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_controller.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
-import 'package:flutter_application_1/app/shared/widgets/auth_animated_scaffold.dart';
-import 'package:flutter_application_1/app/shared/widgets/auth_form_card.dart';
-import 'package:flutter_application_1/app/shared/widgets/auth_input_field.dart' show AuthInputField;
-import 'package:flutter_application_1/app/shared/widgets/auth_primary_button.dart';
-import 'package:flutter_application_1/app/shared/widgets/auth_shimmer_divider.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/widgets/auth_animated_scaffold.dart';
+import 'package:flutter_application_1/app/core/widgets/auth_form_card.dart';
+import 'package:flutter_application_1/app/core/widgets/auth_input_field.dart' show AuthInputField;
+import 'package:flutter_application_1/app/core/widgets/auth_primary_button.dart';
+import 'package:flutter_application_1/app/core/widgets/auth_shimmer_divider.dart';
 import 'package:get/get.dart';
 
 class LoginScreenView extends GetView<LoginScreenController> {

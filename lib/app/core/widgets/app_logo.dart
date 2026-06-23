@@ -1,7 +1,7 @@
 // lib/app/shared/widgets/app_logo.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/shared/themes/app_colors.dart';
+import 'package:flutter_application_1/app/core/themes/app_colors.dart';
 
 class AppLogo extends StatefulWidget {
   /// Size of the circular container. Default: 120.

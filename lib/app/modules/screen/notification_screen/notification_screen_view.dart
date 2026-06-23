@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/core/themes/theme_controller.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -10,27 +11,32 @@ class NotificationScreenView extends GetView<NotificationScreenViewController> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Get.find<ThemeController>().isDarkMode.value;
+
     return Scaffold(
-      backgroundColor: Color(0xFFEEECF5),
+      backgroundColor: isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEECF5),
       appBar: AppBar(
-        backgroundColor: Color(0xFFEEECF5),
+        backgroundColor: isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEECF5),
         toolbarHeight: 70,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: isDark ? Colors.white : Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Notification",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? Colors.white : Colors.black)),
             SizedBox(height: 4),
             Text("Review your notification",
                 style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xFF9F9DA4))),
+                    color: const Color(0xFF9F9DA4))),
           ],
         ),
       ),
@@ -39,20 +45,20 @@ class NotificationScreenView extends GetView<NotificationScreenViewController> {
         itemCount: controller.notifications.length,
         itemBuilder: (context, index) {
           final notif = controller.notifications[index];
-          return _buildNotificationItem(notif);
+          return _buildNotificationItem(notif, isDark);
         },
       ),
     );
   }
 
-  Widget _buildNotificationItem(NotificationModel notif) {
+  Widget _buildNotificationItem(NotificationModel notif, bool isDark) {
     return GestureDetector(
       onTap: () => controller.onNotificationTap(notif),
       child: Container(
         margin: EdgeInsets.only(bottom: 12),
         padding: EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isDark ? const Color(0xFF1C1A2E) : Colors.white,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -61,7 +67,7 @@ class NotificationScreenView extends GetView<NotificationScreenViewController> {
               width: 46,
               height: 46,
               decoration: BoxDecoration(
-                color: Color(0xFFEEECF5),
+                color: isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEECF5),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Image.asset(
@@ -76,13 +82,15 @@ class NotificationScreenView extends GetView<NotificationScreenViewController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(notif.title,
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? Colors.white : Colors.black)),
                   SizedBox(height: 4),
                   Text(notif.subtitle,
                       style: TextStyle(
                           fontSize: 13,
-                          color: Color(0xFF9F9DA4),
+                          color: const Color(0xFF9F9DA4),
                           fontWeight: FontWeight.w600)),
                 ],
               ),
@@ -91,7 +99,7 @@ class NotificationScreenView extends GetView<NotificationScreenViewController> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
-                    color: Color(0xFF9F9DA4))),
+                    color: const Color(0xFF9F9DA4))),
           ],
         ),
       ),

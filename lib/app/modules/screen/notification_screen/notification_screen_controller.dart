@@ -19,6 +19,7 @@ class NotificationModel {
 }
 
 class NotificationScreenViewController extends GetxController {
+  
   final notifications = <NotificationModel>[
     NotificationModel(
       title: "Dr.TungTung Sahur",
