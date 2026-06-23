@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class AppRoutes {
   static const splashScreen = '/splashScreen';
   static const home = '/';
@@ -19,7 +21,6 @@ class AppRoutes {
   static const emailVer = '/email_verification';
   static const sendCode = '/send_code';
 
-
   // doctor feature
   static const chatWithDoctor = '/chat_with_doctor';
   static const bookAppointment = '/book_appointment';
@@ -33,7 +34,6 @@ class AppRoutes {
   static const dChatWithPatient = '/d_chatWithPatient';
   static const dCheckMessage = '/d_checkMessage';
   static const patientList = '/patientList';
-
 
   //reading book screen
   static const readbook = '/readbook';
@@ -59,10 +59,13 @@ class AppRoutes {
   static const notificationScreen = '/notification_screen';
   static const notificationDetail = '/notification_detail';
 
-  //scan face screen
+  //task face screen
   static const goalScreen = '/goalscreen';
   static const addtask = '/addtask';
   static const updatetask = '/updatetask';
+
+  //doctor profile
+  static const dprofile = '/d_profile';
 
   // b nita select role
   static const selectRoleScreen = '/select_role_screen';

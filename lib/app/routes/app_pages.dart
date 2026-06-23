@@ -12,6 +12,9 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/boo
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/book_appointment_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/chat_with_doctor/chat_with_doctor_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/schedule/schedule_binding.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/schedule/schedule_view.dart';
+import 'package:flutter_application_1/app/modules/screen/doctor_feature/d_profilescreen/d_profilescreen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/chat_with_patient_screen/chat_with_patient_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_complete_form/d_complete_form_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d_complete_form/d_complete_form_view.dart';
@@ -23,8 +26,6 @@ import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/d
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/patient%20_list_screen/patient_list_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/scan_id/scan_doctor_id/scan_doctor_id_binding.dart';
 import 'package:flutter_application_1/app/modules/screen/doctor_feature/doctor/scan_id/scan_doctor_id/scan_doctor_id_view.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/schedule/schedule_binding.dart';
-import 'package:flutter_application_1/app/modules/screen/doctor_feature/User/book_appointment/schedule/schedule_view.dart';
 import 'package:flutter_application_1/app/modules/screen/edit_profile_screen/edit_profile_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/goal_screen/goal_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/home_screen/home_screen_binding.dart';
@@ -292,6 +293,13 @@ class AppPages {
       page: () => SignUpScreenView(),
       binding: SignUpScreenBinding(),
     ),
+
+    //doctor prfile screen
+    GetPage(
+      name: AppRoutes.dprofile,
+      page: () => DProfilescreenView(),
+      binding: DCompleteFormBinding(),
+    ),
     GetPage(
       name: AppRoutes.bookAppointmentdetail,
       page: () => ApointmentDetailScreenView(),
@@ -299,7 +307,9 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.dChatWithPatient,
-      page: () => ChatWithPatientScreenView(patientName: '',),
+      page: () => ChatWithPatientScreenView(
+        patientName: '',
+      ),
       binding: ChatWithPatientScreenViewBinding(),
     ),
     GetPage(
