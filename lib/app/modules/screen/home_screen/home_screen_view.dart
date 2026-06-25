@@ -308,7 +308,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
         "title": "Chat AI",
         "color": Colors.purple,
         "route": () => Get.to(
-              () => AiChatView(),
+              () => ChatAiScreenView(),
               binding: BindingsBuilder(() {
                 Get.lazyPut(() => AiChatController());
               }),

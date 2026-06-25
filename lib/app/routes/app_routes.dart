@@ -70,6 +70,9 @@ class AppRoutes {
   // b nita select role
   static const selectRoleScreen = '/select_role_screen';
   static const otpScreen = '/otp_screen';
+  static const otpScreenSendCode = '/otp_screenSendcode';
   static const reelScreen = '/reelscreen';
   static const searchReelsScreen = '/searchReelsScreen';
+  static const information_video = '/information';
+  static const postvdo = '/postvdo';
 }

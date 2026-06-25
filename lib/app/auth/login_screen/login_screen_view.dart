@@ -70,23 +70,24 @@ class LoginScreenView extends GetView<LoginScreenController> {
               const SizedBox(height: 8),
 
               // Forget password
-              staggered(
-                2,
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () => Get.toNamed(AppRoutes.emailVer),
-                    child: Text(
-                      'Forget password?',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: AppColors.secondary,
-                        fontWeight: FontWeight.w600,
-                      ),
+              // Forget password
+            staggered(
+              2,
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () => Get.toNamed(AppRoutes.otpScreenSendCode),
+                  child: Text(
+                    'Forget password?',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.secondary,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
               ),
+            ),
               const SizedBox(height: 34),
 
               // Sign In button

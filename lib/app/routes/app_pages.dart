@@ -1,5 +1,6 @@
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/login_screen/login_screen_view.dart';
+import 'package:flutter_application_1/app/auth/otp_screen_send_code/otp_screen_send_code_view.dart';
 import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_binding.dart';
 import 'package:flutter_application_1/app/auth/sign_up_screen/sign_up_screen_view.dart';
 import 'package:flutter_application_1/app/modules/screen/add_task_screen/add_task_screen_view.dart';
@@ -136,7 +137,7 @@ class AppPages {
     // chat AI
     GetPage(
       name: AppRoutes.chatAI,
-      page: () => AiChatView(),
+      page: () => ChatAiScreenView(),
       binding: AiChatBinding(),
     ),
 
@@ -321,6 +322,11 @@ class AppPages {
       name: AppRoutes.patientList,
       page: () => PatientListScreenView(),
       binding: PatientListScreenViewBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.otpScreenSendCode,
+      page: () => OtpScreenSendCodeView(),
+      binding: OtpScreenSendCodeViewBinding(),
     ),
   ];
 }

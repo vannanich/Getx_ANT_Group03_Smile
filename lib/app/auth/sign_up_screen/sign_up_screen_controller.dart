@@ -1,22 +1,19 @@
-// lib/app/auth/signup_screen/signup_screen_controller.dart
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_application_1/app/routes/app_routes.dart';
 
 class SignUpScreenController extends GetxController {
-  // ── Text controllers ──────────────────────────────────────────────────────
   final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  // ── Observables ───────────────────────────────────────────────────────────
   final isPasswordVisible = false.obs;
   final isConfirmPasswordVisible = false.obs;
   final isLoading = false.obs;
 
-  // ── Validation errors ─────────────────────────────────────────────────────
   final usernameError = ''.obs;
+  final emailError = ''.obs;
   final passwordError = ''.obs;
   final confirmPasswordError = ''.obs;
 
@@ -32,10 +29,11 @@ class SignUpScreenController extends GetxController {
     bool valid = true;
 
     final username = usernameController.text.trim();
+    final email = emailController.text.trim();
     final password = passwordController.text;
     final confirmPassword = confirmPasswordController.text;
 
-    // Username
+    // ── Username ──────────────────────────────────────────────────────────────
     if (username.isEmpty) {
       usernameError.value = 'Username is required';
       valid = false;
@@ -46,18 +44,55 @@ class SignUpScreenController extends GetxController {
       usernameError.value = '';
     }
 
-    // Password
+    // ── Email ─────────────────────────────────────────────────────────────────
+    final emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w{2,}$');
+    if (email.isEmpty) {
+      emailError.value = 'Email is required';
+      valid = false;
+    } else if (!emailRegex.hasMatch(email)) {
+      emailError.value = 'Enter a valid email (e.g. user@example.com)';
+      valid = false;
+    } else {
+      emailError.value = '';
+    }
+
+    // ── Password ──────────────────────────────────────────────────────────────
+    // Rules:
+    //   • At least 8 characters
+    //   • At least one letter  (a-z or A-Z)
+    //   • At least one number  (0-9)
+    //   • At least one symbol  (any non-alphanumeric character)
+    //   • No spaces
+    final hasMinLength = password.length >= 8;
+    final hasLetter = RegExp(r'[a-zA-Z]').hasMatch(password);
+    final hasNumber = RegExp(r'[0-9]').hasMatch(password);
+    final hasSymbol = RegExp(r'[^a-zA-Z0-9]').hasMatch(password);
+    final hasNoSpace = !password.contains(' ');
+
     if (password.isEmpty) {
       passwordError.value = 'Password is required';
       valid = false;
-    } else if (password.length < 6) {
-      passwordError.value = 'Password must be at least 6 characters';
+    } else if (!hasNoSpace) {
+      passwordError.value = 'Password must not contain spaces';
+      valid = false;
+    } else if (!hasMinLength) {
+      passwordError.value = 'Password must be at least 8 characters';
+      valid = false;
+    } else if (!hasLetter) {
+      passwordError.value = 'Password must include at least one letter';
+      valid = false;
+    } else if (!hasNumber) {
+      passwordError.value = 'Password must include at least one number';
+      valid = false;
+    } else if (!hasSymbol) {
+      passwordError.value =
+          'Password must include at least one symbol (e.g. @, #, !)';
       valid = false;
     } else {
       passwordError.value = '';
     }
 
-    // Confirm password
+    // ── Confirm Password ──────────────────────────────────────────────────────
     if (confirmPassword.isEmpty) {
       confirmPasswordError.value = 'Please confirm your password';
       valid = false;
@@ -100,6 +135,7 @@ class SignUpScreenController extends GetxController {
   @override
   void onClose() {
     usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.onClose();

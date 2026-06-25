@@ -17,7 +17,7 @@ class SignUpScreenView extends GetView<SignUpScreenController> {
   Widget build(BuildContext context) {
     return AuthAnimatedScaffold(
       child: AuthFormCard(
-        itemCount: 7,
+        itemCount: 8,
         builder: (context, staggered, pulseAnim, shimmerAnim) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,9 +39,23 @@ class SignUpScreenView extends GetView<SignUpScreenController> {
               ),
               const SizedBox(height: 14),
 
-              // Password
+              // Email
               staggered(
                 2,
+                Obx(() => AuthInputField(
+                      controller: controller.emailController,
+                      hint: 'Email',
+                      keyboardType: TextInputType.emailAddress,
+                      errorText: controller.emailError.value.isEmpty
+                          ? null
+                          : controller.emailError.value,
+                    )),
+              ),
+              const SizedBox(height: 14),
+
+              // Password
+              staggered(
+                3,
                 Obx(() => AuthInputField(
                       controller: controller.passwordController,
                       hint: 'Password',
@@ -71,16 +85,14 @@ class SignUpScreenView extends GetView<SignUpScreenController> {
 
               // Confirm Password
               staggered(
-                3,
+                4,
                 Obx(() => AuthInputField(
                       controller: controller.confirmPasswordController,
                       hint: 'Confirm password',
-                      obscureText:
-                          !controller.isConfirmPasswordVisible.value,
-                      errorText:
-                          controller.confirmPasswordError.value.isEmpty
-                              ? null
-                              : controller.confirmPasswordError.value,
+                      obscureText: !controller.isConfirmPasswordVisible.value,
+                      errorText: controller.confirmPasswordError.value.isEmpty
+                          ? null
+                          : controller.confirmPasswordError.value,
                       suffixIcon: GestureDetector(
                         onTap: controller.toggleConfirmPasswordVisibility,
                         child: AnimatedSwitcher(
@@ -102,8 +114,9 @@ class SignUpScreenView extends GetView<SignUpScreenController> {
               ),
               const SizedBox(height: 44),
 
+              // Sign Up button
               staggered(
-                4,
+                5,
                 Obx(() => AuthPrimaryButton(
                       label: 'Next',
                       pulseAnim: pulseAnim,
@@ -115,7 +128,7 @@ class SignUpScreenView extends GetView<SignUpScreenController> {
 
               // Already have account
               staggered(
-                5,
+                6,
                 Center(
                   child: GestureDetector(
                     onTap: () => Get.toNamed(AppRoutes.login),
@@ -141,11 +154,11 @@ class SignUpScreenView extends GetView<SignUpScreenController> {
                   ),
                 ),
               ),
-              const SizedBox(height: 28),
+              const SizedBox(height: 18),
 
               // Shimmer divider
-              staggered(6, AuthShimmerDivider(shimmerAnim: shimmerAnim)),
-              const SizedBox(height: 40),
+              staggered(7, AuthShimmerDivider(shimmerAnim: shimmerAnim)),
+              const SizedBox(height: 20),
 
               _buildGoogleButton(),
             ],
@@ -201,7 +214,6 @@ class SignUpScreenView extends GetView<SignUpScreenController> {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.secondary, width: 1.4),
         ),
-        
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
