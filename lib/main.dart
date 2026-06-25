@@ -13,9 +13,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< Updated upstream
       // initialRoute: Routes.selectRole,
       // getPages: AppPages.routes,
       home: HomeScreenView(),
     );
+=======
+      initialRoute: AppRoutes.homescreen,
+      getPages: AppPages.pages,
+      themeMode: themeController.isDarkMode.value
+          ? ThemeMode.dark
+          : ThemeMode.light,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+    ));
+>>>>>>> Stashed changes
   }
 }
