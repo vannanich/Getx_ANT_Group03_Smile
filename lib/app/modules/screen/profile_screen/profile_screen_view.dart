@@ -17,10 +17,11 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
     return Obx(() {
       final isDark = themeController.isDarkMode.value;
 
-      final bgColor     = isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEEBF8);
-      final cardColor   = isDark ? const Color(0xFF1C1A2E) : Colors.white;
+      final bgColor =
+          isDark ? const Color(0xFF0F0E1A) : const Color(0xFFEEEBF8);
+      final cardColor = isDark ? const Color(0xFF1C1A2E) : Colors.white;
       final textPrimary = isDark ? Colors.white : const Color(0xFF2D2D4E);
-      final textMid     = isDark ? Colors.white70 : const Color(0xFF4B4B4B);
+      final textMid = isDark ? Colors.white70 : const Color(0xFF4B4B4B);
 
       return AnimatedContainer(
         duration: const Duration(milliseconds: 400),
@@ -33,7 +34,6 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 children: [
-
                   // ── HEADER ────────────────────────────────────────────────
                   Stack(
                     alignment: Alignment.center,
@@ -69,8 +69,7 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                                 ),
                                 child: TweenAnimationBuilder<double>(
                                   tween: Tween(
-                                      begin: 0.0,
-                                      end: isDark ? 1.0 : 0.0),
+                                      begin: 0.0, end: isDark ? 1.0 : 0.0),
                                   duration: const Duration(milliseconds: 400),
                                   curve: Curves.easeInOut,
                                   builder: (_, value, __) {
@@ -138,8 +137,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                       child: Image.network(
                         'https://www.shutterstock.com/shutterstock/photos/2368533593/display_1500/stock-photo-cute-profile-pictures-halloween-themed-2368533593.jpg',
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(
-                            Icons.person, size: 50, color: Colors.white),
+                        errorBuilder: (_, __, ___) => const Icon(Icons.person,
+                            size: 50, color: Colors.white),
                       ),
                     ),
                   ),
@@ -166,7 +165,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                     child: Row(
                       children: [
                         Container(
-                          width: 52, height: 52,
+                          width: 52,
+                          height: 52,
                           decoration: BoxDecoration(
                             color: const Color(0xFFDFC6FF),
                             borderRadius: BorderRadius.circular(10),
@@ -180,7 +180,9 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                           children: [
                             AnimatedDefaultTextStyle(
                               duration: const Duration(milliseconds: 400),
-                              style: TextStyle(fontSize: 12, color: textMid,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: textMid,
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1.0),
                               child: const Text('ARCHIVE'),
@@ -188,8 +190,10 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                             const SizedBox(height: 2),
                             AnimatedDefaultTextStyle(
                               duration: const Duration(milliseconds: 400),
-                              style: TextStyle(fontSize: 15,
-                                  fontWeight: FontWeight.w600, color: textMid),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: textMid),
                               child: const Text('Saved Quotes'),
                             ),
                           ],
@@ -197,7 +201,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                       ],
                     ),
                     bottom: const Text('10',
-                        style: TextStyle(fontSize: 22,
+                        style: TextStyle(
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF7C5CBF))),
                   ),
@@ -214,7 +219,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                           child: Row(
                             children: [
                               Container(
-                                width: 52, height: 52,
+                                width: 52,
+                                height: 52,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFFFFF48E),
                                   borderRadius: BorderRadius.circular(12),
@@ -234,7 +240,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                                       duration:
                                           const Duration(milliseconds: 400),
                                       style: TextStyle(
-                                          fontSize: 12, color: textMid,
+                                          fontSize: 12,
+                                          color: textMid,
                                           fontWeight: FontWeight.w500,
                                           letterSpacing: 1.0),
                                       child: const Text('ACTIVE'),
@@ -243,7 +250,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                                     AnimatedDefaultTextStyle(
                                       duration:
                                           const Duration(milliseconds: 400),
-                                      style: TextStyle(fontSize: 14,
+                                      style: TextStyle(
+                                          fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                           color: textMid),
                                       child: const Text('Daily Streak'),
@@ -254,7 +262,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                             ],
                           ),
                           bottom: const Text('🔥 2 days',
-                              style: TextStyle(fontSize: 18,
+                              style: TextStyle(
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFFFF6B35))),
                         ),
@@ -267,14 +276,16 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                           child: Row(
                             children: [
                               Container(
-                                width: 52, height: 52,
+                                width: 52,
+                                height: 52,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFFFFF1BA),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
-                                  child: Image.asset('assets/clam.png',
-                                      width: 35, height: 35,
+                                  child: Image.asset('assets/img/clam.png',
+                                      width: 35,
+                                      height: 35,
                                       color: const Color(0xFFFCD53F)),
                                 ),
                               ),
@@ -284,9 +295,9 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   AnimatedDefaultTextStyle(
-                                    duration:
-                                        const Duration(milliseconds: 400),
-                                    style: TextStyle(fontSize: 12,
+                                    duration: const Duration(milliseconds: 400),
+                                    style: TextStyle(
+                                        fontSize: 12,
                                         color: textMid,
                                         fontWeight: FontWeight.w500,
                                         letterSpacing: 1.0),
@@ -294,9 +305,9 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                                   ),
                                   const SizedBox(height: 2),
                                   AnimatedDefaultTextStyle(
-                                    duration:
-                                        const Duration(milliseconds: 400),
-                                    style: TextStyle(fontSize: 15,
+                                    duration: const Duration(milliseconds: 400),
+                                    style: TextStyle(
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w600,
                                         color: textMid),
                                     child: const Text('Calm'),
@@ -306,7 +317,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                             ],
                           ),
                           bottom: const Text('Mood',
-                              style: TextStyle(fontSize: 18,
+                              style: TextStyle(
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFFFFC947))),
                         ),
@@ -323,7 +335,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                     child: Row(
                       children: [
                         Container(
-                          width: 42, height: 42,
+                          width: 42,
+                          height: 42,
                           decoration: BoxDecoration(
                             color: const Color(0xFF3DAA7A),
                             borderRadius: BorderRadius.circular(10),
@@ -337,7 +350,9 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                           children: [
                             AnimatedDefaultTextStyle(
                               duration: const Duration(milliseconds: 400),
-                              style: TextStyle(fontSize: 12, color: textMid,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: textMid,
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1.0),
                               child: const Text('Mood'),
@@ -345,8 +360,10 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                             const SizedBox(height: 2),
                             AnimatedDefaultTextStyle(
                               duration: const Duration(milliseconds: 400),
-                              style: TextStyle(fontSize: 15,
-                                  fontWeight: FontWeight.w700, color: textMid),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: textMid),
                               child: const Text('REFLECTIONS'),
                             ),
                           ],
@@ -354,7 +371,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
                       ],
                     ),
                     bottom: const Text('0',
-                        style: TextStyle(fontSize: 22,
+                        style: TextStyle(
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF3DAA7A))),
                   ),
@@ -385,8 +403,8 @@ class ProfileScreenView extends GetView<ProfileScreenViewController> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF7C5CBF)
-                .withValues(alpha: isDark ? 0.15 : 0.06),
+            color:
+                const Color(0xFF7C5CBF).withValues(alpha: isDark ? 0.15 : 0.06),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
